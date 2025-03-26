@@ -16,7 +16,7 @@
 		searchWord = "";
 	}
 	
-	//페이징 설정
+	// 페이징 설정
 	int currentPage = 1;
 	if(request.getParameter("currentPage") != null) {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
