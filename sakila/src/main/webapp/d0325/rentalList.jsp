@@ -33,7 +33,7 @@
 <%
 	// mysql 드라이버 로딩
 	Class.forName("com.mysql.cj.jdbc.Driver");
-	System.out.println("드라이버 로딩 성공");
+	System.out.println("rentalList.jsp: 드라이버 로딩 성공");
 	
 	Connection conn = null;
 	PreparedStatement stmt = null;
