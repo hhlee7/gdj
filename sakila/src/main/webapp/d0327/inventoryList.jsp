@@ -3,7 +3,15 @@
 <%@ page import="java.sql.*" %>
 <!-- Controller -->
 <%
-	//페이징 설정
+	String searchWord = request.getParameter("searchWord");
+	// 전달된 searchWord 값 확인
+	System.out.println("inventory.jsp searchWord: " + searchWord);
+	
+	if(searchWord == null) {
+		searchWord = "";
+	}
+
+	// 페이징 설정
 	int currentPage = 1;
 	if(request.getParameter("currentPage") != null) {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -35,6 +43,7 @@
 				+ " WHERE (inventory_id, rental_date) IN (SELECT inventory_id, MAX(rental_date)"
 				+ " FROM rental GROUP BY inventory_id) ORDER BY inventory_id ASC) t ON i.inventory_id = t.inventory_id) t"
 				+ " INNER JOIN film f ON t.film_id = f.film_id"
+				+ " order by inventoryId"
 				+ " limit ?, ?";
 	
 	// inventory list의 전체 행 수를 조회하는 쿼리 작성
@@ -52,10 +61,45 @@
 	
 	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila", "root", "java1234");
 	
-	stmt = conn.prepareStatement(sql);
-	stmt.setInt(1, startRow);
-	stmt.setInt(2, rowPerPage);
-	stmt2 = conn.prepareStatement(sql2);
+	// [검색 기능]
+	// 1. 검색어가 없으면 전체 데이터를 조회
+	if(searchWord.equals("")) {
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, startRow);
+		stmt.setInt(2, rowPerPage);
+		stmt2 = conn.prepareStatement(sql2);
+	// 2. 검색어가 있으면 조건에 맞는 결과만 조회
+	} else {
+		sql = "SELECT t.inventory_id inventoryId, f.title title, t.return_date returnDate, t.isRental isRental"
+			+ " FROM (SELECT i.inventory_id, i.film_id, t.return_date"
+			+ ", case when t.rental_date IS NULL then '대여가능'"
+			+ " when t.return_date IS NULL then '대여불가'"
+			+ " ELSE '대여가능' END isRental"
+			+ " from inventory i LEFT JOIN (SELECT inventory_id, rental_date, return_date FROM rental"
+			+ " WHERE (inventory_id, rental_date) IN (SELECT inventory_id, MAX(rental_date)"
+			+ " FROM rental GROUP BY inventory_id) ORDER BY inventory_id ASC) t ON i.inventory_id = t.inventory_id) t"
+			+ " INNER JOIN film f ON t.film_id = f.film_id"
+			+ " where title like ?"
+			+ " order by inventoryId"
+			+ " limit ?, ?";
+		stmt = conn.prepareStatement(sql);
+		stmt.setString(1, "%" + searchWord + "%");
+		stmt.setInt(2, startRow);
+		stmt.setInt(3, rowPerPage);
+		sql2 = "SELECT count(*) cnt"
+			+ " FROM (SELECT i.inventory_id, i.film_id, t.return_date"
+			+ ", case when t.rental_date IS NULL then '대여가능'"
+			+ " when t.return_date IS NULL then '대여불가'"
+			+ " ELSE '대여가능' END isRental"
+			+ " from inventory i LEFT JOIN (SELECT inventory_id, rental_date, return_date FROM rental"
+			+ " WHERE (inventory_id, rental_date) IN (SELECT inventory_id, MAX(rental_date)"
+			+ " FROM rental GROUP BY inventory_id) ORDER BY inventory_id ASC) t ON i.inventory_id = t.inventory_id) t"
+			+ " INNER JOIN film f ON t.film_id = f.film_id"
+			+ " where title like ?";
+		stmt2 = conn.prepareStatement(sql2);
+		stmt2.setString(1, "%" + searchWord + "%");
+	}
+
 	rs = stmt.executeQuery();
 	rs2 = stmt2.executeQuery();
 	rs2.next();
@@ -112,7 +156,7 @@
 					<%
 						if((map.get("isRental")).equals("대여가능")) {
 					%>
-					<td><a href=""><%=map.get("isRental")%></a></td>
+							<td><a href=""><%=map.get("isRental")%></a></td>
 					<%
 						} else {
 					%>
@@ -126,12 +170,19 @@
 		%>
 		</table>
 		
+		<!-- title 검색 -->
+		<form action="/sakila/d0327/inventoryList.jsp">
+			title :
+			<input type="text" name="searchWord">
+			<button type="submit">검색</button>
+		</form>
+		
 		<!-- 페이징 -->
-		<a href="/sakila/d0327/inventoryList.jsp?currentPage=1">[처음]</a>
+		<a href="/sakila/d0327/inventoryList.jsp?searchWord=<%=searchWord%>&currentPage=1">[처음]</a>
 		<%
 			if(startPage > 1) {
 		%>
-			<a href="/sakila/d0327/inventoryList.jsp?currentPage=<%=startPage - 10%>">[이전 10페이지]</a>
+			<a href="/sakila/d0327/inventoryList.jsp?searchWord=<%=searchWord%>&currentPage=<%=startPage - 10%>">[이전 10페이지]</a>
 		<%
 			}
 		%>
@@ -139,7 +190,7 @@
 		<%
 			if(currentPage > 1) {
 		%>
-			<a href="/sakila/d0327/inventoryList.jsp?currentPage=<%=currentPage - 1%>">[이전]</a>
+			<a href="/sakila/d0327/inventoryList.jsp?searchWord=<%=searchWord%>&currentPage=<%=currentPage - 1%>">[이전]</a>
 		<%
 			}
 		%>
@@ -152,7 +203,7 @@
 		<%
 				} else {
 		%>
-					<a href="/sakila/d0327/inventoryList.jsp?currentPage=<%=i%>">[<%=i%>]</a>
+					<a href="/sakila/d0327/inventoryList.jsp?searchWord=<%=searchWord%>&currentPage=<%=i%>">[<%=i%>]</a>
 		<%
 				}
 			}
@@ -161,7 +212,7 @@
 		<%
 			if(currentPage < lastPage) {
 		%>
-			<a href="/sakila/d0327/inventoryList.jsp?currentPage=<%=currentPage + 1%>">[다음]</a>
+			<a href="/sakila/d0327/inventoryList.jsp?searchWord=<%=searchWord%>&currentPage=<%=currentPage + 1%>">[다음]</a>
 		<%
 			}
 		%>
@@ -169,10 +220,10 @@
 		<%
 			if(endPage < lastPage) {
 		%>
-			<a href="/sakila/d0327/inventoryList.jsp?currentPage=<%=startPage + 10%>">[다음 10페이지]</a>
+			<a href="/sakila/d0327/inventoryList.jsp?searchWord=<%=searchWord%>&currentPage=<%=startPage + 10%>">[다음 10페이지]</a>
 		<%
 			}
 		%>
-		<a href="/sakila/d0327/inventoryList.jsp?currentPage=<%=lastPage%>">[끝으로]</a>	
+		<a href="/sakila/d0327/inventoryList.jsp?searchWord=<%=searchWord%>&currentPage=<%=lastPage%>">[끝으로]</a>	
 </body>
 </html>
