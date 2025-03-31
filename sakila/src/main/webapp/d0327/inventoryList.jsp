@@ -164,7 +164,7 @@
 					<%
 						if((map.get("isRental")).equals("대여가능")) {
 					%>
-							<td><a href=""><%=map.get("isRental")%></a></td>
+							<td><a href="/sakila/d0327/insertRentalForm.jsp?inventoryId=<%=map.get("inventoryId")%>"><%=map.get("isRental")%></a></td>
 					<%
 						} else {
 					%>

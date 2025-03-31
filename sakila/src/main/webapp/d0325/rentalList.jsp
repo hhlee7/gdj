@@ -175,7 +175,7 @@
 	rs2 = stmt2.executeQuery();
 	rs2.next();
 	// 조회된 전체 행 수 출력 확인
-	System.out.println("전체 행의 수: " + rs2.getInt("cnt"));
+	System.out.println("rentalList.jsp 전체 행의 수: " + rs2.getInt("cnt"));
 			
 	ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 	while(rs.next()) {
@@ -210,7 +210,7 @@
 </head>
 <body>
 	<h1>Rental List</h1>
-	<form action="/sakila/d0325/rentalList.jsp">
+	<form action="/sakila/d0325/rentalList.jsp" method="post">
 		Store
 		<select name="storeId">
 			<%

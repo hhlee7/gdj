@@ -15,7 +15,7 @@
 </head>
 <body>
 	<h1>Staff Login</h1>
-	<form action="/sakila/d0328/loginAction.jsp">
+	<form action="/sakila/d0328/loginAction.jsp" method="post">
 		<table border="1">
 			<tr>
 				<th>staffId</th>
