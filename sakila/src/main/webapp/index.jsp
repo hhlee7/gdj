@@ -29,6 +29,8 @@
 		<li><a href="/sakila/d0326/filmList.jsp">필름 목록</a></li>
 		<li><a href="/sakila/d0326/actorList.jsp">액터 목록</a></li>
 		<li><a href="/sakila/d0327/inventoryList.jsp">인벤토리 목록</a></li>
+		<li><a href="/sakila/d0401/actorInfoList.jsp">배우 목록</a></li>
+		<li><a href="/sakila/d0401/customerList.jsp">고객 목록</a></li>
 	</ol>
 </body>
 </html>
