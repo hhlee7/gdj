@@ -45,7 +45,7 @@
 	String sql = "SELECT t.inventory_id inventoryId, f.title title, t.return_date returnDate, t.isRental isRental"
 				+ " FROM (SELECT i.inventory_id, i.film_id, t.return_date"
 				+ ", case when t.rental_date IS NULL then '대여가능'"
-				+ " when t.return_date IS NULL then '대여불가'"
+				+ " when t.return_date IS NULL then '반납하기'"
 				+ " ELSE '대여가능' END isRental"
 				+ " from inventory i LEFT JOIN (SELECT inventory_id, rental_date, return_date FROM rental"
 				+ " WHERE (inventory_id, rental_date) IN (SELECT inventory_id, MAX(rental_date)"
@@ -60,7 +60,7 @@
 	String sql2 = "SELECT count(*) cnt"
 				+ " FROM (SELECT i.inventory_id, i.film_id, t.return_date"
 				+ ", case when t.rental_date IS NULL then '대여가능'"
-				+ " when t.return_date IS NULL then '대여불가'"
+				+ " when t.return_date IS NULL then '반납하기'"
 				+ " ELSE '대여가능' END isRental"
 				+ " from inventory i LEFT JOIN (SELECT inventory_id, rental_date, return_date FROM rental"
 				+ " WHERE (inventory_id, rental_date) IN (SELECT inventory_id, MAX(rental_date)"
@@ -81,7 +81,7 @@
 		sql = "SELECT t.inventory_id inventoryId, f.title title, t.return_date returnDate, t.isRental isRental"
 			+ " FROM (SELECT i.inventory_id, i.film_id, t.return_date"
 			+ ", case when t.rental_date IS NULL then '대여가능'"
-			+ " when t.return_date IS NULL then '대여불가'"
+			+ " when t.return_date IS NULL then '반납하기'"
 			+ " ELSE '대여가능' END isRental"
 			+ " from inventory i LEFT JOIN (SELECT inventory_id, rental_date, return_date FROM rental"
 			+ " WHERE (inventory_id, rental_date) IN (SELECT inventory_id, MAX(rental_date)"
@@ -97,7 +97,7 @@
 		sql2 = "SELECT count(*) cnt"
 			+ " FROM (SELECT i.inventory_id, i.film_id, t.return_date"
 			+ ", case when t.rental_date IS NULL then '대여가능'"
-			+ " when t.return_date IS NULL then '대여불가'"
+			+ " when t.return_date IS NULL then '반납하기'"
 			+ " ELSE '대여가능' END isRental"
 			+ " from inventory i LEFT JOIN (SELECT inventory_id, rental_date, return_date FROM rental"
 			+ " WHERE (inventory_id, rental_date) IN (SELECT inventory_id, MAX(rental_date)"
@@ -164,11 +164,11 @@
 					<%
 						if((map.get("isRental")).equals("대여가능")) {
 					%>
-							<td><a href="/sakila/d0327/insertRentalForm.jsp?inventoryId=<%=map.get("inventoryId")%>"><%=map.get("isRental")%></a></td>
+							<td><a href='/sakila/d0327/insertRentalForm.jsp?inventoryId=<%=map.get("inventoryId")%>'><%=map.get("isRental")%></a></td>
 					<%
 						} else {
 					%>
-							<td><%=map.get("isRental")%></td>
+							<td><a href='/sakila/d0327/updateRentalForm.jsp?inventoryId=<%=map.get("inventoryId")%>'><%=map.get("isRental")%></a></td>
 					<%
 						}
 					%>
