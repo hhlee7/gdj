@@ -11,11 +11,6 @@
 	}
 	
 	Integer inventoryId = Integer.parseInt(request.getParameter("inventoryId"));
-	Integer customerId = null;
-	if(request.getParameter("customerId") != null) {
-		// 대여 실행할 고객 선택 후 이 페이지가 다시 요청되면 customerId 값을 받아옴
-		customerId = Integer.parseInt(request.getParameter("customerId"));
-	}
 %>
 
 <!-- Model -->
@@ -26,7 +21,7 @@
 	String sql = "select i.inventory_id inventoryId, i.film_id filmId, i.store_id storeId, f.title title, r.customer_id customerId"
 				+ " from inventory i inner join film f on i.film_id = f.film_id"
 				+ " INNER JOIN rental r ON i.inventory_id = r.inventory_id"
-				+ " WHERE i.inventory_id = ?";
+				+ " WHERE i.inventory_id = ? and r.return_date is null";
 	Class.forName("com.mysql.cj.jdbc.Driver");
 	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila", "root", "java1234");
 	stmt = conn.prepareStatement(sql);
@@ -48,12 +43,6 @@
 	<%
 		if(rs.next()) {
 	%>
-		<form action="/sakila/d0327/searchCustomerIdList.jsp" method="post">
-			<input type="hidden" name="inventoryId" value="<%=inventoryId%>">
-			<input type="text" name="searchName">
-			<button type="submit">이름으로 customerId 검색</button>
-		</form>
-		
 		<form action="/sakila/d0327/updateRentalAction.jsp" method="post">
 			<table border="1">
 				<tr>

@@ -17,7 +17,7 @@
 	if(request.getParameter("currentPage") != null) {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
-	int rowPerPage = 10; // 페이지 당 보여줄 행 개수
+	int rowPerPage = 5; // 페이지 당 보여줄 행 개수
 	int startRow = (currentPage - 1) * rowPerPage;
 	int pageBlock = 10; // 한 번에 표기할 페이지 번호 개수
 	int startPage = ((currentPage - 1) / pageBlock) * pageBlock + 1;
@@ -102,6 +102,11 @@
 <title></title>
 </head>
 <body>
+	<div>
+		<%=staffId%>님, 반갑습니다.
+		<a href="/sakila/index.jsp">[대시보드로 이동]</a>
+	</div>
+	<hr>
 	<h1>Actor Info</h1>
 	
 	<!-- actorInfoList 각 행 데이터 출력 -->

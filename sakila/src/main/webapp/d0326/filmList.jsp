@@ -110,6 +110,11 @@
 <title></title>
 </head>
 <body>
+	<div>
+		<%=staffId%>님, 반갑습니다.
+		<a href="/sakila/index.jsp">[대시보드로 이동]</a>
+	</div>
+	<hr>
 	<h1>Film List</h1>
 	
 	<!-- 영화 리스트 출력 -->

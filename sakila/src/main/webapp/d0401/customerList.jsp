@@ -100,6 +100,11 @@
 <title></title>
 </head>
 <body>
+	<div>
+		<%=staffId%>님, 반갑습니다.
+		<a href="/sakila/index.jsp">[대시보드로 이동]</a>
+	</div>
+	<hr>
 	<h1>Customer List</h1>
 	
 	<!-- customerList 각 행 데이터 출력 -->

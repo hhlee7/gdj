@@ -74,6 +74,11 @@
 <title></title>
 </head>
 <body>
+	<div>
+		<%=staffId%>님, 반갑습니다.
+		<a href="/sakila/index.jsp">[대시보드로 이동]</a>
+	</div>
+	<hr>
 	<!-- 배우 상세 정보 출력 -->
 	<h1>Actor One</h1>
 	<table border="1">

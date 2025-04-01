@@ -44,9 +44,9 @@
 	ResultSet rs = null;
 	String sql = "SELECT t.inventory_id inventoryId, f.title title, t.return_date returnDate, t.isRental isRental"
 				+ " FROM (SELECT i.inventory_id, i.film_id, t.return_date"
-				+ ", case when t.rental_date IS NULL then '대여가능'"
+				+ ", case when t.rental_date IS NULL then '대여하기'"
 				+ " when t.return_date IS NULL then '반납하기'"
-				+ " ELSE '대여가능' END isRental"
+				+ " ELSE '대여하기' END isRental"
 				+ " from inventory i LEFT JOIN (SELECT inventory_id, rental_date, return_date FROM rental"
 				+ " WHERE (inventory_id, rental_date) IN (SELECT inventory_id, MAX(rental_date)"
 				+ " FROM rental GROUP BY inventory_id) ORDER BY inventory_id ASC) t ON i.inventory_id = t.inventory_id) t"
@@ -59,9 +59,9 @@
 	ResultSet rs2 = null;
 	String sql2 = "SELECT count(*) cnt"
 				+ " FROM (SELECT i.inventory_id, i.film_id, t.return_date"
-				+ ", case when t.rental_date IS NULL then '대여가능'"
+				+ ", case when t.rental_date IS NULL then '대여하기'"
 				+ " when t.return_date IS NULL then '반납하기'"
-				+ " ELSE '대여가능' END isRental"
+				+ " ELSE '대여하기' END isRental"
 				+ " from inventory i LEFT JOIN (SELECT inventory_id, rental_date, return_date FROM rental"
 				+ " WHERE (inventory_id, rental_date) IN (SELECT inventory_id, MAX(rental_date)"
 				+ " FROM rental GROUP BY inventory_id) ORDER BY inventory_id ASC) t ON i.inventory_id = t.inventory_id) t"
@@ -80,9 +80,9 @@
 	} else {
 		sql = "SELECT t.inventory_id inventoryId, f.title title, t.return_date returnDate, t.isRental isRental"
 			+ " FROM (SELECT i.inventory_id, i.film_id, t.return_date"
-			+ ", case when t.rental_date IS NULL then '대여가능'"
+			+ ", case when t.rental_date IS NULL then '대여하기'"
 			+ " when t.return_date IS NULL then '반납하기'"
-			+ " ELSE '대여가능' END isRental"
+			+ " ELSE '대여하기' END isRental"
 			+ " from inventory i LEFT JOIN (SELECT inventory_id, rental_date, return_date FROM rental"
 			+ " WHERE (inventory_id, rental_date) IN (SELECT inventory_id, MAX(rental_date)"
 			+ " FROM rental GROUP BY inventory_id) ORDER BY inventory_id ASC) t ON i.inventory_id = t.inventory_id) t"
@@ -96,9 +96,9 @@
 		stmt.setInt(3, rowPerPage);
 		sql2 = "SELECT count(*) cnt"
 			+ " FROM (SELECT i.inventory_id, i.film_id, t.return_date"
-			+ ", case when t.rental_date IS NULL then '대여가능'"
+			+ ", case when t.rental_date IS NULL then '대여하기'"
 			+ " when t.return_date IS NULL then '반납하기'"
-			+ " ELSE '대여가능' END isRental"
+			+ " ELSE '대여하기' END isRental"
 			+ " from inventory i LEFT JOIN (SELECT inventory_id, rental_date, return_date FROM rental"
 			+ " WHERE (inventory_id, rental_date) IN (SELECT inventory_id, MAX(rental_date)"
 			+ " FROM rental GROUP BY inventory_id) ORDER BY inventory_id ASC) t ON i.inventory_id = t.inventory_id) t"
@@ -144,6 +144,11 @@
 <title></title>
 </head>
 <body>
+	<div>
+		<%=staffId%>님, 반갑습니다.
+		<a href="/sakila/index.jsp">[대시보드로 이동]</a>
+	</div>
+	<hr>
 	<h1>Inventory List</h1>
 	
 	<!-- inventory list 출력 -->
