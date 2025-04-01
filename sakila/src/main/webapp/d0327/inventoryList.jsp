@@ -167,7 +167,7 @@
 					<td><%=map.get("title")%></td>
 					<td><%=map.get("returnDate")%></td>
 					<%
-						if((map.get("isRental")).equals("대여가능")) {
+						if((map.get("isRental")).equals("대여하기")) {
 					%>
 							<td><a href='/sakila/d0327/insertRentalForm.jsp?inventoryId=<%=map.get("inventoryId")%>'><%=map.get("isRental")%></a></td>
 					<%

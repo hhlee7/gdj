@@ -3,7 +3,7 @@
 <%@ page import="java.sql.*" %>
 <!-- Controller -->
 <%
-	//로그인 상태 확인
+	// 로그인 상태 확인
 	Integer staffId = (Integer)(session.getAttribute("loginStaff"));
 			
 	if(staffId == null) { // 로그아웃 상태라면 로그인 페이지로 이동
