@@ -20,10 +20,11 @@ public class QuestionDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "select num, title, startdate, enddate, createdate, type from question limit ?";
+		String sql = "select num, title, startdate, enddate, createdate, type from question limit ?, ?";
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll", "root", "java1234");
 		stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, p.getRowPerPage());
+		stmt.setInt(1, p.getBeginRow());
+		stmt.setInt(2, p.getRowPerPage());
 		System.out.println(stmt);
 		rs = stmt.executeQuery();
 		while(rs.next()) {
@@ -38,8 +39,6 @@ public class QuestionDao {
 		}
 		conn.close();
 		return list;
-		// ? p.getBeginRow();
-		// ? p.getRowPerPage();
 	}
 	
 	// 입력 후 자동으로 생성된 키 값을 반환받기 위해 반환타입 int로 설정
@@ -65,5 +64,24 @@ public class QuestionDao {
 		}
 		conn.close();
 		return pk;
+		
+		}
+	
+	// 데이터의 전체 행 수를 구하는 메서드
+	public int getTotalQuestion() throws ClassNotFoundException, SQLException {
+		int cnt = 0;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) cnt from question";
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll", "root", "java1234");
+		stmt = conn.prepareStatement(sql);
+		System.out.println(stmt);
+		rs = stmt.executeQuery();
+		rs.next();
+		cnt = rs.getInt("cnt");
+		conn.close();
+		return cnt;
 	}
 }
