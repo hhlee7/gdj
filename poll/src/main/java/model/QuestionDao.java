@@ -41,6 +41,32 @@ public class QuestionDao {
 		return list;
 	}
 	
+	// question 테이블에서 해당 num 값이 속한 행 데이터만 조회
+	public Question selectQuestion(int qnum) throws ClassNotFoundException, SQLException {
+		Question q = null;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "select num, title, startdate, enddate, createdate, type from question where num = ?";
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll", "root", "java1234");
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, qnum);
+		System.out.println(stmt);
+		rs = stmt.executeQuery();
+		while(rs.next()) {
+			q = new Question();
+			q.setNum(rs.getInt("num"));
+			q.setTitle(rs.getString("title"));
+			q.setStartdate(rs.getString("startdate"));
+			q.setEnddate(rs.getString("enddate"));
+			q.setCreatedate(rs.getString("createdate"));
+			q.setType(rs.getInt("type"));
+		}
+		conn.close();
+		return q;
+	}
+	
 	// 입력 후 자동으로 생성된 키 값을 반환받기 위해 반환타입 int로 설정
 	public int insertQuestion(Question question) throws ClassNotFoundException, SQLException {
 		int pk = 0;
@@ -64,10 +90,48 @@ public class QuestionDao {
 		}
 		conn.close();
 		return pk;
-		
 		}
 	
-	// 데이터의 전체 행 수를 구하는 메서드
+	// question 테이블에서 해당하는 데이터를 삭제 - delete
+	public void deleteQuestion(int num) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		String sql = "delete from question where num = ?";
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll", "root", "java1234");
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, num);
+		System.out.println(stmt);
+		int row = stmt.executeUpdate(); // delete
+		if(row == 1) {
+			System.out.println("삭제 완료");
+		} else {
+			System.out.println("삭제 실패");
+		}
+		conn.close();
+	}
+	
+	// 해당하는 데이터의 투표자 수를 반환하는 메서드
+	public int checkVoter(int num) throws ClassNotFoundException, SQLException {
+		int sumCnt = 0;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT qnum, SUM(COUNT) sumCnt FROM item GROUP BY qnum HAVING qnum = ?";
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll", "root", "java1234");
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, num);
+		System.out.println(stmt);
+		rs = stmt.executeQuery();
+		if(rs.next()) {
+			sumCnt = rs.getInt("sumCnt");
+		}
+		conn.close();
+		return sumCnt;
+	}
+	
+	// question 테이블의 전체 행 수를 구하는 메서드
 	public int getTotalQuestion() throws ClassNotFoundException, SQLException {
 		int cnt = 0;
 		Class.forName("com.mysql.cj.jdbc.Driver");

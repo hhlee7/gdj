@@ -20,6 +20,7 @@
 	
 	// Dao 객체 생성
 	QuestionDao questionDao = new QuestionDao();
+	ItemDao itemDao = new ItemDao();
 	
 	// 마지막 페이지 설정
 	int lastPage = paging.getLastPage((questionDao.getTotalQuestion()));
@@ -43,12 +44,15 @@
 	<h1>설문 리스트</h1>
 	<table border="1">
 		<tr>
-			<th>num</th>
-			<th>title</th>
-			<th>startdate</th>
-			<th>enddate</th>
-			<th>type</th>
-			<th>isVote</th>
+			<th>번호</th>
+			<th>제목</th>
+			<th>투표 기간</th>
+			<th>복수투표</th>
+			<th>투표</th>
+			<th>삭제</th>
+			<th>수정</th>
+			<th>종료일자 수정</th>
+			<th>결과</th>
 		</tr>
 		<%
 			for(Question q : list) {
@@ -56,8 +60,7 @@
 				<tr>
 					<td><%=q.getNum()%></td>
 					<td><%=q.getTitle()%></td>
-					<td><%=q.getStartdate()%></td>
-					<td><%=q.getEnddate()%></td>
+					<td><%=q.getStartdate()%> ~ <%=q.getEnddate()%></td>
 					<td><%=q.getType()%></td>
 					<td>
 					<%
@@ -73,10 +76,30 @@
 					<%
 						} else {
 					%>
-							<a href="">투표 하기</a>
+							<a href="">투표하기</a>
 					<%
 						}
 					%>
+					</td>
+					<td>
+					<%
+						if(today.after(endDate) || questionDao.checkVoter(q.getNum()) >= 1) {
+					%>
+							불가
+					<%
+						} else {
+					%>
+							<a href="/poll/deletePollAction.jsp?num=<%=q.getNum()%>">삭제</a>
+					<%
+							}
+					
+					%>
+					</td>
+					<td>
+						<a href="/poll/updatePollForm.jsp?num=<%=q.getNum()%>">수정</a>
+					</td>
+					<td>
+						종료일자 수정
 					</td>
 				</tr>
 		<%
@@ -100,8 +123,5 @@
 	<%
 		}
 	%>
-	
-	
-	
 </body>
 </html>
