@@ -12,6 +12,7 @@ import dto.Paging;
 
 // Table : item CRUD
 public class ItemDao {
+/*
 	// item 테이블 데이터를 조회 - select
 	public ArrayList<Item> selectItemList(Paging p) throws ClassNotFoundException, SQLException {
 		ArrayList<Item> list = new ArrayList<>();
@@ -35,7 +36,7 @@ public class ItemDao {
 		conn.close();
 		return list;
 	}
-	
+*/
 	// item 테이블 데이터를 조회 - select
 		public ArrayList<Item> selectItemList(int num) throws ClassNotFoundException, SQLException {
 			ArrayList<Item> list = new ArrayList<>();
@@ -60,7 +61,7 @@ public class ItemDao {
 			conn.close();
 			return list;
 		}
-	
+/*
 	// item 테이블에서 해당 num 값이 속한 행 데이터만 조회
 	public Item selectItem(int num) throws ClassNotFoundException, SQLException {
 		Item i = null;
@@ -84,7 +85,7 @@ public class ItemDao {
 		conn.close();
 		return i;
 	}
-	
+*/	
 	public void insertItem(Item item) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = null;

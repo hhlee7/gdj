@@ -148,4 +148,45 @@ public class QuestionDao {
 		conn.close();
 		return cnt;
 	}
+	
+	// question 테이블 데이터를 수정 - update
+	public void updateQuestion(int num, String title, int type) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		String sql = "update question set title = ?, type = ? where num = ?";
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll", "root", "java1234");
+		stmt = conn.prepareStatement(sql);
+		stmt.setString(1, title);
+		stmt.setInt(2, type);
+		stmt.setInt(3, num);
+		System.out.println(stmt);
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			System.out.println("수정 완료");
+		} else {
+			System.out.println("수정 실패");
+		}
+		conn.close();
+	}
+	
+	// question 테이블에서 해당 num 값이 속한 enddate 값 수정
+	public void updateQuestionEnddate(int num, String enddate) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		String sql = "update question set enddate = ? where num = ?";
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll", "root", "java1234");
+		stmt = conn.prepareStatement(sql);
+		stmt.setString(1, enddate);
+		stmt.setInt(2, num);
+		System.out.println(stmt);
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			System.out.println("수정 완료");
+		} else {
+			System.out.println("수정 실패");
+		}
+		conn.close();
+	}
 }

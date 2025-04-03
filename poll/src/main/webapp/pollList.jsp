@@ -1,8 +1,8 @@
-<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="dto.*"%>
 <%@ page import="model.*"%>
 <%@ page import="java.util.*"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%
 	// question 테이블 리스트 -> 페이징 -> title 링크(stardate <= 오늘 날짜 <= enddate) -> 투표 프로그램
 	
@@ -51,7 +51,7 @@
 			<th>투표</th>
 			<th>삭제</th>
 			<th>수정</th>
-			<th>종료일자 수정</th>
+			<th>종료 일자 수정</th>
 			<th>결과</th>
 		</tr>
 		<%
@@ -99,7 +99,17 @@
 						<a href="/poll/updatePollForm.jsp?num=<%=q.getNum()%>">수정</a>
 					</td>
 					<td>
-						종료일자 수정
+					<%
+						if(today.before(endDate)) {
+					%>
+							<a href="/poll/updateQuestionEnddateForm.jsp?num=<%=q.getNum()%>">종료 일자 수정</a>
+					<%
+						} else {
+					%>
+							불가
+					<%
+						}
+					%>
 					</td>
 				</tr>
 		<%
