@@ -12,31 +12,6 @@ import dto.Paging;
 
 // Table : item CRUD
 public class ItemDao {
-/*
-	// item 테이블 데이터를 조회 - select
-	public ArrayList<Item> selectItemList(Paging p) throws ClassNotFoundException, SQLException {
-		ArrayList<Item> list = new ArrayList<>();
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		String sql = "select qnum, inum, content, count from item";
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll", "root", "java1234");
-		stmt = conn.prepareStatement(sql);
-		System.out.println(stmt);
-		rs = stmt.executeQuery();
-		while(rs.next()) {
-			Item i = new Item();
-			i.setQnum(rs.getInt("qnum"));
-			i.setInum(rs.getInt("inum"));
-			i.setContent(rs.getString("content"));
-			i.setCount(rs.getInt("count"));
-			list.add(i);
-		}
-		conn.close();
-		return list;
-	}
-*/
 	// item 테이블에서 해당 num 값이 속하는 데이터만 조회
 	// updateItemForm, questionOneResult
 	public ArrayList<Item> selectItemListByNum(int num) throws ClassNotFoundException, SQLException {
@@ -106,31 +81,6 @@ public class ItemDao {
 		conn.close();
 	}
 	
-/*
-	// item 테이블에서 해당 num 값이 속한 행 데이터만 조회
-	public Item selectItem(int num) throws ClassNotFoundException, SQLException {
-		Item i = null;
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		String sql = "select qnum, inum, content, count from item where qnum = ?";
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll", "root", "java1234");
-		stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, num);
-		System.out.println(stmt);
-		rs = stmt.executeQuery();
-		while(rs.next()) {
-			i = new Item();
-			i.setQnum(rs.getInt("qnum"));
-			i.setInum(rs.getInt("inum"));
-			i.setContent(rs.getString("content"));
-			i.setCount(rs.getInt("count"));
-		}
-		conn.close();
-		return i;
-	}
-*/	
 	public void insertItem(Item item) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = null;
