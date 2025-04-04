@@ -20,7 +20,13 @@ public class QuestionDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "select num, title, startdate, enddate, createdate, type from question limit ?, ?";
+		String sql = " SELECT num, title, startdate, enddate, createdate, type, t.sumCnt sumCnt"
+					+ " FROM question q INNER JOIN"
+					+ " (SELECT qnum, SUM(COUNT) sumCnt"
+					+ " FROM item"
+					+ " GROUP BY qnum) t ON q.num = t.qnum"
+					+ " ORDER BY num"
+					+ " limit ?, ?";
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll", "root", "java1234");
 		stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, p.getBeginRow());
@@ -35,6 +41,7 @@ public class QuestionDao {
 			q.setEnddate(rs.getString("enddate"));
 			q.setCreatedate(rs.getString("createdate"));
 			q.setType(rs.getInt("type"));
+			q.setSumCnt(rs.getInt("sumCnt"));
 			list.add(q);
 		}
 		conn.close();
@@ -42,7 +49,7 @@ public class QuestionDao {
 	}
 	
 	// question 테이블에서 해당 num 값이 속한 행 데이터만 조회
-	public Question selectQuestion(int qnum) throws ClassNotFoundException, SQLException {
+	public Question selectQuestion(int num) throws ClassNotFoundException, SQLException {
 		Question q = null;
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = null;
@@ -51,7 +58,7 @@ public class QuestionDao {
 		String sql = "select num, title, startdate, enddate, createdate, type from question where num = ?";
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll", "root", "java1234");
 		stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, qnum);
+		stmt.setInt(1, num);
 		System.out.println(stmt);
 		rs = stmt.executeQuery();
 		while(rs.next()) {

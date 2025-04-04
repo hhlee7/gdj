@@ -7,6 +7,8 @@ public class Question {
 	private String enddate;
 	private String createdate;
 	private int type;
+	private int sumCnt;
+	
 	public int getNum() {
 		return num;
 	}
@@ -42,5 +44,11 @@ public class Question {
 	}
 	public void setType(int type) {
 		this.type = type;
+	}
+	public int getSumCnt() {
+		return sumCnt;
+	}
+	public void setSumCnt(int sumCnt) {
+		this.sumCnt = sumCnt;
 	}
 }

@@ -13,7 +13,7 @@
 	}
 	
 	// 페이징 정보 설정
-	int rowPerPage = 3; // 한 페이지 당 보여줄 행 개수
+	int rowPerPage = 5; // 한 페이지 당 보여줄 행 개수
 	Paging paging = new Paging();
 	paging.setCurrentPage(currentPage);
 	paging.setRowPerPage(rowPerPage);
@@ -37,17 +37,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>pollList</title>
+	<meta charset="UTF-8">
+	<title>설문 리스트</title>
+	<!-- Latest compiled and minified CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+	<!-- nav.jsp include -->
+	<div>
+		<jsp:include page="/inc/nav.jsp"></jsp:include>
+	</div>
+	
 	<h1>설문 리스트</h1>
-	<table border="1">
+	<table class="table table-hover">
 		<tr>
 			<th>번호</th>
 			<th>제목</th>
 			<th>투표 기간</th>
-			<th>복수투표</th>
+			<th>현재 투표 현황</th>
 			<th>투표</th>
 			<th>삭제</th>
 			<th>수정</th>
@@ -61,7 +71,7 @@
 					<td><%=q.getNum()%></td>
 					<td><%=q.getTitle()%></td>
 					<td><%=q.getStartdate()%> ~ <%=q.getEnddate()%></td>
-					<td><%=q.getType()%></td>
+					<td><%=q.getSumCnt()%></td>
 					<td>
 					<%
 						Date startDate = sdf.parse(q.getStartdate());
@@ -76,37 +86,50 @@
 					<%
 						} else {
 					%>
-							<a href="">투표하기</a>
+							<a class="btn btn-outline-primary" href="/poll/updateItemForm.jsp?num=<%=q.getNum()%>">투표하기</a>
 					<%
 						}
 					%>
 					</td>
 					<td>
 					<%
-						if(today.after(endDate) || questionDao.checkVoter(q.getNum()) >= 1) {
+						if(today.after(endDate) || q.getSumCnt() >= 1) {
 					%>
 							불가
 					<%
 						} else {
 					%>
-							<a href="/poll/deletePollAction.jsp?num=<%=q.getNum()%>">삭제</a>
+							<a class="btn btn-outline-primary" href="/poll/deletePollAction.jsp?num=<%=q.getNum()%>">삭제</a>
 					<%
 							}
 					
 					%>
 					</td>
 					<td>
-						<a href="/poll/updatePollForm.jsp?num=<%=q.getNum()%>">수정</a>
+						<a class="btn btn-outline-primary" href="/poll/updatePollForm.jsp?num=<%=q.getNum()%>">수정</a>
 					</td>
 					<td>
 					<%
-						if(today.before(endDate)) {
+						if(today.before(endDate) || today.equals(endDate)) {
 					%>
-							<a href="/poll/updateQuestionEnddateForm.jsp?num=<%=q.getNum()%>">종료 일자 수정</a>
+							<a class="btn btn-outline-primary" href="/poll/updateQuestionEnddateForm.jsp?num=<%=q.getNum()%>">종료 일자 수정</a>
 					<%
 						} else {
 					%>
 							불가
+					<%
+						}
+					%>
+					</td>
+					<td>
+					<%
+						if(today.after(endDate)) {
+					%>
+							<a class="btn btn-outline-primary" href="/poll/questionOneResult.jsp?num=<%=q.getNum()%>">결과보기</a>
+					<%
+						} else {
+					%>
+							투표 진행 중
 					<%
 						}
 					%>

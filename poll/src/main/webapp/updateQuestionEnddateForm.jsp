@@ -16,14 +16,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>종료 일자 수정</title>
+	<meta charset="UTF-8">
+	<title>종료 일자 수정</title>
+	<!-- Latest compiled and minified CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+	<!-- nav.jsp include -->
+	<div>
+		<jsp:include page="/inc/nav.jsp"></jsp:include>
+	</div>
+	
 	<h1>종료 일자 수정</h1>
 		<form method="post" action="/poll/updateQuestionEnddateAction.jsp">
 		<input type="hidden" name="num" value="<%=q.getNum()%>">
-			<table border="1">
+			<table class="table table-hover">
 				<tr>
 					<th>종료 일자</th>
 					<td>
@@ -31,7 +41,7 @@
 					</td>
 				</tr>
 			</table>
-		<button type="submit">수정하기</button>
+		<button class="btn btn-outline-primary" type="submit">수정하기</button>
 		</form>
 </body>
 </html>

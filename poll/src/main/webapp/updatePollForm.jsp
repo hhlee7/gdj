@@ -29,16 +29,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>UpdatePollForm</title>
+	<meta charset="UTF-8">
+	<title>설문 수정</title>
+	<!-- Latest compiled and minified CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<h1>투표 프로그램</h1>
-	<hr>
-	<h2>설문 수정</h2>
+	<!-- nav.jsp include -->
+	<div>
+		<jsp:include page="/inc/nav.jsp"></jsp:include>
+	</div>
+	
+	<h1>설문 수정</h1>
 	<form method="post" action="/poll/updatePollAction.jsp">
 		<input type="hidden" name="num" value="<%=q.getNum()%>">
-		<table border="1">
+		<table class="table table-hover">
 			<tr>
 				<td>질문</td>
 				<td colspan="2">
@@ -99,7 +107,7 @@
 				</td>
 			</tr>
 		</table>
-		<button type="submit">수정하기</button>
+		<button class="btn btn-outline-primary" type="submit">수정하기</button>
 	
 	</form>
 </body>

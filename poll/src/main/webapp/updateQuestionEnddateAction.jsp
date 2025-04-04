@@ -19,7 +19,7 @@
 	
 	// 이미 종료된 설문 -> 종료 일자 수정 불가 -> 다시 수정 페이지로 이동
 	if(today.after(endDate)) {
-		response.sendRedirect("/poll/updateQuestionEnddateAction.jsp?num=" + num);
+		response.sendRedirect("/poll/updateQuestionEnddateForm.jsp?num=" + num);
 		return;
 	}
 	
