@@ -141,20 +141,23 @@
 	</table>
 	
 	<!-- 페이징 -->
+	<ul class="pagination">
 	<%
 		if(currentPage > 1) {
 	%>
-			<a href="/poll/pollList.jsp?currentPage=<%=currentPage - 1%>">[이전]</a>
+			<li class="page-item"><a class="page-link" href="/poll/pollList.jsp?currentPage=<%=currentPage - 1%>">이전</a></li>
 	<%
 		}
 	%>
-			<%=currentPage%>
+			<li class="page-item"><a class="page-link" href="/poll/pollList.jsp?currentPage=<%=currentPage%>"><%=currentPage%></a></li>
+			
 	<%
 		if(currentPage < lastPage) {
 	%>
-			<a href="/poll/pollList.jsp?currentPage=<%=currentPage + 1%>">[다음]</a>
+			<li class="page-item"><a class="page-link" href="/poll/pollList.jsp?currentPage=<%=currentPage + 1%>">다음</a></li>
 	<%
 		}
 	%>
+	</ul>
 </body>
 </html>
