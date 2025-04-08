@@ -7,36 +7,19 @@
 <nav>
 	<ul class="nav nav-tabs">
 	  <li class="nav-item">
+	    <a class="nav-link" href="/poll/index.jsp">홈으로</a>
+	  </li>
+	  <li class="nav-item">
 	    <a class="nav-link" href="/poll/pollList.jsp">리스트로 이동</a>
 	  </li>
 	  <li class="nav-item">
 	    <a class="nav-link" href="/poll/insertPollForm.jsp">설문 추가</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link disabled" href="#">Disabled</a>
+	    <a class="nav-link" href="/poll/board/boardList.jsp">계층형 게시판</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link disabled" href="#">Disabled</a>
+	    <a class="nav-link" href="/poll/board/insertBoardForm.jsp">새 글 입력</a>
 	  </li>
 	</ul>
 </nav>
-<!-- 
-<nav class="navbar navbar-expand-sm bg-light navbar-light">
-  <div class="container-fluid">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link active" href="/poll/pollList.jsp">리스트로 이동</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/poll/insertPollForm.jsp">설문 추가</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-  </div>
-</nav>
- -->

@@ -45,7 +45,7 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body class="container">
 	<!-- nav.jsp include -->
 	<div>
 		<jsp:include page="/inc/nav.jsp"></jsp:include>
