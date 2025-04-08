@@ -12,7 +12,7 @@
 	Paging p = new Paging();
 	
 	// 페이징 정보 설정
-	int rowPerPage = 20; // 한 페이지 당 보여줄 행 개수
+	int rowPerPage = 15; // 한 페이지 당 보여줄 행 개수
 	p.setCurrentPage(currentPage);
 	p.setRowPerPage(rowPerPage);
 	

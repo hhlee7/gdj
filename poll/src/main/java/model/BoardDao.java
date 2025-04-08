@@ -167,7 +167,7 @@ public class BoardDao {
 		return cnt;
 	}
 	
-	// boardOne의 해당 데이터를 수정
+	// 해당 num값을 가진 board 데이터 수정
 	public int updateBoard(int num, String name, String subject, String content, String pass) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = null;
@@ -186,6 +186,27 @@ public class BoardDao {
 			System.out.println("수정 완료");
 		} else {
 			System.out.println("수정 실패");
+		}
+		conn.close();
+		return row;
+	}
+	
+	// 해당 num값을 가진 board 데이터 삭제
+	public int deleteBoard(int num, String pass) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		String sql = "delete from board where num = ? and pass = ?";
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/poll", "root", "java1234");
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, num);
+		stmt.setString(2, pass);
+		System.out.println(stmt);
+		int row = stmt.executeUpdate();
+		if(row == 1) {
+			System.out.println("삭제 완료");
+		} else {
+			System.out.println("삭제 실패");
 		}
 		conn.close();
 		return row;

@@ -68,7 +68,7 @@
 		</tr>
 	</table>
 	<a class="btn btn-outline-primary" href="/poll/board/updateBoardForm.jsp?num=<%=b.getNum()%>">수정</a>
-	<a class="btn btn-outline-primary" href="">삭제</a>
+	<a class="btn btn-outline-primary" href="/poll/board/deleteBoardForm.jsp?num=<%=b.getNum()%>">삭제</a>
 	<a class="btn btn-outline-primary" href="/poll/board/insertBoardReplyForm.jsp?ref=<%=b.getRef()%>&pos=<%=b.getPos()%>&depth=<%=b.getDepth()%>">답글달기</a>
 </body>
 </html>
