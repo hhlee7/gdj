@@ -7,7 +7,7 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<nav>
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
 	<div>
 		<%=AdminId%>님, 반갑습니다.
 		<a class="btn btn-outline-primary" href="/cashbook/logout.jsp">로그아웃</a>
