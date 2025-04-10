@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="dto.*"%>
+<%@page import="model.*"%>
+<%@page import="java.util.*"%>
 <%
 	// 현재 로그인 상태 확인
 	String AdminId = (String)(session.getAttribute("loginAdmin"));
@@ -7,6 +10,27 @@
 		response.sendRedirect("/cashbook/loginForm.jsp");
 		return;
 	}
+	
+	// 현재 페이지 설정
+	int currentPage = 1;
+	if(request.getParameter("currentPage") != null) {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
+	
+	// 페이징 정보 설정
+	int rowPerPage = 10; // 한 페이지 당 보여줄 행 개수
+	Paging p = new Paging();
+	p.setCurrentPage(currentPage);
+	p.setRowPerPage(rowPerPage);
+	
+	// Category 모델 호출
+	CategoryDao categoryDao = new CategoryDao();
+	
+	// 마지막 페이지 설정
+	int lastPage = p.getLastPage((categoryDao.getTotalCategory()));
+	
+	// 해당 페이지에 속한 리스트 조회
+	ArrayList<Category> list = categoryDao.selectCategoryList(p);
 %>
 <!DOCTYPE html>
 <html>
@@ -26,6 +50,49 @@
 	</div>
 	
 	<h1>카테고리 목록</h1>
-
+	<table class="table table-hover">
+		<tr>
+			<th>번호</th>
+			<th>분류</th>
+			<th>제목</th>
+			<th>생성일</th>
+			<th>수정</th>
+			<th>삭제</th>
+		</tr>
+		<%
+			for(Category c : list) {
+		%>
+				<tr>
+					<td><%=c.getCategoryNo()%></td>
+					<td><%=c.getKind()%></td>
+					<td><%=c.getTitle()%></td>
+					<td><%=c.getCreatedate()%></td>
+					<td><a href="/cashbook/updateCategoryForm.jsp?categoryNo=<%=c.getCategoryNo()%>">수정</a></td>
+					<td><a href="/cashbook/deleteCategoryAction.jsp">삭제</a></td>
+				</tr>
+		<%
+			}
+		%>
+	</table>
+	
+	<!-- 페이징 -->
+	<ul class="pagination">
+	<%
+		if(currentPage > 1) {
+	%>
+			<li class="page-item"><a class="page-link" href="/cashbook/categoryList.jsp?currentPage=<%=currentPage - 1%>">이전</a></li>
+	<%
+		}
+	%>
+			<li class="page-item"><a class="page-link" href="/cashbook/categoryList.jsp?currentPage=<%=currentPage%>"><%=currentPage%></a></li>
+			
+	<%
+		if(currentPage < lastPage) {
+	%>
+			<li class="page-item"><a class="page-link" href="/cashbook/categoryList.jsp?currentPage=<%=currentPage + 1%>">다음</a></li>
+	<%
+		}
+	%>
+	</ul>
 </body>
 </html>

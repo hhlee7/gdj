@@ -29,19 +29,20 @@
 	<form action="/cashbook/insertCategoryAction.jsp">
 		<table class="table table-hover">
 			<tr>
-				<th>kind</th>
+				<th>분류</th>
 				<td>
-					<select class="form-select">
-						<option>1</option>
-						<option>1</option>
+					<select class="form-select" name="kind">
+						<option value="수입">수입</option>
+						<option value="지출">지출</option>
 					</select>
 				</td>
 			</tr>
 			<tr>
-				<th>title</th>
-				<td></td>
+				<th>제목</th>
+				<td><input type="text" name="title"></td>
 			</tr>
 		</table>
+		<button type="submit">추가</button>
 	</form>
 </body>
 </html>

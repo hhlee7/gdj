@@ -19,7 +19,7 @@
 	    <a class="nav-link" href="/cashbook/index.jsp">홈으로</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link" href="">disabled</a>
+	    <a class="nav-link" href="/cashbook/insertCategoryForm.jsp">카테고리 추가</a>
 	  </li>
 	  <li class="nav-item">
 	    <a class="nav-link" href="">disabled</a>
