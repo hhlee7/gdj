@@ -20,10 +20,13 @@
 		<jsp:include page="/inc/nav.jsp"></jsp:include>
 	</div>
 	
-	<h1>Index</h1>
+	<h1>목차</h1>
 	<ul>
 		<li>
 			<a href="/cashbook/category/categoryList.jsp">카테고리 목록</a>
+		</li>
+		<li>
+			<a href="/cashbook/monthList.jsp">가계부 달력</a>
 		</li>
 	</ul>
 </body>
