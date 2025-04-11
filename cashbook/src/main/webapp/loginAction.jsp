@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="model.*"%>
+<%@page import="java.net.URLEncoder"%>
 <%
 	String adminId = request.getParameter("adminId");
 	String adminPw = request.getParameter("adminPw");
@@ -20,7 +21,8 @@
 		response.sendRedirect("/cashbook/index.jsp");
 	} else {
 		// 로그인 실패
-		response.sendRedirect("/cashbook/loginForm.jsp?msg=loginFailed");
+		String msg = URLEncoder.encode("아이디 또는 비밀번호가 잘못 되었습니다. 아이디와 비밀번호를 정확히 입력해 주세요.", "UTF-8");
+		response.sendRedirect("/cashbook/loginForm.jsp?msg=" + msg);
 	}
 	
 %>

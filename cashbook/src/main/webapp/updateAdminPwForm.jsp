@@ -26,13 +26,6 @@
 	</div>
 	
 	<h1>비밀번호 변경</h1>
-	<%
-		if(request.getParameter("msg") != null) {
-	%>
-			<div><%=request.getParameter("msg")%></div>
-	<%
-		}
-	%>
 	<form action="/cashbook/updateAdminPwAction.jsp">
 		<input type="hidden" name="adminId" value="<%=AdminId%>">
 		<table class="table table-hover">
@@ -49,6 +42,13 @@
 				<td><input type="password" name="confirmPw"></td>
 			</tr>
 		</table>
+		<%
+			if(request.getParameter("msg") != null) {
+		%>
+				<div><%=request.getParameter("msg")%></div>
+		<%
+			}
+		%>
 		<button type="submit" class="btn btn-outline-primary">변경하기</button>
 	</form>
 </body>

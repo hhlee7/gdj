@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="model.*"%>
+<%@page import="java.net.URLEncoder"%>
 <%
 	String adminId = request.getParameter("adminId");
 	String beforePw = request.getParameter("beforePw");
@@ -14,7 +15,8 @@
 	// 비밀번호 확인 불일치 시, 다시 비밀번호 수정 페이지로 이동
 	if(!newPw.equals(confirmPw)) {
 		System.out.println("updateAdminPwAction.jsp 비밀번호 확인 불일치");
-		response.sendRedirect("/cashbook/updateAdminPwForm.jsp?msg=notMatchConfirmPw");
+		String msg = URLEncoder.encode("비밀번호가 일치하지 않습니다.", "UTF-8");
+		response.sendRedirect("/cashbook/updateAdminPwForm.jsp?msg=" + msg);
 		return;
 	}
 	
@@ -30,6 +32,7 @@
 		response.sendRedirect("/cashbook/loginForm.jsp");
 	} else {
 		// 비밀번호 변경 실패 시, 다시 비밀번호 수정 페이지로 이동
-		response.sendRedirect("/cashbook/updateAdminPwForm.jsp?msg=notMatchBeforePw");
+		String msg = URLEncoder.encode("비밀번호를 다시 확인해주세요.", "UTF-8");
+		response.sendRedirect("/cashbook/updateAdminPwForm.jsp?msg=" + msg);
 	}
 %>
