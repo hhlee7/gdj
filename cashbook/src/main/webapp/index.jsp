@@ -23,7 +23,7 @@
 	<h1>Index</h1>
 	<ul>
 		<li>
-			<a href="/cashbook/categoryList.jsp">카테고리 목록</a>
+			<a href="/cashbook/category/categoryList.jsp">카테고리 목록</a>
 		</li>
 	</ul>
 </body>

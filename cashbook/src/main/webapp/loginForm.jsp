@@ -21,13 +21,6 @@
 </head>
 <body class="container">
 	<h1>Login</h1>
-	<%
-		if(request.getParameter("msg") != null) {
-	%>
-			<div><%=request.getParameter("msg")%></div>
-	<%
-		}
-	%>
 	<form action="/cashbook/loginAction.jsp">
 		<table class="table table-hover">
 			<tr>
@@ -39,6 +32,13 @@
 				<td><input type="password" name="adminPw"></td>
 			</tr>
 		</table>
+		<%
+			if(request.getParameter("msg") != null) {
+		%>
+				<div><%=request.getParameter("msg")%></div>
+		<%
+			}
+		%>
 		<button type="submit" class="btn btn-outline-primary">로그인</button>
 	</form>
 </body>
