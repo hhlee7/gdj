@@ -26,7 +26,7 @@
 	</div>
 	
 	<h1>카테고리 추가</h1>
-	<form action="/cashbook/insertCategoryAction.jsp">
+	<form action="/cashbook/category/insertCategoryAction.jsp">
 		<table class="table table-hover">
 			<tr>
 				<th>분류</th>
@@ -42,7 +42,14 @@
 				<td><input type="text" name="title"></td>
 			</tr>
 		</table>
-		<button type="submit">추가</button>
+		<%
+			if(request.getParameter("msg") != null) {
+		%>
+				<div><%=request.getParameter("msg")%></div>
+		<%
+			}
+		%>
+		<button class="btn btn-outline-primary" type="submit">추가</button>
 	</form>
 </body>
 </html>

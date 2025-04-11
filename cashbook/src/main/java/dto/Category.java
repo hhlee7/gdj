@@ -1,6 +1,19 @@
 package dto;
+// import java.lang.*;
+public class Category extends Object {
+	
+	/*
+	public Category() {
 
-public class Category {
+		super(); // Object();
+		// new 생성자 : new heap 영역에 this 필드를 생성하고 초기화
+		this.categoryNo = 0;
+		this.kind = null;
+		this.title = null;
+		this.createdate = null;
+	}
+	*/
+	
 	private int categoryNo;
 	private String kind;
 	private String title;
@@ -30,7 +43,6 @@ public class Category {
 	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
 	}
-	
 	@Override
 	public String toString() {
 		return "Category [categoryNo=" + categoryNo + ", kind=" + kind + ", title=" + title + ", createdate="

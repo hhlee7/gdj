@@ -67,8 +67,8 @@
 					<td><%=c.getKind()%></td>
 					<td><%=c.getTitle()%></td>
 					<td><%=c.getCreatedate()%></td>
-					<td><a href="/cashbook/updateCategoryForm.jsp?categoryNo=<%=c.getCategoryNo()%>">수정</a></td>
-					<td><a href="/cashbook/deleteCategoryAction.jsp">삭제</a></td>
+					<td><a class="btn btn-outline-primary" href="/cashbook/category/updateCategoryForm.jsp?categoryNo=<%=c.getCategoryNo()%>">수정</a></td>
+					<td><a class="btn btn-outline-primary" href="/cashbook/category/deleteCategoryAction.jsp?categoryNo=<%=c.getCategoryNo()%>">삭제</a></td>
 				</tr>
 		<%
 			}
@@ -80,16 +80,16 @@
 	<%
 		if(currentPage > 1) {
 	%>
-			<li class="page-item"><a class="page-link" href="/cashbook/categoryList.jsp?currentPage=<%=currentPage - 1%>">이전</a></li>
+			<li class="page-item"><a class="page-link" href="/cashbook/category/categoryList.jsp?currentPage=<%=currentPage - 1%>">이전</a></li>
 	<%
 		}
 	%>
-			<li class="page-item"><a class="page-link" href="/cashbook/categoryList.jsp?currentPage=<%=currentPage%>"><%=currentPage%></a></li>
+			<li class="page-item"><a class="page-link" href="/cashbook/category/categoryList.jsp?currentPage=<%=currentPage%>"><%=currentPage%></a></li>
 			
 	<%
 		if(currentPage < lastPage) {
 	%>
-			<li class="page-item"><a class="page-link" href="/cashbook/categoryList.jsp?currentPage=<%=currentPage + 1%>">다음</a></li>
+			<li class="page-item"><a class="page-link" href="/cashbook/category/categoryList.jsp?currentPage=<%=currentPage + 1%>">다음</a></li>
 	<%
 		}
 	%>
