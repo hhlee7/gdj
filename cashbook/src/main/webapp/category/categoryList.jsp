@@ -54,8 +54,8 @@
 		<tr>
 			<th>번호</th>
 			<th>분류</th>
-			<th>제목</th>
-			<th>생성일</th>
+			<th>항목</th>
+			<th>등록일</th>
 			<th>수정</th>
 			<th>삭제</th>
 		</tr>
