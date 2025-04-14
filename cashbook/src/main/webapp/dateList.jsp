@@ -39,6 +39,7 @@
 	</div>
 	
 	<h1>일 별 내역</h1>
+	<h3><%=y%>년 <%=m%>월 <%=d%>일</h3>
 	<table class="table table-hover">
 		<tr>
 			<th>분류</th>
