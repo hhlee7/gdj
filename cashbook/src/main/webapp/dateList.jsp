@@ -80,6 +80,7 @@
 	</table>
 	<div>
 		<a href="/cashbook/monthList.jsp?targetYear=<%=y%>&targetMonth=<%=m - 1%>">달력 돌아가기</a>
+		<a href="/cashbook/cash/insertCashForm.jsp">내역 등록하기</a>
 	</div>
 </body>
 </html>

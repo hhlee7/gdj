@@ -122,8 +122,8 @@
 		</tr>
 	</table>
 	<div>
-		<a href="/cashbook/monthList.jsp?targetYear=<%=firstDate.get(Calendar.YEAR)%>&targetMonth=<%=firstDate.get(Calendar.MONTH) - 1%>">이전달</a>
-		<a href="/cashbook/monthList.jsp?targetYear=<%=firstDate.get(Calendar.YEAR)%>&targetMonth=<%=firstDate.get(Calendar.MONTH) + 1%>">다음달</a>
+		<a class="btn btn-outline-primary" href="/cashbook/monthList.jsp?targetYear=<%=firstDate.get(Calendar.YEAR)%>&targetMonth=<%=firstDate.get(Calendar.MONTH) - 1%>">이전달</a>
+		<a class="btn btn-outline-primary" href="/cashbook/monthList.jsp?targetYear=<%=firstDate.get(Calendar.YEAR)%>&targetMonth=<%=firstDate.get(Calendar.MONTH) + 1%>">다음달</a>
 	</div>
 </body>
 </html>

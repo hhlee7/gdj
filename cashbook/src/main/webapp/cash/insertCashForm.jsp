@@ -22,14 +22,24 @@
 <head>
 <meta charset="UTF-8">
 <title>insertCashForm</title>
+	<!-- Latest compiled and minified CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body class="container">
+	<!-- nav.jsp include -->
+	<div>
+		<jsp:include page="/inc/nav.jsp"></jsp:include>
+	</div>
+	
 	<h1>수입/지출 선택</h1>
 	<form method="post" action="/cashbook/cash/insertCashForm.jsp">
 		<input type="hidden" name="cashDate" value="<%=cashDate%>">
-		kind
+		분류
 		<select name="kind">
-			<option value="">선택</option>
+			<option value="">- 선택 -</option>
 			<option value="수입">수입</option>
 			<option value="지출">지출</option>
 		</select>
@@ -39,7 +49,7 @@
 	<h1>수입/지출 이력 추가</h1>
 	<form method="post" action="/cashbook/cash/insertCashAction.jsp">
 		cashDate : <input type="text" name="cashDate" value="<%=cashDate%>" readonly><br>
-		category :
+		항목 :
 		<select name="categoryNo">
 			<%
 				if(list != null) {
