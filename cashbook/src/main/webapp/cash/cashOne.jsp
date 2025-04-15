@@ -18,6 +18,9 @@
 	int y = Integer.parseInt(dateParts[0]);
 	int m = Integer.parseInt(dateParts[1]);
 	int d = Integer.parseInt(dateParts[2]);
+	
+	ReceiptDao receiptDao = new ReceiptDao();
+	ArrayList<Receipt> list = receiptDao.selectImageList(cashNo);
 %>
 <!DOCTYPE html>
 <html>
@@ -61,5 +64,37 @@
 	<a class="btn btn-outline-primary" href="/cashbook/dateList.jsp?y=<%=y%>&m=<%=m%>&d=<%=d%>">목록</a>
 	<a class="btn btn-outline-primary" href="/cashbook/cash/updateCashForm.jsp?cashNo=<%=c.getCashNo()%>">수정</a>
 	<a class="btn btn-outline-primary" href="/cashbook/cash/deleteCashAction.jsp?cashNo=<%=c.getCashNo()%>&y=<%=y%>&m=<%=m%>&d=<%=d%>">삭제</a>
+	<a class="btn btn-outline-primary" href="/cashbook/receipt/insertReceiptForm.jsp?cashNo=<%=c.getCashNo()%>">영수증 등록</a>
+	
+	<!-- 영수증 목록 -->
+	<table>
+	<%
+		// 영수증 파일이 있는 경우
+		if (list != null && !list.isEmpty()) {
+			for(Receipt r : list) {
+	%>
+					<tr>
+						<td>
+							<img src="/cashbook/upload/<%=r.getFilename()%>">
+						</td>
+					</tr>
+					<tr>
+						<td><%=r.getCreatedate()%></td>
+					</tr>
+					<tr>
+						<td>
+							<a href="/cashbook/receipt/deleteReceipt.jsp?cashNo=<%=r.getCashNo()%>&filename=<%=r.getFilename()%>">삭제</a>
+						</td>
+					</tr>
+	<%
+		// 영수증 파일이 없는 경우
+			}
+		} else {
+	%>
+			<p>등록된 영수증이 없습니다.</p>
+	<%
+		}
+	%>
+	</table>
 </body>
 </html>
