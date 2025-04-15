@@ -58,8 +58,8 @@
 			<td><%=c.getUpdatedate()%></td>
 		</tr>
 	</table>
-	<a href="/cashbook/dateList.jsp?y=<%=y%>&m=<%=m%>&d=<%=d%>">목록</a>
-	<a href="/cashbook/cash/updateCashForm.jsp?cashNo=<%=c.getCashNo()%>">수정</a>
-	<a href="/cashbook/cash/deleteCashAction.jsp?cashNo=<%=c.getCashNo()%>&y=<%=y%>&m=<%=m%>&d=<%=d%>">삭제</a>
+	<a class="btn btn-outline-primary" href="/cashbook/dateList.jsp?y=<%=y%>&m=<%=m%>&d=<%=d%>">목록</a>
+	<a class="btn btn-outline-primary" href="/cashbook/cash/updateCashForm.jsp?cashNo=<%=c.getCashNo()%>">수정</a>
+	<a class="btn btn-outline-primary" href="/cashbook/cash/deleteCashAction.jsp?cashNo=<%=c.getCashNo()%>&y=<%=y%>&m=<%=m%>&d=<%=d%>">삭제</a>
 </body>
 </html>

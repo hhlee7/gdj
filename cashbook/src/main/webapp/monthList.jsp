@@ -7,7 +7,7 @@
 	// 캘린더 객체 생성 및 해당 월의 1일로 날짜 설정
 	Calendar firstDate = Calendar.getInstance();
 	firstDate.set(Calendar.DATE, 1);
-	
+	// test
 	// 파라미터로 전달된 targetYear, targetMonth가 있다면 해당 연월로 설정
 	System.out.println("monthList.jsp targetMonth: " + request.getParameter("targetMonth"));
 	if(request.getParameter("targetYear") != null && request.getParameter("targetMonth") != null) {

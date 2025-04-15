@@ -50,7 +50,7 @@
 		<%
 			for(Cash c : list) {
 		%>
-				<tr>
+				<tr onclick="location.href='/cashbook/cash/cashOne.jsp?cashNo=<%=c.getCashNo()%>'" style="cursor:pointer;">
 					<td><%=c.getKind()%></td>
 					<td><%=c.getTitle()%></td>
 					<td><%=String.format("%,d",c.getAmount())%></td>
@@ -79,8 +79,8 @@
 		%>
 	</table>
 	<div>
-		<a href="/cashbook/monthList.jsp?targetYear=<%=y%>&targetMonth=<%=m - 1%>">달력 돌아가기</a>
-		<a href="/cashbook/cash/insertCashForm.jsp">내역 등록하기</a>
+		<a class="btn btn-outline-primary" href="/cashbook/monthList.jsp?targetYear=<%=y%>&targetMonth=<%=m - 1%>">달력</a>
+		<a class="btn btn-outline-primary" href="/cashbook/cash/insertCashForm.jsp">새 내역 등록</a>
 	</div>
 </body>
 </html>

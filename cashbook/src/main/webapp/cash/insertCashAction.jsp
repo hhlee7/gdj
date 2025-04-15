@@ -16,7 +16,7 @@
 	// Cash 모델 호출
 	CashDao cashDao = new CashDao();
 	
-	// update 메서드 호출
+	// insert 메서드 호출
 	cashDao.insertCash(categoryNo, cashDate, amount, memo, color);
 	
 	// dateList.jsp로 보낼 cashDate 값 형식 변환

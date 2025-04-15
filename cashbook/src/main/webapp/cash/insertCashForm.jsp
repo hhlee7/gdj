@@ -43,12 +43,12 @@
 			<option value="수입">수입</option>
 			<option value="지출">지출</option>
 		</select>
-		<button type="submit">수입/지출 선택</button>
+		<button class="btn btn-outline-primary" type="submit">선택</button>
 	</form>
 	<hr>
 	<h1>수입/지출 이력 추가</h1>
 	<form method="post" action="/cashbook/cash/insertCashAction.jsp">
-		cashDate : <input type="text" name="cashDate" value="<%=cashDate%>" readonly><br>
+		cashDate : <input type="date" name="cashDate" value="<%=cashDate%>"><br>
 		항목 :
 		<select name="categoryNo">
 			<%
@@ -61,7 +61,10 @@
 				}
 			%>
 		</select>
-		<button type="submit">수입/지출 입력</button>
+		<div>금액 : <input type="number" name="amount"></div>
+		<div>메모 : <input type="text" name="memo"></div>
+		<div>색상 : <input type="color" name="color"></div>
+		<button class="btn btn-outline-primary" type="submit">등록</button>
 	</form>
 </body>
 </html>
