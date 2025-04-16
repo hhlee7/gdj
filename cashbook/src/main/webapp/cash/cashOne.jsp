@@ -3,6 +3,14 @@
 <%@page import="model.*"%>
 <%@page import="java.util.*"%>
 <%
+	// 현재 로그인 상태 확인
+	String AdminId = (String)(session.getAttribute("loginAdmin"));
+			
+	if(AdminId == null) { // 로그아웃 상태라면 로그인 페이지로 이동
+		response.sendRedirect("/cashbook/loginForm.jsp");
+		return;
+	}
+
 	int cashNo = Integer.parseInt(request.getParameter("cashNo"));
 	// 전달된 파라미터 값 확인용 출력
 	System.out.println("cashOne.jsp cashNo: " + cashNo);
@@ -28,8 +36,14 @@
 <meta charset="UTF-8">
 <title>cashOne</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body class="container">
+	<!-- nav.jsp include -->
+	<div>
+		<jsp:include page="/inc/nav.jsp"></jsp:include>
+	</div>
+	
 	<h1>내역 상세</h1>
 	<table class="table table-hover">
 		<tr>
@@ -46,7 +60,7 @@
 		</tr>
 		<tr>
 			<th>금액</th>
-			<td><%=c.getAmount()%></td>
+			<td><%=String.format("%,d" ,c.getAmount())%></td>
 		</tr>
 		<tr>
 			<th>메모</th>
@@ -83,7 +97,7 @@
 					</tr>
 					<tr>
 						<td>
-							<a href="/cashbook/receipt/deleteReceipt.jsp?cashNo=<%=r.getCashNo()%>&filename=<%=r.getFilename()%>">삭제</a>
+							<a class="btn btn-outline-primary" href="/cashbook/receipt/deleteReceipt.jsp?cashNo=<%=r.getCashNo()%>&filename=<%=r.getFilename()%>">삭제</a>
 						</td>
 					</tr>
 	<%

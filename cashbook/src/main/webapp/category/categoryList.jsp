@@ -37,10 +37,7 @@
 <head>
 <meta charset="UTF-8">
 <title>categoryList</title>
-	<!-- Latest compiled and minified CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	
-	<!-- Latest compiled JavaScript -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body class="container">
@@ -76,6 +73,7 @@
 	</table>
 	
 	<!-- 페이징 -->
+	<div class="d-flex justify-content-between align-items-center my-3">
 	<ul class="pagination">
 	<%
 		if(currentPage > 1) {
@@ -94,5 +92,7 @@
 		}
 	%>
 	</ul>
+	<a class="btn btn-outline-primary" href="/cashbook/category/insertCategoryForm.jsp">카테고리 추가</a>
+	</div>
 </body>
 </html>

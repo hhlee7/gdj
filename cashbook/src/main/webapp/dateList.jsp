@@ -4,6 +4,14 @@
 <%@page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
 <%
+	// 현재 로그인 상태 확인
+	String AdminId = (String)(session.getAttribute("loginAdmin"));
+			
+	if(AdminId == null) { // 로그아웃 상태라면 로그인 페이지로 이동
+		response.sendRedirect("/cashbook/loginForm.jsp");
+		return;
+	}
+	
 	int y = Integer.parseInt(request.getParameter("y"));
 	int m = Integer.parseInt(request.getParameter("m"));
 	int d = Integer.parseInt(request.getParameter("d"));
@@ -26,10 +34,7 @@
 <head>
 <meta charset="UTF-8">
 <title>dateList</title>
-	<!-- Latest compiled and minified CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	
-	<!-- Latest compiled JavaScript -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body class="container">
@@ -38,8 +43,7 @@
 		<jsp:include page="/inc/nav.jsp"></jsp:include>
 	</div>
 	
-	<h1>일 별 내역</h1>
-	<h3><%=y%>년 <%=m%>월 <%=d%>일</h3>
+	<h1><%=y%>년 <%=m%>월 <%=d%>일 내역</h1>
 	<table class="table table-hover">
 		<tr>
 			<th>분류</th>
@@ -61,7 +65,7 @@
 		%>
 	</table>
 	
-	<h3>총 합계</h3>
+	<h1>합계</h1>
 	<table class="table table-hover">
 		<tr>
 			<th>분류</th>

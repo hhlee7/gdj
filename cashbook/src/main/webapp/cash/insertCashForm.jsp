@@ -3,6 +3,14 @@
 <%@page import="model.*"%>
 <%@page import="java.util.*"%>
 <%
+	// 현재 로그인 상태 확인
+	String AdminId = (String)(session.getAttribute("loginAdmin"));
+			
+	if(AdminId == null) { // 로그아웃 상태라면 로그인 페이지로 이동
+		response.sendRedirect("/cashbook/loginForm.jsp");
+		return;
+	}
+
 	// dateList.jsp(특정 날짜의 수입/지출 리스트 출력) -> 수입/지출 입력(String cashDate) ->
 	String cashDate = request.getParameter("cashDate");
 	cashDate = "2025-04-11"; // 수정 요망

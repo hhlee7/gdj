@@ -2,6 +2,14 @@
 <%@page import="dto.*"%>
 <%@page import="model.*"%>
 <%
+	// 현재 로그인 상태 확인
+	String AdminId = (String)(session.getAttribute("loginAdmin"));
+			
+	if(AdminId == null) { // 로그아웃 상태라면 로그인 페이지로 이동
+		response.sendRedirect("/cashbook/loginForm.jsp");
+		return;
+	}
+
 	int cashNo = Integer.parseInt(request.getParameter("cashNo"));
 	// 전달된 파라미터 값 확인용 출력
 	System.out.println("updateCashForm.jsp cashDate: " + cashNo);
