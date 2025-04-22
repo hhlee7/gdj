@@ -15,7 +15,12 @@
 			<h3 class="text-center mb-4">회원가입</h3>
 
 			{{#msg}}
-				<div class="alert alert-warning text-center">{{msg}}</div>
+				{{#msgType}}
+					<div class="alert alert-{{msgType}} text-center">{{msg}}</div>
+				{{/msgType}}
+				{{^msgType}}
+					<div class="alert alert-warning text-center">{{msg}}</div>
+				{{/msgType}}
 			{{/msg}}
 
 			<form method="post" action="/member/joinMember">

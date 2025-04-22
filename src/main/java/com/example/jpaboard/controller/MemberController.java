@@ -67,6 +67,7 @@ public class MemberController {
 		
 		if(loginMember == null) { // 로그인 실패
 			rda.addFlashAttribute("msg", "로그인 실패");
+			rda.addFlashAttribute("msgType", "danger");
 			return "redirect:/member/login";
 		}
 		// 로그인 성공 코드 구현
@@ -125,6 +126,7 @@ public class MemberController {
 		MemberOnlyMemberId loginMember = (MemberOnlyMemberId)session.getAttribute("loginMember");
 		if(loginMember == null) {
 			rda.addFlashAttribute("msg", "로그인 세션이 만료되었습니다.");
+			rda.addFlashAttribute("msgType", "warning");
 			return "redirect:/member/login";
 		}
 		
@@ -134,11 +136,13 @@ public class MemberController {
 		// 기존 비밀번호와 비교
 		if(!member.getMemberPw().equals(SHA256Util.encoding(beforePw))) {
 			rda.addFlashAttribute("msg", "기존 비밀번호가 일치하지 않습니다.");
+			rda.addFlashAttribute("msgType", "danger");
 			return "redirect:/member/modifyMemberPw";
 		}
 		
 		if(!newPw.equals(confirmPw)) {
 			rda.addFlashAttribute("msg", "확인 비밀번호와 일치하지 않습니다.");
+			rda.addFlashAttribute("msgType", "danger");
 			return "redirect:/member/modifyMemberPw";
 		}
 		
@@ -146,6 +150,7 @@ public class MemberController {
 		member.setMemberPw(SHA256Util.encoding(newPw));
 		memberRepository.save(member);
 		rda.addFlashAttribute("msg", "비밀번호가 변경되었습니다. 다시 로그인해주세요.");
+		rda.addFlashAttribute("msgType", "success");
 		session.invalidate();
 		return "redirect:/member/login";
 	}
@@ -156,6 +161,7 @@ public class MemberController {
 		MemberOnlyMemberId loginMember = (MemberOnlyMemberId)session.getAttribute("loginMember");
 		if(loginMember == null) {
 			rda.addFlashAttribute("msg", "로그인 세션이 만료되었습니다.");
+			rda.addFlashAttribute("msgType", "warning");
 			return "redirect:/member/login";
 		}
 		return "member/removeMember";
