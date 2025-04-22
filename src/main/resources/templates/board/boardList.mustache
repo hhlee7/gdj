@@ -7,51 +7,68 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <title>boardList</title>
 </head>
-<body>
+<body class="bg-light">
 	{{>layouts/header}}
-		
-		{{#msg}}
-		<div>{{msg}}</div>
-		{{/msg}}
-	
-		<table class="table">
-		    <thead>
-		    <tr>
-		        <th scope="col">No</th>
-		        <th scope="col">Title</th>
-		        <th scope="col">Content</th>
-		    </tr>
-		    </thead>
-		    <tbody>
-		    {{#list}}
-		        <tr>
-		            <th>{{boardNo}}</th>
-		            <td><a href="/board/boardOne?boardNo={{boardNo}}">{{boardTitle}}</a></td>
-		            <td>{{boardContent}}</td>
-		        </tr>
-		    {{/list}}
-		    </tbody>
-		</table>
-		
-		<div>
-			<!-- 첫 페이지가 아닐 때 -->
-			{{^list.isFirst}}
-			<a href="/board/boardList?currentPage={{prePage}}&word={{word}}">이전</a>
-			{{/list.isFirst}}
+		<div class="container">
+			<h1 class="mb-4">Board List</h1>
 			
-			{{list.getNumber}}
-			
-			{{#list.hasNext}}
-			<a href="/board/boardList?currentPage={{nextPage}}&word={{word}}">다음</a>
-			{{/list.hasNext}}
+			{{#msg}}
+			<div>{{msg}}</div>
+			{{/msg}}
+		
+			<table class="table table-hover table-bordered">
+			    <thead class="table-secondary">
+			    <tr class="text-center">
+			        <th scope="col">No</th>
+			        <th scope="col">Title</th>
+			        <th scope="col">Content</th>
+			    </tr>
+			    </thead>
+			    <tbody>
+			    {{#list}}
+			        <tr>
+			            <th class="text-center">{{boardNo}}</th>
+			            <td class="text-center"><a href="/board/boardOne?boardNo={{boardNo}}" class="text-decoration-none">{{boardTitle}}</a></td>
+			            <td class="text-start">{{boardContent}}</td>
+			        </tr>
+			    {{/list}}
+			    </tbody>
+			</table>
+			<div class="row align-items-center">
+				<div class="col-md-4">
+					<form action="/board/boardList" method="get" class="d-flex w-100">
+						<input type="text" name="word">
+						<button type="submit" class="btn btn-outline-primary">검색</button>
+					</form>
+				</div>
+					
+				<!-- pagination -->
+				<div class="col-md-4 d-flex justify-content-center align-items-center">
+					<ul class="pagination mb-0 py-0">
+						<!-- 첫 페이지가 아닐 때 -->
+						{{^list.isFirst}}
+						<li class="page-item">
+							<a class="page-link" href="/board/boardList?currentPage={{prePage}}&word={{word}}">이전</a>
+						</li> {{/list.isFirst}}
+						
+						<!-- 현재 페이지 -->
+						<li class="page-item disabled">
+							<span class="page-link">{{list.getNumber}}</span>
+						</li>
+		
+						<!-- 마지막 페이지가 아닐 때 -->
+						{{#list.hasNext}}
+						<li class="page-item">
+							<a class="page-link" href="/board/boardList?currentPage={{nextPage}}&word={{word}}">다음</a>
+						</li> {{/list.hasNext}}
+					</ul>
+				</div>
+				
+				<div class="col-md-4 d-flex justify-content-end">
+					<a href="/board/addBoard" class="btn btn-success py-2">새 글 작성</a>
+				</div>
+			</div>
 		</div>
-		
-		<form action="/board/boardList" method="get">
-			<input type="text" name="word">
-			<button type="submit">검색</button>
-		</form>
-		
-		<a href="/board/addBoard">New Board</a>
 	{{>layouts/footer}}
 </body>
 </html>
