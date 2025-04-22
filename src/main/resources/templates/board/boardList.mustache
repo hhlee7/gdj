@@ -27,13 +27,15 @@
 			    <tbody>
 			    {{#list}}
 			        <tr>
-			            <th class="text-center">{{boardNo}}</th>
+			            <td class="text-center">{{boardNo}}</td>
 			            <td class="text-center"><a href="/board/boardOne?boardNo={{boardNo}}" class="text-decoration-none">{{boardTitle}}</a></td>
 			            <td class="text-start">{{boardContent}}</td>
 			        </tr>
 			    {{/list}}
 			    </tbody>
 			</table>
+			
+			<!-- 검색 기능 -->
 			<div class="row align-items-center">
 				<div class="col-md-4">
 					<form action="/board/boardList" method="get" class="d-flex w-100">
@@ -65,7 +67,7 @@
 				</div>
 				
 				<div class="col-md-4 d-flex justify-content-end">
-					<a href="/board/addBoard" class="btn btn-success py-2">새 글 작성</a>
+					<a href="/board/addBoard" class="btn btn-primary py-2">새 글 작성</a>
 				</div>
 			</div>
 		</div>
