@@ -5,4 +5,9 @@ public interface MemberOnlyMemberId {
 	int getMemberNo();
 	String getMemberId();
 	String getMemberRole();
+	
+	// 구현 메서드로 만들어 사용
+	default String getRoleOnly() {
+		return getMemberRole().split("_")[1]; // ex) "ROLE_USER" -> "USER"
+	}
 }

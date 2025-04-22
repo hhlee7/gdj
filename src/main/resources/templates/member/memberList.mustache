@@ -11,12 +11,13 @@
 {{>layouts/header}}
 
 	<div class="container">
-		<h1>멤버 목록</h1>
-		<div>
-			{{loginMember.memberId}}님, 반갑습니다.
-			<a href="/member/logout">로그아웃</a>
-			<a href="/member/modifyMemberPw">비밀번호 수정</a>
-			<a href="/member/removeMember">회원탈퇴</a>
+		<h1 class="fw-bold mt-4">멤버 목록</h1>
+		
+		<div class="d-flex justify-content-end align-items-center mb-3">
+			<span class="me-3">{{loginMember.memberId}}님, 반갑습니다.</span>
+			<a href="/member/logout" class="btn btn-outline-secondary btn-sm me-2">로그아웃</a>
+			<a href="/member/modifyMemberPw" class="btn btn-outline-warning btn-sm me-2">비밀번호 수정</a>
+			<a href="/member/removeMember" class="btn btn-outline-danger btn-sm">회원 탈퇴</a>
 		</div>
 		
 		<table class="table table-hover table-bordered text-center">
@@ -32,7 +33,7 @@
 		        <tr>
 		            <td>{{memberNo}}</td>
 		            <td>{{memberId}}</td>
-		            <td>{{memberRole}}</td>
+		            <td>{{roleOnly}}</td>
 		        </tr>
 		    {{/list}}
 		    </tbody>
@@ -55,7 +56,8 @@
 						{{^list.isFirst}}
 						<li class="page-item">
 							<a class="page-link" href="/member/memberList?currentPage={{prePage}}&word={{word}}">이전</a>
-						</li> {{/list.isFirst}}
+						</li>
+						{{/list.isFirst}}
 						
 						<!-- 현재 페이지 -->
 						<li class="page-item disabled">
@@ -66,7 +68,8 @@
 						{{#list.hasNext}}
 						<li class="page-item">
 							<a class="page-link" href="/member/memberList?currentPage={{nextPage}}&word={{word}}">다음</a>
-						</li> {{/list.hasNext}}
+						</li>
+						{{/list.hasNext}}
 					</ul>
 				</div>
 			</div>

@@ -88,12 +88,13 @@ public class MemberController {
 							, @RequestParam(value = "currentPage", defaultValue = "0") int currentPage
 							, @RequestParam(value = "rowPerPage", defaultValue = "10") int rowPerPage
 							, @RequestParam(value = "word", defaultValue = "") String word) {
+		
 		// session 인증/인가 검사
 		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/member/login";
 		}
 		
-		Sort sort = Sort.by("memberNo").ascending();
+		Sort sort = Sort.by("memberNo").descending();
 		
 		PageRequest pageable = PageRequest.of(currentPage, rowPerPage, sort);
 		
@@ -110,10 +111,67 @@ public class MemberController {
 	
 	// 회원 정보 수정
 	@GetMapping("/member/modifyMemberPw")
-	String modifyMemberPw(HttpSession session) {
+	public String modifyMemberPw(HttpSession session) {
 		return "member/modifyMemberPw";
 	}
 	
+	@PostMapping("/member/modifyMemberPw")
+	public String modifyMemberPw(HttpSession session, RedirectAttributes rda
+								, @RequestParam(value = "beforePw") String beforePw
+								, @RequestParam(value = "newPw") String newPw
+								, @RequestParam(value = "confirmPw") String confirmPw) {
+		
+		// 세션에서 로그인 사용자 정보 가져오기
+		MemberOnlyMemberId loginMember = (MemberOnlyMemberId)session.getAttribute("loginMember");
+		if(loginMember == null) {
+			rda.addFlashAttribute("msg", "로그인 세션이 만료되었습니다.");
+			return "redirect:/member/login";
+		}
+		
+		// DB에서 회원의 전체 정보 가져오기
+		Member member = memberRepository.findById(loginMember.getMemberNo()).orElse(null);
+		
+		// 기존 비밀번호와 비교
+		if(!member.getMemberPw().equals(SHA256Util.encoding(beforePw))) {
+			rda.addFlashAttribute("msg", "기존 비밀번호가 일치하지 않습니다.");
+			return "redirect:/member/modifyMemberPw";
+		}
+		
+		if(!newPw.equals(confirmPw)) {
+			rda.addFlashAttribute("msg", "확인 비밀번호와 일치하지 않습니다.");
+			return "redirect:/member/modifyMemberPw";
+		}
+		
+		// 새로운 비밀번호 암호화 후 update
+		member.setMemberPw(SHA256Util.encoding(newPw));
+		memberRepository.save(member);
+		rda.addFlashAttribute("msg", "비밀번호가 변경되었습니다. 다시 로그인해주세요.");
+		session.invalidate();
+		return "redirect:/member/login";
+	}
 	
 	// 회원 탈퇴
+	@GetMapping("/member/removeMember")
+	public String removeMember(HttpSession session, RedirectAttributes rda) {
+		MemberOnlyMemberId loginMember = (MemberOnlyMemberId)session.getAttribute("loginMember");
+		if(loginMember == null) {
+			rda.addFlashAttribute("msg", "로그인 세션이 만료되었습니다.");
+			return "redirect:/member/login";
+		}
+		return "member/removeMember";
+	}
+	
+	@PostMapping("/member/removeMember")
+	public String removeMember(HttpSession session, RedirectAttributes rda
+								, @RequestParam(value = "memberPw") String memberPw) {
+		MemberOnlyMemberId loginMember = (MemberOnlyMemberId)session.getAttribute("loginMember");
+		Member member = memberRepository.findById(loginMember.getMemberNo()).orElse(null);
+		if(member.getMemberPw().equals(SHA256Util.encoding(memberPw))) {
+			memberRepository.delete(member);
+		} else {
+			rda.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			return "redirect:/member/removeMember";
+		}
+		return "redirect:/member/login";
+	}
 }

@@ -20,7 +20,11 @@ public class MemberForm {
 		member.setMemberNo(this.memberNo);
 		member.setMemberId(this.memberId);
 		member.setMemberPw(this.memberPw);
-		member.setMemberPw(this.memberRole);
+		if(this.memberRole == null || this.memberRole.isBlank()) {
+			member.setMemberRole("ROLE_USER");
+		} else {
+			member.setMemberRole(this.memberRole);
+		}
 		return member;
 	}
 }
