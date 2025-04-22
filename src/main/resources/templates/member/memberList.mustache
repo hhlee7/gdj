@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<title>memberList</title>
+</head>
+<body>
+
+{{>layouts/header}}
+
+	<div class="container">
+		<h1>멤버 목록</h1>
+		<div>
+			{{loginMember.memberId}}님, 반갑습니다.
+			<a href="/member/logout">로그아웃</a>
+			<a href="/member/modifyMemberPw">비밀번호 수정</a>
+			<a href="/member/removeMember">회원탈퇴</a>
+		</div>
+		
+		<table class="table table-hover table-bordered text-center">
+		    <thead class="table-secondary">
+		    <tr>
+		        <th scope="col">No</th>
+		        <th scope="col">Id</th>
+		        <th scope="col">Role</th>
+		    </tr>
+		    </thead>
+		    <tbody>
+		    {{#list}}
+		        <tr>
+		            <td>{{memberNo}}</td>
+		            <td>{{memberId}}</td>
+		            <td>{{memberRole}}</td>
+		        </tr>
+		    {{/list}}
+		    </tbody>
+		</table>
+
+			<!-- 검색 기능 -->
+			<div class="row align-items-center">
+				<div class="col-md-4">
+					<form action="/member/memberList" method="get" class="d-flex w-100">
+						<input type="text" name="word">
+						<button type="submit" class="btn btn-outline-primary">검색</button>
+					</form>
+				</div>
+					
+				<!-- pagination -->
+				<div class="col-md-4 d-flex justify-content-center align-items-center">
+					<ul class="pagination mb-0 py-0">
+					
+						<!-- 첫 페이지가 아닐 때 -->
+						{{^list.isFirst}}
+						<li class="page-item">
+							<a class="page-link" href="/member/memberList?currentPage={{prePage}}&word={{word}}">이전</a>
+						</li> {{/list.isFirst}}
+						
+						<!-- 현재 페이지 -->
+						<li class="page-item disabled">
+							<span class="page-link">{{list.getNumber}}</span>
+						</li>
+		
+						<!-- 마지막 페이지가 아닐 때 -->
+						{{#list.hasNext}}
+						<li class="page-item">
+							<a class="page-link" href="/member/memberList?currentPage={{nextPage}}&word={{word}}">다음</a>
+						</li> {{/list.hasNext}}
+					</ul>
+				</div>
+			</div>
+		</div>	
+
+{{>layouts/footer}}
+
+</body>
+</html>
