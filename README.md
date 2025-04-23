@@ -18,7 +18,8 @@
   > 기존 [`java-oop`](https://github.com/hhlee7/java-oop) 레포 병합 (커밋 이력 포함).  
 
 ### 🔹 MVC 패턴 실습
-- `/mvc`, `/mvcboard`  
+- [`/mvc`](./mvc)  
+- [`/mvcboard`](./mvcboard)  
   > Servlet 기반 MVC 패턴 실습 및 DB 연동.
 
 ---
