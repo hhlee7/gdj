@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>회원가입</h1>
+	<!-- 가입폼에 틀을 9x2 테이블로 생성 -->
+	<form>
+		<table border="1">
+			<tr><!-- 1행 -->
+				<td>아이디</td>
+				<td>
+					<!-- 텍스트 입력창 -->
+					<input type="text">
+				</td>			
+			</tr>
+			
+			<tr><!-- 2행 -->
+				<td>암호<br>암호확인</td>
+				<td>
+				<input type="password">
+				<br>
+				<input type="password">
+				</td>			
+			</tr>
+			
+			<tr><!-- 3행 -->
+				<td>성별</td>
+				<td>
+					<input type="radio" name="gender">남
+					<input type="radio" name="gender">여
+				</td>			
+			</tr>
+			
+			<tr><!-- 4행 -->
+				<td>취미</td>
+				<td>
+					<input type="checkbox">운동
+					<input type="checkbox">여행
+					<input type="checkbox">독서
+				</td>			
+			</tr>
+			
+			<tr><!-- 5행 -->
+				<td>생일</td>
+				<td>
+					<input type="date">
+				</td>			
+			</tr>
+			
+			<tr><!-- 6행 -->
+				<td>나이</td>
+				<td>
+					<input type="number">
+				</td>			
+			</tr>
+			
+			<tr><!-- 7행 -->
+				<td>이메일</td>
+				<td><input type="text"></td>			
+			</tr>
+			
+			<tr><!-- 8행 -->
+				<td>메모</td>
+				<td>
+					<textarea rows="3" cols="40"></textarea>
+				</td>			
+			</tr>
+			
+			<tr><!-- 9행 -->
+				<td colspan="2">
+					<button type="button">회원가입</button>
+					<button type="reset">리셋</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
