@@ -71,12 +71,6 @@ public class BoardController {
 		// ISSUE : 파일을 첨부하지 않아도 fileSize는 1이다.
 		log.debug("MultipartFile Size: " + boardForm.getFileList().size());
 		
-		Board board = new Board();
-		board.setTitle(boardForm.getTitle());
-		board.setPw(boardForm.getPw());
-		boardRepository.save(board); // board 저장
-		int bno = board.getBno(); // board insert 후 bno 변경되었는지 확인
-		log.debug("bno: " + bno);
 		
 		// 파일 분리
 		List<MultipartFile> fileList = boardForm.getFileList();
@@ -93,6 +87,13 @@ public class BoardController {
 					return "redirect:/addBoard";
 				}
 			}
+			
+		Board board = new Board();
+		board.setTitle(boardForm.getTitle());
+		board.setPw(boardForm.getPw());
+		boardRepository.save(board); // board 저장
+		int bno = board.getBno(); // board insert 후 bno 변경되었는지 확인
+		log.debug("bno: " + bno);
 			
 			// 파일 업로드 진행 코드
 			for(MultipartFile f : fileList) {
