@@ -9,7 +9,6 @@
 
 ### 🔹 Web 실습 프로젝트
 - [`/web`](./web)(`/web01` ~ `/web0410`)
-- `/web01` ~ `/web0410`
   > HTML, JSP, DB 연동 및 SQL Query 실습을 위한 웹 프로젝트 모음.  
   > `web/` 폴더 하위에 정리.
 
