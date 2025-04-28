@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script>
+		// JS는 동적 언어. 타입이 없음.
+		let d = 10;
+		d = d + 1;
+		d = 'test';
+		console.log(d);
+		
+		var a = 1;
+		let b = 2;
+		const c = 3; // 상수
+		// c = 10; // error
+		
+		console.log('goodee', 'academy', 'etc', '...'); // @Slf4j -> log.debug()와 비슷함
+		
+		/*
+			숫자
+			문자열
+			불
+		*/
+		
+		let str = 'goodee academy';
+		console.log(str);
+		
+		str = "Goodee Academy";
+		console.log(str);
+		
+		str = "test\"test";
+		console.log(str);
+		str = "test'test";
+		console.log(str);
+		
+		// 1) 백틱 문자열을 사용하면 멀티 라인 문자열 표현이 가능
+		str = `goodee
+				academy`;
+		console.log(str);
+		
+		let x = 5;
+		let y = 7;
+		console.log(x + '*' + y + '=' + (x * y));
+		
+		// 2) 백틱 문자열은 문자열 안에 표현식 사용이 가능 / 하지만 jsp에서 사용하면 EL과 충돌 때문에 jsp에서는 사용 X
+		console.log(`${x}*${y}=${x*y}`);
+		
+		let name = "구디";
+		console.log('당신의 이름은 ' + name + '입니다.');
+		console.log(`당신의 이름은 ${name}입니다.`);
+		
+		// 자바스크립트의 문자열은 인덱스가 존재
+		console.log(name[0]); // 구
+		console.log(name[1]); // 디
+		console.log('문자열 길이:', name.length);
+		
+		console.log(4/2);
+		console.log(5/2);
+		console.log(5.0/2);
+		console.log(5%2);
+		
+		let e = true;
+		let f = false;
+		console.log(e);
+		console.log(f);
+		
+		e = 10 > 100;
+		console.log(e); // false
+		
+		console.log('=== 연산자', '777' === 777); // 정확한 연산
+		console.log('== 연산자', '777' == 777); // 느슨한 연산 : ex) 자동 형 변환 후 연산
+		
+		console.log('!== 연산자', '777' !== 777); // 정확한 연산
+		console.log('!= 연산자', '777' != 777); // 느슨한 연산
+		// 피연산자가 같은 자료형임을 확신한다면 느슨한 연산자를 사용해도 무관
+		
+		// JS는 동적 언어이기 때문에, typeof 연산자를 사용해서 변수의 타입을 확인
+		let g = 10;
+		let h = 0;
+		
+		if(typeof(g) === 'number') {
+			h = g * 2;
+		}
+		
+		g = 'hello';
+		if(typeof(g) === 'number') {
+			h = g * 10;
+		}
+		console.log('h:', h);
+		
+		console.log('-------------------');
+		
+		let name2;
+		console.log(typeof('7'));
+		console.log(typeof(7));
+		console.log(typeof(false));
+		console.log(typeof(name2));
+		
+		function add(x, y) {
+			return x + y;
+		};
+		console.log(typeof(add));
+		
+		let obj = new Object();
+		console.log(typeof(obj));
+		console.log({});
+		
+		let arr = [];
+		console.log(typeof(arr));
+		console.log('-------------------');
+	</script>
+</head>
+<body>
+
+	<input type="text" name="x" id="x" value="">
+	<div id="y"></div>
+
+	<script>
+		/*
+			출력 방법
+			1) 콘솔에 출력 (디버깅 & 로그) : console.log
+			2) 경고창에 출력 : alert()
+			3) html 페이지에 출력 document.write()
+			4) 특정 태그 안 or input value안에 출력
+			5) 특정 태그안에 출력
+		*/
+		console.log('test');
+		alert('test');
+		document.write('<p>test</p>');
+		document.getElementById('x').value = 'test';
+		document.getElementById('y').innerHTML = 'test';
+		
+		if(typeof(z) !== 'undefined') { // z 변수가 선언되어 있고, 값이 대입되어 있을때만 ~
+		}
+	</script>
+</body>
+</html>
