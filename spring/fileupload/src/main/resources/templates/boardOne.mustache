@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>boardOne</title>
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-light">
+	<div class="container py-5">
+		<h1 class="mb-4 text-center">게시글 상세</h1>
+
+		<!-- 가로 폭 w-50으로 제한 -->
+		<div class="w-50 mx-auto">
+
+			<!-- 게시글 내용 -->
+			<div class="card mb-4 shadow-sm">
+	<div class="card-body">
+		<table class="table table-borderless mb-0">
+			<tbody>
+				<tr>
+					<th scope="row" style="width: 30%;">번호</th>
+					<td>{{boardMapping.bno}}</td>
+				</tr>
+				<tr>
+					<th scope="row">제목</th>
+					<td>{{boardMapping.title}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+			<!-- 수정 / 삭제 버튼 -->
+			<div class="mb-4 text-end">
+				<a href="/boardList" class="btn btn-outline-primary me-2">목록</a>
+				<a href="/modifyBoard?bno={{boardMapping.bno}}" class="btn btn-outline-success me-2">수정</a>
+				<a href="/removeBoard?bno={{boardMapping.bno}}" class="btn btn-outline-danger">삭제</a>
+			</div>
+
+			<!-- 첨부 파일 목록 -->
+			<div class="card shadow-sm">
+				<div class="card-header bg-secondary text-white">
+					첨부 파일
+				</div>
+				<ul class="list-group list-group-flush">
+					{{#fileList}}
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						<a href="/upload/{{fname}}.{{fext}}" download="{{foriginname}}">{{foriginname}}</a>
+						<a href="/removeBoardfile?fno={{fno}}&bno={{bno}}" class="btn btn-sm btn-outline-danger">파일삭제</a>
+					</li>
+					{{/fileList}}
+				</ul>
+			</div>
+			
+		</div>
+	</div>
+</body>
+</html>

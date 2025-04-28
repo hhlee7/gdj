@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>boardList</title>
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<div class="container py-5">
+		<h1 class="mb-4 text-center">게시판 목록</h1>
+
+		<div class="w-50 mx-auto">
+			<!-- 새 글 작성 버튼 오른쪽 정렬 -->
+			<div class="d-flex justify-content-start mb-2">
+				<a href="/addBoard" class="btn btn-outline-primary btn-sm">새 게시글</a>
+			</div>
+
+			<table class="table table-hover table-bordered text-center align-middle">
+				<thead class="table-secondary">
+					<tr>
+						<th style="width: 20%;">번호</th>
+						<th>제목</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#list}}
+					<tr>
+						<td>{{bno}}</td>
+						<td>
+							<a href="/boardOne?bno={{bno}}" class="text-decoration-none">{{title}}</a>
+						</td>
+					</tr>
+					{{/list}}
+				</tbody>
+			</table>
+		</div>
+
+		<!-- 페이징 -->
+		<div class="d-flex justify-content-center mt-4">
+			<ul class="pagination">
+				{{^list.isFirst}}
+				<li class="page-item">
+					<a class="page-link" href="/boardList?currentPage={{prePage}}">이전</a>
+				</li>
+				{{/list.isFirst}}
+
+				<li class="page-item active" aria-current="page">
+					<span class="page-link">{{list.getNumber}}</span>
+				</li>
+
+				{{^list.isLast}}
+				<li class="page-item">
+					<a class="page-link" href="/boardList?currentPage={{nextPage}}">다음</a>
+				</li>
+				{{/list.isLast}}
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
