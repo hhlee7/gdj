@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>로그인</h1>
+	<form method="post" action="/loginAction" id="loginForm">
+		<div>
+			ID :
+			<input type="text" name="id" id="id" class="">
+		</div>
+		<div>
+			PW :
+			<input type="password" name="pw" id="pw" class="">
+		</div>
+		<button type="button" onclick="loginCheck()">로그인</button> <!-- 이 버튼을 클릭하면 loginCheck 함수가 호출됨 -->
+	</form>
+	
+	<script>
+		function loginCheck() { // 입력값 없고 반환값 없음
+			// alert('버튼 test');
+			if(document.getElementById('id').value < 4 || document.getElementById('pw').value < 4) {
+				alert('ID와 PW는 4자 이상이어야 합니다.');
+				return;
+			}
+			document.getElementById('loginForm').submit(); // <button type="button" ... 태그와 동일한 기능
+		}
+	</script>
+</body>
+</html>
