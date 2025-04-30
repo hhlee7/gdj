@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script>
+		let arr = [];
+		// let arr = new Array();
+		console.log(arr.length);
+		arr[0] = '구디';
+		console.log(arr.length, arr[0]);
+		arr[1] = 777;
+		console.log(arr.length, arr[0], arr[1]);
+		
+		console.log(arr);
+		
+		// 자바스크립트의 배열은 자바의 배열보다는 List<Object>에 가깝다.
+		
+		let arr2 = [];
+		arr2.push('루피');
+		arr2.push('조로');
+		arr2.push('나미');
+		
+		console.log(arr2[2]); // 나미
+		console.log(arr2[3]); // undefined
+		
+		arr2.push('상디');
+		arr2.push('우솝');
+		arr2.push('쵸파');
+		console.log(arr2);
+		
+		let arr3 = arr2.splice(3, 2);
+		console.log(arr2);
+		console.log(arr3);
+		
+		console.log(arr2.indexOf('조로'))
+		
+		let str = '동해물과 백두산이 마르고 닳도록';
+		console.log(str[3]); // 과
+		console.log(str.indexOf('백두산')); // 5
+		
+		console.log(arr2);
+		arr2.filter(function(x) {console.log(x)}); // 람다 함수를 arr 순환하면서 요소를 매개값으로 실행
+		arr2.filter((x) => console.log(x));
+	</script>
+</head>
+<body>
+
+</body>
+</html>
