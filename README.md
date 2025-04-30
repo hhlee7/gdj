@@ -11,7 +11,7 @@
 HTML · JSP / DB 연동 / SQL Query / 프로젝트 실습
 
 - [`/web`](./web)  
-  > `web01 ~ web0410` : 유형별 웹 실습  
+  > [`/web01-0410`](./web/web01-0410) : 유형별 웹 실습  
   > [`/sakila`](./web/sakila) : DVD 대여 관리 시스템  
   > [`/poll`](./web/poll) : 설문조사 시스템  
   > [`/cashbook`](./web/cashbook) : 가계부 구현  
