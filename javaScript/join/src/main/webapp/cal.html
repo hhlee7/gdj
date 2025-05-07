@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>계산기</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		.container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+		}
+		.calculator-card {
+			width: 320px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			border-radius: 12px;
+		}
+		table {
+			table-layout: fixed;
+			width: 100%;
+		}
+		td {
+			padding: 5px;
+		}
+		.btn {
+			font-size: 1.25rem;
+			padding: 0.75rem 0;
+			width: 100%;
+		}
+		#result {
+			height: 70px;
+			font-size: 1.5rem;
+			padding-right: 10px;
+		}
+	</style>
+</head>
+<body class="bg-light">
+	<div class="container">
+		<div class="card calculator-card p-3">
+			<table class="table table-bordered text-center align-middle mb-0">
+				<tr>
+					<td colspan="4"><input type="text" id="result" class="form-control text-end" readonly></td>
+				</tr>
+				<tr>
+					<td><button type="button" id="seven" class="btn btn-secondary">7</button></td>
+					<td><button type="button" id="eight" class="btn btn-secondary">8</button></td>
+					<td><button type="button" id="nine" class="btn btn-secondary">9</button></td>
+					<td><button type="button" id="divide" class="btn btn-warning">/</button></td>
+				</tr>
+				<tr>
+					<td><button type="button" id="four" class="btn btn-secondary">4</button></td>
+					<td><button type="button" id="five" class="btn btn-secondary">5</button></td>
+					<td><button type="button" id="six" class="btn btn-secondary">6</button></td>
+					<td><button type="button" id="multiple" class="btn btn-warning">*</button></td>
+				</tr>
+				<tr>
+					<td><button type="button" id="one" class="btn btn-secondary">1</button></td>
+					<td><button type="button" id="two" class="btn btn-secondary">2</button></td>
+					<td><button type="button" id="three" class="btn btn-secondary">3</button></td>
+					<td><button type="button" id="minus" class="btn btn-warning">-</button></td>
+				</tr>
+				<tr>
+					<td><button type="button" id="equal" class="btn btn-success">=</button></td>
+					<td><button type="button" id="zero" class="btn btn-secondary">0</button></td>
+					<td><button type="button" id="back" class="btn btn-info">←</button></td>
+					<td><button type="button" id="plus" class="btn btn-warning">+</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.min.js"></script>
+	<script>
+		// 0
+		let result = '';
+		document.querySelector('#zero').addEventListener('click', function() {
+			result += 0;
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+		
+		// 1
+		document.querySelector('#one').addEventListener('click', function() {
+			result += 1;
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+		
+		// 2
+		document.querySelector('#two').addEventListener('click', function() {
+			result += 2;
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+		
+		// 3
+		document.querySelector('#three').addEventListener('click', function() {
+			result += 3;
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+		
+		// 4
+		document.querySelector('#four').addEventListener('click', function() {
+			result += 4;
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+		
+		// 5
+		document.querySelector('#five').addEventListener('click', function() {
+			result += 5;
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+		
+		// 6
+		document.querySelector('#six').addEventListener('click', function() {
+			result += 6;
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+		
+		// 7
+		document.querySelector('#seven').addEventListener('click', function() {
+			result += 7;
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+		
+		// 8
+		document.querySelector('#eight').addEventListener('click', function() {
+			result += 8;
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+		
+		// 9
+		document.querySelector('#nine').addEventListener('click', function() {
+			result += 9;
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+		
+		// + 연산자
+		document.querySelector('#plus').addEventListener('click', function() {
+			if(['+', '-', '*', '/'].includes(result.slice(-1))) {
+				alert('연속된 연산자는 사용할 수 없습니다.');
+				return;
+			}
+			result += '+';
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+		
+		// - 연산자
+		document.querySelector('#minus').addEventListener('click', function() {
+			if(['+', '-', '*', '/'].includes(result.slice(-1))) {
+				alert('연속된 연산자는 사용할 수 없습니다.');
+				return;
+			}
+			result += '-';
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+		
+		// * 연산자
+		document.querySelector('#multiple').addEventListener('click', function() {
+			if(['+', '-', '*', '/'].includes(result.slice(-1))) {
+				alert('연속된 연산자는 사용할 수 없습니다.');
+				return;
+			}
+			result += '*';
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+		
+		// / 연산자
+		document.querySelector('#divide').addEventListener('click', function() {
+			if(['+', '-', '*', '/'].includes(result.slice(-1))) {
+				alert('연속된 연산자는 사용할 수 없습니다.');
+				return;
+			}
+			result += '/';
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+
+		// ← back
+		document.querySelector('#back').addEventListener('click', function() {
+			result = result.slice(0, -1);
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+		
+		// = 결과 값 계산		
+		document.querySelector('#equal').addEventListener('click', function() {
+			if(['+', '-', '*', '/'].includes(result.slice(-1))) {
+				result = result.slice(0, -1); 
+			}
+			result = math.evaluate(result).toString();
+			document.querySelector('#result').value = result;
+			console.log(result);
+		});
+	</script>
+</body>
+</html>
