@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	// setTimeout(() => console.log('hello'), 1 * 1000); // 1초후에 한 번만 콜백을 호출
+	
+	let x = () => alert('익명 함수');
+	x(); // 함수 호출 연산자의 위치는 함수 이름 뒤에 사용
+	
+	(() => alert('익명 함수2'))(); // 이름이 없는 함수(익명 함수)뒤에 함수 호출 연산자 사용 - 즉시 호출 함수
+	
+	/*
+	let x = 1;
+	let y = setInterval(() => {
+		x += 1;
+		if(x > 5) {
+		 clearInterval(y);
+		}
+		console.log('setInterval x:', x);
+	}, 1 * 1000); // 1초마다 콜백을 호출
+	*/
+</script>
+</body>
+</html>

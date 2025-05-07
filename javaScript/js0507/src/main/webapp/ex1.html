@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function f0() { // 선언적 함수 - 호이스팅
+		alert('f0');
+	};
+
+	let f1 = function() {
+		alert('f1');
+	};
+	
+	// f0(); // 함수 호출, () : 호출 연산자
+	// f1();
+	
+	// 콜백 함수 : 매개변수에 함수를 전달
+	let f2 = function(p1) { // p1 = 함수 대입
+		alert(p1);
+		p1(); // 매개값으로 전달받은 함수를 호출
+	}
+	
+	f2(f1);
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>로또 5줄 동시 정지 + 히스토리</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .lotto-number {
+      font-size: 1.5rem;
+      font-weight: bold;
+      width: 50px;
+      height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: #f8f9fa;
+      margin: 5px;
+      border: 1px solid #ccc;
+    }
+    .line {
+      margin-bottom: 10px;
+    }
+    #history .line {
+      font-size: 1rem;
+    }
+    .history-title {
+      margin-top: 30px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container text-center mt-5">
+    <h3>🎯 로또 번호 5줄 생성기</h3>
+    <div class="mt-2">
+      State: <span id="stateVal" class="fw-bold tex-primary">end</span>
+    </div>
+    <div id="lottoContainer" class="mt-4"></div>
+    <button id="start" class="btn btn-success mt-3 me-2">Start</button>
+    <button id="end" class="btn btn-danger mt-3">End</button>
+
+    <!-- 히스토리 영역 -->
+    <div id="history" class="text-start mt-5">
+      <div class="history-title">📌 생성된 로또 번호 기록</div>
+      <!-- 여기에 회차별 기록이 추가됨 -->    </div>
+  </div>
+
+  <script>
+    const ROWS = 5;
+    const COLS = 6;
+    let state = 'end';
+    document.querySelector('#stateVal').textContent = state;
+    let intervals = [];
+    let finalNumbers = [];
+
+    const container = document.getElementById('lottoContainer');
+    const historyContainer = document.getElementById('history');
+
+    // 초기 5줄 화면 구성
+    for (let i = 0; i < ROWS; i++) {
+      const row = document.createElement('div');
+      row.className = 'line';
+      for (let j = 0; j < COLS; j++) {
+        const span = document.createElement('span');
+        span.className = 'lotto-number';
+        span.dataset.index = `${i}-${j}`;
+        span.textContent = '0';
+        row.appendChild(span);
+      }
+      container.appendChild(row);
+    }
+
+    document.getElementById('start').addEventListener('click', () => {
+      if (state === 'start') return;
+      state = 'start';
+      document.querySelector('#stateVal').textContent = state;
+
+      intervals = Array.from({ length: ROWS }, () => []);
+      finalNumbers = [];
+
+      for (let i = 0; i < ROWS; i++) {
+        const picked = shuffleAndPick();
+        finalNumbers.push(picked);
+
+        for (let j = 0; j < COLS; j++) {
+          const span = document.querySelector(`.lotto-number[data-index="${i}-${j}"]`);
+          intervals[i][j] = setInterval(() => {
+            span.textContent = Math.floor(Math.random() * 45) + 1;
+          }, 50);
+        }
+      }
+    });
+
+    document.getElementById('end').addEventListener('click', () => {
+      if (state === 'end') return;
+
+      for (let col = 0; col < COLS; col++) {
+        setTimeout(() => {
+          for (let row = 0; row < ROWS; row++) {
+            clearInterval(intervals[row][col]);
+            const span = document.querySelector(`.lotto-number[data-index="${row}-${col}"]`);
+            span.textContent = finalNumbers[row][col];
+          }
+        }, col * 500);
+      }
+
+      setTimeout(() => {
+        state = 'end';
+        document.querySelector('#stateVal').textContent = state;
+
+        // 🎯 히스토리 저장
+        appendToHistory(finalNumbers);
+
+      }, COLS * 500 + 100);
+    });
+
+    function shuffleAndPick() {
+      let numbers = Array.from({ length: 45 }, (_, i) => i + 1);
+      for (let i = numbers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+      }
+      return numbers.slice(0, 6).sort((a, b) => a - b);
+    }
+
+    function appendToHistory(results) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'mb-2';
+
+      results.forEach((line, idx) => {
+        const lineDiv = document.createElement('div');
+        lineDiv.className = 'line';
+        lineDiv.innerHTML = `<span class="text-secondary me-2">[${idx + 1}줄]</span>`;
+        line.forEach(num => {
+          const span = document.createElement('span');
+          span.className = 'lotto-number';
+          span.textContent = num;
+          lineDiv.appendChild(span);
+        });
+        wrapper.appendChild(lineDiv);
+      });
+
+      // 최신 결과가 위로 오도록 prepend
+      historyContainer.insertBefore(wrapper, historyContainer.children[1]);
+    }
+  </script>
+</body>
+</html>
