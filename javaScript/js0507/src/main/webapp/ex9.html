@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="/emp.js"></script>
+</head>
+<body>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>first_name</th>
+				<th>last_name</th>
+				<th>email</th>
+				<th>gender</th>
+				<th>hiredate</th>
+				<th>age</th>
+			</tr>
+		</thead>
+		<tbody id="empList">
+		</tbody>
+	</table>
+	<script>
+		let emp = JSON.parse(JSON.stringify(data));
+		// 메일이 google인 사람만 출력
+		/*
+		let mailOnlyGoogle = emp.filter(function(e) {
+			// return e.email.split('@')[1].split('.')[0] == 'google';
+			// return e.email.includes('google');
+			return e.email.indexOf('google') != -1;
+		}).forEach(function(e) {
+			html += '<tr>';
+				html += '<td>' + e.id + '</td>';
+				html += '<td>' + e.first_name + '</td>';
+				html += '<td>' + e.last_name + '</td>';
+				html += '<td>' + e.email + '</td>';
+				html += '<td>' + e.gender + '</td>';
+				html += '<td>' + e.hiredate + '</td>';
+				html += '<td>' + e.age + '</td>';
+			html += '</tr>';
+		});
+		*/
+		
+		// 메서드 체이닝 연습
+		// map() : last_name을 * 로 출력 ex) Lottrington -> ***********, Aubri -> *****
+		// map() : age 23 -> 20, 38 -> 30, 40 -> 40
+		// filter() : age == 20
+		// forEach() : 출력
+		
+		let html = '';
+		let Emp = emp.map(e => ({
+		...e,
+		last_name: (e.last_name.includes('Lottrington') || e.last_name.includes('Aubri'))
+					? '*'.repeat(e.last_name.length) : e.last_name,
+		age: Math.floor(e.age / 10) * 10
+		}))
+		.filter(e => e.age == 20)
+		.forEach(function(e) {
+			html += '<tr>';
+				html += '<td>' + e.id + '</td>';
+				html += '<td>' + e.first_name + '</td>';
+				html += '<td>' + e.last_name + '</td>';
+				html += '<td>' + e.email + '</td>';
+				html += '<td>' + e.gender + '</td>';
+				html += '<td>' + e.hiredate + '</td>';
+				html += '<td>' + e.age + '</td>';
+			html += '</tr>';
+		});
+		
+		document.querySelector('#empList').innerHTML = html;
+	</script>
+</body>
+</html>
