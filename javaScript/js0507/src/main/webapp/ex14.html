@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	const product = {
+		name : '망고',
+		type : '당절임',
+		madein : '필리핀',
+		// 객체 안에 선언된 함수 -> 메서드
+		print : function() { // 함수, 메서드 모두 사용 가능
+			alert(this.name);
+		},
+		show : () => { // 함수를 만들때만 사용
+			alert('show:' + this.name);
+		},
+		printType() { // 메서드 문법 printType : function(){...}
+			alert(this.type);
+		}
+	}
+	
+	product.print();
+	product.show(); // show 함수이기 때문에 show 안에 this가 .앞에 product를 가리키지 않는다.
+	product.printType();
+</script>
+</body>
+</html>
