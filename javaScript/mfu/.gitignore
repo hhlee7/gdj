@@ -1,0 +1,41 @@
+# Java/Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+
+# Maven Wrapper
+.mvn/
+!**/maven-wrapper.jar
+
+# IDEs
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+*.iws
+*.ipr
+.sts4-cache
+.apt_generated
+.factorypath
+.springBeans
+
+# OS 파일
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# 테스트 리포트 및 빌드 산출물
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+.nb-gradle/
+
+# 기타
+HELP.md
