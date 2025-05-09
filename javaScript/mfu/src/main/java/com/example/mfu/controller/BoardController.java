@@ -23,7 +23,8 @@ public class BoardController {
 	@PostMapping({"/addBoard"})
 	public String addBoard(BoardForm boardForm) {
 		log.info(boardForm.toString());
-		// boardService.addBoard(boardForm);
+		// log.info("boardfile size: " + boardForm.getBoardfile().size());
+		boardService.addBoard(boardForm);
 		return "redirect:/";
 	}
 	

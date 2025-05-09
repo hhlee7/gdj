@@ -58,6 +58,19 @@
 		document.querySelector('#addBtn').addEventListener('click', () => {
 			// alert('addBtn click!');
 			// 폼(값) 유효성 검사 선행
+			if(document.querySelector('#boardTitle').value == '') {
+				alert('title을 입력하세요.');
+				return;
+			}
+			
+			// 파일이 추가되지 않은 node(input type=file)을 삭제
+			let boardfiles = document.querySelectorAll('.boardfile');
+			boardfiles.forEach((e) => {
+				if(e.value == '') {
+					e.remove(); // node 삭제
+				}
+			})
+				
 			document.querySelector('#addForm').submit();
 		})
 	</script>
