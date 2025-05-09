@@ -11,4 +11,10 @@
 			#{boardTitle}
 		)
 	</insert>
+	
+	<select id="selectBoardList" resultType="com.example.mfu.dto.Board">
+		SELECT board_no boardNo, board_title boardTitle
+		FROM board
+		ORDER BY board_no
+	</select>
 </mapper>

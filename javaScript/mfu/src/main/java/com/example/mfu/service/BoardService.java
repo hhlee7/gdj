@@ -1,6 +1,7 @@
 package com.example.mfu.service;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,4 +60,9 @@ public class BoardService {
 			}
 		}
 	}
+	
+	public List<Board> getBoardList() {
+		return boardMapper.selectBoardList();
+	}
+	
 }
