@@ -10,4 +10,5 @@ import com.example.mfu.dto.Boardfile;
 public interface BoardfileMapper {
 	Integer insertBoardfile(Boardfile boardfile);
 	List<Boardfile> selectBoardfileList(int boardNo);
+	void removeBoardfile(int boardNo);
 }

@@ -14,4 +14,8 @@
 		FROM boardfile
 		WHERE board_no = #{boardNo}
 	</select>
+	
+	<delete id="removeBoardfile">
+		DELETE FROM boardfile WHERE board_no = #{boardNo}
+	</delete>
 </mapper>

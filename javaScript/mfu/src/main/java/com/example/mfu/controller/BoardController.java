@@ -31,7 +31,7 @@ public class BoardController {
 		log.info(boardForm.toString());
 		// log.info("boardfile size: " + boardForm.getBoardfile().size());
 		boardService.addBoard(boardForm);
-		return "redirect:/";
+		return "redirect:/boardList";
 	}
 	
 	@GetMapping("/boardList")
@@ -48,6 +48,25 @@ public class BoardController {
 		model.addAttribute("board", board);
 		model.addAttribute("fileList", fileList);
 		return "boardOne";
+	}
+	
+	@GetMapping("/modifyBoard")
+	public String modifyBoard(@RequestParam("boardNo") int boardNo, Model model) {
+		Board board = boardService.getBoardOne(boardNo);
+		model.addAttribute("board", board);
+		return "modifyBoard";
+	}
+	
+	@PostMapping("/modifyBoard")
+	public String modifyBoard(Board board) {
+		boardService.modifyBoard(board);
+		return "redirect:/boardOne?boardNo=" + board.getBoardNo();
+	}
+	
+	@GetMapping("/removeBoard")
+	public String removeBoard(@RequestParam("boardNo") int boardNo) {
+		boardService.removeBoard(boardNo);
+		return "redirect:/boardList";
 	}
 	
 	

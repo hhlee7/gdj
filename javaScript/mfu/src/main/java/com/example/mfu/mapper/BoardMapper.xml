@@ -21,6 +21,16 @@
 	<select id="selectBoardOne" resultType="com.example.mfu.dto.Board">
 		SELECT board_no boardNo, board_title boardTitle
 		FROM board
-		WHERE board_no = ${boardNo}
+		WHERE board_no = #{boardNo}
 	</select>
+	
+	<update id="modifyBoard" parameterType="com.example.mfu.dto.Board">
+		UPDATE board
+		SET board_title = #{boardTitle}
+		WHERE board_no = #{boardNo}
+	</update>
+	
+	<delete id="removeBoard" parameterType="int">
+		DELETE FROM board WHERE board_no = #{boardNo}
+	</delete>
 </mapper>

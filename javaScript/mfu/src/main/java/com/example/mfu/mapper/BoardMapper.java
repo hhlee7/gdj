@@ -11,4 +11,6 @@ public interface BoardMapper {
 	Integer insertBoard(Board board);
 	List<Board> selectBoardList();
 	Board selectBoardOne(int boardNo);
+	void modifyBoard(Board board);
+	void removeBoard(int boardNo);
 }

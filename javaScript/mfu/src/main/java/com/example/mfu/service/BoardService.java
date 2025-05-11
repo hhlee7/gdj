@@ -76,4 +76,23 @@ public class BoardService {
 		return boardfileMapper.selectBoardfileList(boardNo);
 	}
 	
+	// 해당 boardNo의 boardTitle 수정
+	public void modifyBoard(Board board) {
+		boardMapper.modifyBoard(board);
+	}
+	
+	// 해당 boardNo의 board 및 file 모두 삭제
+	public void removeBoard(int boardNo) {
+		List<Boardfile> fileList = boardfileMapper.selectBoardfileList(boardNo);
+		
+		for(Boardfile f : fileList) {
+			String filename = f.getFilename();
+			File file = new File("c:/project/upload/" + filename);
+			if(file.exists()) {
+				file.delete();
+			}
+		}		
+		boardfileMapper.removeBoardfile(boardNo);
+		boardMapper.removeBoard(boardNo);
+	}
 }

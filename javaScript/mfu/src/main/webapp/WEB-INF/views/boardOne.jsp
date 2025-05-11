@@ -41,6 +41,7 @@
 		</tr>
 	</table>
 	<a href="/modifyBoard?boardNo=${board.boardNo}">수정</a>
+	<a href="/removeBoard?boardNo=${board.boardNo}" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
 	<a href="/boardList">목록으로</a>
 </body>
 </html>
