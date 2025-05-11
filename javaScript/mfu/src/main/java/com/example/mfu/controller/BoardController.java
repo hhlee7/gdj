@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.mfu.dto.Board;
 import com.example.mfu.dto.BoardForm;
+import com.example.mfu.dto.Boardfile;
 import com.example.mfu.service.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +39,15 @@ public class BoardController {
 		List<Board> list = boardService.getBoardList();
 		model.addAttribute("list", list);
 		return "boardList";
+	}
+	
+	@GetMapping("/boardOne")
+	public String boardOne(@RequestParam("boardNo") int boardNo, Model model) {
+		Board board = boardService.getBoardOne(boardNo);
+		List<Boardfile> fileList = boardService.getBoardfileList(boardNo);
+		model.addAttribute("board", board);
+		model.addAttribute("fileList", fileList);
+		return "boardOne";
 	}
 	
 	

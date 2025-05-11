@@ -30,6 +30,7 @@
 		</table>
 		<button id="addBtn" type="button">입력</button>
 	</form>
+	<a href="/boardList">목록으로</a>
 	<script>
 		document.querySelector('#appendFile').addEventListener('click', () => {
 			let flag = false; // 두 번째, 세 번째... flag = false로 초기화

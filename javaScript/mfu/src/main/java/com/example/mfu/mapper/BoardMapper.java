@@ -10,4 +10,5 @@ import com.example.mfu.dto.Board;
 public interface BoardMapper {
 	Integer insertBoard(Board board);
 	List<Board> selectBoardList();
+	Board selectBoardOne(int boardNo);
 }

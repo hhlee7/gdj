@@ -16,7 +16,11 @@
 		<c:forEach var="b" items="${list}">
 			<tr>
 				<td>${b.boardNo}</td>
-				<td>${b.boardTitle}</td>
+				<td>
+					<a href="/boardOne?boardNo=${b.boardNo}">
+						${b.boardTitle}
+					</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

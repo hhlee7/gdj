@@ -8,4 +8,10 @@
 			#{boardNo}, #{filename}, #{filetype}
 		)
 	</insert>
+	
+	<select id="selectBoardfileList" resultType="com.example.mfu.dto.Boardfile">
+		SELECT boardfile_no boardfileNo, board_no boardNo, filename, filetype
+		FROM boardfile
+		WHERE board_no = #{boardNo}
+	</select>
 </mapper>

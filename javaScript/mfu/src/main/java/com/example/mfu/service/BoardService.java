@@ -61,8 +61,19 @@ public class BoardService {
 		}
 	}
 	
+	// boardList 호출
 	public List<Board> getBoardList() {
 		return boardMapper.selectBoardList();
+	}
+	
+	// 해당 boardNo의 boardOne 호출
+	public Board getBoardOne(int boardNo) {
+		return boardMapper.selectBoardOne(boardNo);
+	}
+	
+	// 해당 boardNo의 boardfile의 데이터 호출
+	public List<Boardfile> getBoardfileList(int boardNo) {
+		return boardfileMapper.selectBoardfileList(boardNo);
 	}
 	
 }
