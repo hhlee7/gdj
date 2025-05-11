@@ -32,7 +32,7 @@ public class BoardService {
 		int addBoardRow = boardMapper.insertBoard(board); // After => board.setBoardNo(key);
 		log.info("board.getBoardNo(): " + board.getBoardNo());
 		if(addBoardRow != 1) {
-			throw new AddBoardException();
+			throw new AddBoardException("board 입력 실패");
 		}
 		
 		// 2) boardfile 추가
@@ -47,7 +47,7 @@ public class BoardService {
 				bf.setFilename(filename);
 				int addBoardfileRow = boardfileMapper.insertBoardfile(bf);
 				if(addBoardfileRow != 1) {
-					throw new AddBoardException();
+					throw new AddBoardException("boardfile 입력 실패");
 				}
 				// 3) 파일 저장
 				File emptyFile = new File("c:/project/upload/" + filename);
@@ -55,7 +55,7 @@ public class BoardService {
 				try {
 					f.transferTo(emptyFile);
 				} catch (Exception e) {
-					throw new AddBoardException(); // try ... catch 강제하는 예외를 강제하지 않는 예외로 변경해서 예외 발생
+					throw new AddBoardException("파일 저장 실패"); // try ... catch 강제하는 예외를 강제하지 않는 예외로 변경해서 예외 발생
 				}
 			}
 		}
