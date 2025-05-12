@@ -8,6 +8,8 @@
 </head>
 <body>
 	<form id="form1" action="/continentList" method="get">
+	
+		<!--  대륙 선택 -->
 		<select id="continent" name="continent">
 			<option value="">:::대륙선택:::</option>
 			<c:forEach var="continent" items="${continentList}">
@@ -26,6 +28,7 @@
 			</c:forEach>
 		</select>
 		
+		<!--  나라 선택 -->
 		<select id="country" name="country">
 			<option value="">:::나라선택:::</option>
 			<c:forEach var="country" items="${countryList}">
@@ -44,6 +47,7 @@
 			</c:forEach>
 		</select>
 		
+		<!--  도시 선택 -->
 		<select id="city" name="city">
 			<option value="">:::도시선택:::</option>
 			<c:forEach var="city" items="${cityList}">
@@ -53,6 +57,7 @@
 			</c:forEach>
 		</select>
 	</form>
+	
 	<script>
 		document.querySelector('#continent').addEventListener('change', function() {
 			if(this.value == '') {
