@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="text" id="email">
+	<p id="result"></p>
+	
+	<script>
+		let isEmail = function(value) { // ab@naver.com
+			// @ 문자 앞에 2글자 이상 존재
+			let ch1 = value.indexOf('@') > 1
+			// @ 뒤의 문자는 . 문자 앞에 2글자 이상 존재
+			let ch2 = false;
+			if(ch1) {
+			let arr = value.split('@'); // arr[0] : @ 앞의 문자, arr[1] : @ 뒤의 문자
+				ch2 = arr[1].indexOf('.') > 1;
+			}
+			let ch3 = false;
+			if(ch2) {
+			let arr2 = value.split('.'); // arr2[0] : . 앞의 문자, arr2[1] : . 뒤의 문자
+				ch3 = arr2[1].length > 2;
+			}
+			return ch3;
+			
+			/*
+				010-xxxx-xxxx :
+				1) split('-') length -> 3
+				2) arr[0], arr[1], arr[3] isNaN -> false
+				3) arr[0].length -> 3
+				4) arr[1], arr[3] length -> 4
+			*/
+		};
+	
+		let email = document.querySelector('#email');
+		let result = document.querySelector('#result');
+		
+		email.addEventListener('keyup', function(e) {
+			// email.value
+			// this.value
+			// e.currentTarget.value
+			if(isEmail(this.value)) {
+				result.textContent = '사용 가능한 이메일입니다.';
+			} else {
+				result.textContent = '이메일 형식이 아닙니다.';
+			}
+		});
+	</script>
+</body>
+</html>
