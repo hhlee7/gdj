@@ -3,34 +3,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>addBoard</title>
+	<meta charset="UTF-8">
+	<title>addBoard</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-	<h1>addBoard</h1>
-	<form id="addForm" action="${pageContext.request.contextPath}/addBoard" method="post" enctype="multipart/form-data">
-		<table border="1">
-			<tr>
-				<td>boardTitle</td>
-				<td>
-					<input type="text" name="boardTitle" id="boardTitle">
-				</td>
-			</tr>
-			<tr>
-				<td>boardfile</td>
-				<td>
-					<div>
-						<button id="appendFile" type="button">파일 추가</button>
+<body class="bg-light">
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<div class="card shadow">
+					<div class="card-body">
+						<h1 class="card-title text-center mb-4">게시글 작성</h1>
+						<form id="addForm" action="${pageContext.request.contextPath}/addBoard" method="post" enctype="multipart/form-data">
+							<div class="mb-3">
+								<label for="boardTitle" class="form-label">제목</label>
+								<input type="text" class="form-control" name="boardTitle" id="boardTitle">
+							</div>
+							<div class="mb-3">
+								<label class="form-label">파일 첨부</label>
+								<div class="d-grid gap-2 d-md-flex justify-content-md-start mb-2">
+									<button id="appendFile" type="button" class="btn btn-outline-secondary btn-sm">파일 추가</button>
+								</div>
+								<div id="fileDiv">
+									<input type="file" name="boardfile" class="form-control mb-2 boardfile">
+								</div>
+							</div>
+							<div class="d-flex justify-content-between">
+								<button id="addBtn" type="button" class="btn btn-primary">등록</button>
+								<a href="/boardList" class="btn btn-secondary">목록</a>
+							</div>
+						</form>
 					</div>
-					<div id="fileDiv">
-						<input type="file" name="boardfile" class="boardfile">
-					</div>
-				</td>
-			</tr>
-		</table>
-		<button id="addBtn" type="button">입력</button>
-	</form>
-	<a href="/boardList">목록으로</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<script>
 		document.querySelector('#appendFile').addEventListener('click', () => {
 			let flag = false; // 두 번째, 세 번째... flag = false로 초기화
@@ -52,7 +60,7 @@
 			let inputFile = document.createElement('input');
 			inputFile.setAttribute('type', 'file');
 			inputFile.setAttribute('name', 'boardfile');
-			inputFile.setAttribute('class', 'boardfile');
+			inputFile.setAttribute('class', 'form-control mb-2 boardfile');
 			document.querySelector('#fileDiv').appendChild(inputFile);
 		})
 		
@@ -60,7 +68,7 @@
 			// alert('addBtn click!');
 			// 폼(값) 유효성 검사 선행
 			if(document.querySelector('#boardTitle').value == '') {
-				alert('title을 입력하세요.');
+				alert('제목을 입력하세요.');
 				return;
 			}
 			
