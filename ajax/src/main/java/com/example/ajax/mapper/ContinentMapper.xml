@@ -8,19 +8,19 @@
 		FROM continent
 	</select>
 	
-	<select id="selectCountryList" resultType="map">
+	<select id="selectCountryList" resultType="map" parameterType="int">
 		SELECT
 			country_no countryNo
 			, country_name countryName
-			, continent_no continentNo
 		FROM country
+		WHERE continent_no = #{continentNo}
 	</select>
 	
-	<select id="selectCityList" resultType="map">
+	<select id="selectCityList" resultType="map" parameterType="int">
 		SELECT
 			city_no cityNo
 			, city_name cityName
-			, country_no countryNo
 		FROM city
+		WHERE country_no = #{countryNo}
 	</select>
 </mapper>

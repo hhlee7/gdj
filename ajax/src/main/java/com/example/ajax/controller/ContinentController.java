@@ -22,12 +22,12 @@ public class ContinentController {
 		
 		// 대륙 선택 시 나라 목록 조회
 		if(continent != null) {
-			model.addAttribute("countryList", continentMapper.selectCountryList());
+			model.addAttribute("countryList", continentMapper.selectCountryList(continent));
 		}
 		
 		// 나라 선택 시 도시 목록 조회
 		if(country != null) {
-			model.addAttribute("cityList", continentMapper.selectCityList());
+			model.addAttribute("cityList", continentMapper.selectCityList(country));
 		}
 		
 		return "continentList";
