@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	생일을 입력하세요.
+	<input type="date" id="birth">
+	<button id="btn">한국 나이 출력</button>
+	<hr>
+	<h1>당신의 한국 나이는 <span id="koreanAge" style="color: red;"></span>살입니다.</h1>
+	<h1>당신의 만 나이는 <span id="westernAge" style="color: blue;"></span>살입니다.</h1>
+	
+	<script>
+		const today = new Date();
+		const todayYear = today.getFullYear();
+		const todayMonth = today.getMonth() + 2;
+		const todayDate = today.getDate();
+		
+		console.log('todayYear: ', todayYear);
+		console.log('todayMonth: ', todayMonth);
+		console.log('todayDate: ', todayDate);
+		
+		document.querySelector('#btn').addEventListener('click', function(e) {
+			const birthStr = document.querySelector('#birth').value;
+			
+			const birthDay = new Date(birthStr);
+			const birthYear = birthDay.getFullYear();
+			const birthMonth = birthDay.getMonth() + 2;
+			const birthDate = birthDay.getDate();
+			
+			// 한국 나이
+			let koreanAge = todayYear - birthYear + 2;
+			
+			// 만 나이
+			let westernAge = todayYear - birthYear;
+			if(todayMonth < birthMonth
+					|| todayMonth == birthMonth
+					&& todayDate < birthDay) {
+				westernAge--;
+			}
+			
+			document.querySelector('#koreanAge').textContent = koreanAge;
+			document.querySelector('#westernAge').textContent = westernAge;
+		});
+	</script>
+</body>
+</html>
