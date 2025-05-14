@@ -9,11 +9,11 @@ import com.example.mbboard.dto.Page;
 
 @Mapper
 public interface BoardMapper {
-	
 	List<Board> selectBoardListByPage(Page p);
-	Board selectBoardOne(Board b);
+	int countBoard(String searchWord);
+	Board selectBoardOne(int boardNo);
 	
 	int insertBoard(Board b);
 	int updateBoard(Board b);
-	int deleteBoardByKey(Board b);
+	int deleteBoardByKey(int boardNo);
 }

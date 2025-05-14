@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mbboard.mapper.BoardMapper">
-
+	<!-- 전체 게시글 조회 -->
 	<select id="selectBoardListByPage" parameterType="com.example.mbboard.dto.Page"
 										resultType="com.example.mbboard.dto.Board">
 		SELECT
 			board_no boardNo
 			, board_title boardTitle
+			, board_user boardUser
+			, createdate
 		FROM board
 		<where>
-			<if test="searchWord != null">
-				board_title like #{searchWord}
+			<if test="searchWord != null and searchWord != ''">
+				board_title like concat('%', #{searchWord}, '%')
 			</if>
-			<!-- 
-			<if test="searchWord != null">
-				AND board_content like #{searchWord}
-			</if>
-			 -->
 		</where>
-		ORDER BY board_no
+		ORDER BY board_no DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
-	<select id="selectBoardOne" parameterType="com.example.mbboard.dto.Board"
+	<!-- 총 게시글 수 조회 -->
+	<select id="countBoard" resultType="int">
+		SELECT count(*) FROM board
+		<where>
+			<if test="searchWord != null and searchWord != ''">
+				board_title LIKE CONCAT('%', #{searchWord}, '%')
+			</if>
+		</where>
+	</select>
+	
+	<!-- 해당 게시글 상세 조회 -->
+	<select id="selectBoardOne" parameterType="int"
 								resultType="com.example.mbboard.dto.Board">
 		SELECT
 			board_no boardNo
@@ -34,7 +42,8 @@
 		FROM board
 		WHERE board_no = #{boardNo}
 	</select>
-
+	
+	<!-- 게시글 등록 -->
 	<insert id="insertBoard" parameterType="com.example.mbboard.dto.Board">
 		INSERT INTO board (
 			board_title, board_content, board_user
@@ -43,6 +52,7 @@
 		)
 	</insert>
 
+	<!-- 해당 게시글 수정 -->
 	<update id="updateBoard" parameterType="com.example.mbboard.dto.Board">
 		UPDATE board
 		<set>
@@ -53,7 +63,7 @@
 		WHERE board_no = #{boardNo}
 	</update>
 	
-	<delete id="deleteBoardByKey" parameterType="com.example.mbboard.dto.Board">
+	<delete id="deleteBoardByKey" parameterType="int">
 		DELETE FROM board
 		WHERE board_no = ${boardNo}
 	</delete>
