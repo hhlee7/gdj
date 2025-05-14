@@ -30,21 +30,18 @@
 	
 	<script>
 		// 입력값 유효성 검사
-		$('#updateForm').on('submit', function(e) {
+		$('#updateForm').on('submit', function() {
 			if($('#boardTitle').val() == '') {
 				alert('제목을 입력하세요.');
-				e.preventDefault();
-				return;
+				return false;
 			}
 			if($('#boardContent').val() == '') {
 				alert('내용을 입력하세요.');
-				e.preventDefault();
-				return;
+				return false;
 			}
 			if($('#boardUser').val() == '') {
 				alert('작성자를 입력하세요.');
-				e.preventDefault();
-				return;
+				return false;
 			}
 		});
 	</script>

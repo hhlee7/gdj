@@ -15,61 +15,61 @@ import com.example.mbboard.service.IBoardService;
 
 @Controller
 public class BoardController {
-
-    private final BoardService boardService_1;
 	@Autowired IBoardService boardService; // 인터페이스 형태로 의존성 주입 -> 디커플
-	@Autowired BoardMapper boardMapper;
-
-    BoardController(BoardService boardService_1) {
-        this.boardService_1 = boardService_1;
-    }
-
+	
+	// 게시글 목록 조회
 	@GetMapping({"/", "/boardList"})
 	public String boardList(Model model, @RequestParam(defaultValue = "1") int currentPage
 										, @RequestParam(defaultValue = "") String searchWord) {
 		int rowPerPage = 10;
-		int totalCount = boardMapper.countBoard(searchWord);
+		int totalCount = boardService.countBoard(searchWord);
 		Page page = new Page(rowPerPage, currentPage, totalCount, searchWord);
 		
-		model.addAttribute("boardList", boardMapper.selectBoardListByPage(page));
+		model.addAttribute("boardList", boardService.selectBoardListByPage(page));
 		model.addAttribute("page", page);
 		return "boardList";
 	}
 	
+	// 게시글 상세 조회
 	@GetMapping("/boardOne")
 	public String boardOne(Model model, @RequestParam int boardNo) {
-		Board board = boardMapper.selectBoardOne(boardNo);
+		Board board = boardService.selectBoardOne(boardNo);
 		model.addAttribute("board", board);
 		return "boardOne";
 	}
 	
+	// 게시글 등록 폼
 	@GetMapping("/insertBoard")
 	public String insertBoardForm() {
 		return "insertBoard";
 	}
 	
+	// 게시글 등록 처리
 	@PostMapping("/insertBoard")
 	public String insertBoard(Board board) {
-		boardMapper.insertBoard(board);
+		boardService.insertBoard(board);
 		return "redirect:/boardList";
 	}
 	
+	// 게시글 수정 폼
 	@GetMapping("/updateBoard")
 	public String updateBoardForm(Model model, @RequestParam int boardNo) {
-		Board board = boardMapper.selectBoardOne(boardNo);
+		Board board = boardService.selectBoardOne(boardNo);
 		model.addAttribute("board", board);
 		return "updateBoard";
 	}
 	
+	// 게시글 수정 처리
 	@PostMapping("updateBoard")
 	public String updateBoard(Board board) {
-		boardMapper.updateBoard(board);
+		boardService.updateBoard(board);
 		return "redirect:/boardList";
 	}
 	
+	// 게시글 삭제
 	@GetMapping("deleteBoard")
 	public String deleteBoard(@RequestParam int boardNo) {
-		boardMapper.deleteBoardByKey(boardNo);
+		boardService.deleteBoardByKey(boardNo);
 		return "redirect:/boardList";
 	}
 }
