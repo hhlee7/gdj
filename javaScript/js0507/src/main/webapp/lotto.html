@@ -58,122 +58,98 @@
 
 
 	<script>
-		// 6개의 로또 번호 생성
-		let arr = new Array(45);
-		for (let i = 0; i < arr.length; i++) {
-			arr[i] = i + 1;
-		}
-		for (let i = 0; i < 10000; i++) {
-			let temp = arr[0];
-			let rnum = Math.floor(Math.random() * 45);
-			arr[0] = arr[rnum];
-			arr[rnum] = temp;
-		} // 0 ~ 5까지만 로또 번호로 사용
-
-		// 진행 상태값 변수
 		let state = 'end';
-		document.querySelector('#stateVal').innerHTML = state;
-
+		let arr = [];
 		let num1, num2, num3, num4, num5, num6, bonus;
 
-		document.querySelector('#start').addEventListener(
-				'click',
-				function() {
-					// start 진행중일때는 클릭 X -> state값이 end 상태에서만 출력
-					if (state == 'start') {
-						// alert('state값이 start입니다.')
-						return;
-					}
+		document.querySelector('#stateVal').innerHTML = state;
 
-					state = 'start';
-					document.querySelector('#stateVal').innerHTML = state;
+		document.querySelector('#start').addEventListener('click', function() {
+			if (state == 'start') return;
 
-					num1 = setInterval(function() {
-						document.querySelector('#num1').innerHTML = Math
-								.floor(Math.random() * 45) + 1;
-					}, 50);
-
-					num2 = setInterval(function() {
-						document.querySelector('#num2').innerHTML = Math
-								.floor(Math.random() * 45) + 1;
-					}, 50);
-
-					num3 = setInterval(function() {
-						document.querySelector('#num3').innerHTML = Math
-								.floor(Math.random() * 45) + 1;
-					}, 50);
-
-					num4 = setInterval(function() {
-						document.querySelector('#num4').innerHTML = Math
-								.floor(Math.random() * 45) + 1;
-					}, 50);
-
-					num5 = setInterval(function() {
-						document.querySelector('#num5').innerHTML = Math
-								.floor(Math.random() * 45) + 1;
-					}, 50);
-
-					num6 = setInterval(function() {
-						document.querySelector('#num6').innerHTML = Math
-								.floor(Math.random() * 45) + 1;
-					}, 50);
-					
-					bonus = setInterval(function() {
-						document.querySelector('#bonus').innerHTML = Math
-								.floor(Math.random() * 45) + 1;
-					}, 50);
-
-					console.log('start button click');
-				});
-
-		document.querySelector('#end').addEventListener('click', function() {
-			// start 진행중일때는 클릭 O -> state값이 start 상태에서만 출력
-			if (state == 'end') {
-				// alert('state값이 end입니다.')
-				return;
+			// 새 번호 셔플
+			arr = Array.from({ length: 45 }, (_, i) => i + 1);
+			for (let i = 0; i < 10000; i++) {
+				let temp = arr[0];
+				let rnum = Math.floor(Math.random() * 45);
+				arr[0] = arr[rnum];
+				arr[rnum] = temp;
 			}
 
-			setTimeout(function() {
+			state = 'start';
+			document.querySelector('#stateVal').innerHTML = state;
+
+			num1 = setInterval(() => {
+				document.querySelector('#num1').innerHTML = Math.floor(Math.random() * 45) + 1;
+			}, 50);
+
+			num2 = setInterval(() => {
+				document.querySelector('#num2').innerHTML = Math.floor(Math.random() * 45) + 1;
+			}, 50);
+
+			num3 = setInterval(() => {
+				document.querySelector('#num3').innerHTML = Math.floor(Math.random() * 45) + 1;
+			}, 50);
+
+			num4 = setInterval(() => {
+				document.querySelector('#num4').innerHTML = Math.floor(Math.random() * 45) + 1;
+			}, 50);
+
+			num5 = setInterval(() => {
+				document.querySelector('#num5').innerHTML = Math.floor(Math.random() * 45) + 1;
+			}, 50);
+
+			num6 = setInterval(() => {
+				document.querySelector('#num6').innerHTML = Math.floor(Math.random() * 45) + 1;
+			}, 50);
+
+			bonus = setInterval(() => {
+				document.querySelector('#bonus').innerHTML = Math.floor(Math.random() * 45) + 1;
+			}, 50);
+		});
+
+		document.querySelector('#end').addEventListener('click', function() {
+			if (state == 'end') return;
+
+			setTimeout(() => {
 				clearInterval(num1);
 				document.querySelector('#num1').innerHTML = arr[0];
-			}, 1);
+			}, 0);
 
-			setTimeout(function() {
+			setTimeout(() => {
 				clearInterval(num2);
 				document.querySelector('#num2').innerHTML = arr[1];
-			}, 0.5 * 1000);
+			}, 500);
 
-			setTimeout(function() {
+			setTimeout(() => {
 				clearInterval(num3);
 				document.querySelector('#num3').innerHTML = arr[2];
-			}, 1 * 1000);
+			}, 1000);
 
-			setTimeout(function() {
+			setTimeout(() => {
 				clearInterval(num4);
 				document.querySelector('#num4').innerHTML = arr[3];
-			}, 1.5 * 1000);
+			}, 1500);
 
-			setTimeout(function() {
+			setTimeout(() => {
 				clearInterval(num5);
 				document.querySelector('#num5').innerHTML = arr[4];
-			}, 2 * 1000);
+			}, 2000);
 
-			setTimeout(function() {
+			setTimeout(() => {
 				clearInterval(num6);
 				document.querySelector('#num6').innerHTML = arr[5];
-			}, 2.5 * 1000);
-			
-			setTimeout(function() {
+			}, 2500);
+
+			setTimeout(() => {
 				clearInterval(bonus);
 				document.querySelector('#bonus').innerHTML = arr[6];
-			}, 3 * 1000);
-			
-			setTimeout(function() {
+			}, 3000);
+
+			setTimeout(() => {
 				state = 'end';
 				document.querySelector('#stateVal').innerHTML = state;
-			}, 3 * 1000);
-
-			console.log('end button click');
+			}, 3000);
 		});
 	</script>
 </body>
