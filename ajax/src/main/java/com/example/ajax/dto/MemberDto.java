@@ -9,4 +9,10 @@ public class MemberDto {
 	private String pw2;
 	private String gender;
 	private int age;
+	
+	private String postcode;
+	private String roadAddress;
+	private String jibunAddress;
+	private String detailAddress;
+	private String extraAddress;
 }

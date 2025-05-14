@@ -21,6 +21,6 @@ public class MemberController {
 	@PostMapping("/joinMember")
 	public String joinMember(MemberDto memberDto) {
 		memberMapper.insertMember(memberDto);
-		return "joinMember";
+		return "redirect:/joinMember";
 	}
 }

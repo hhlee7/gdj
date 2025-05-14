@@ -9,7 +9,7 @@
 	
 	<insert id="insertMember" parameterType="com.example.ajax.dto.MemberDto">
 		INSERT INTO member(
-			id, pw, gender, age
-		) VALUES (#{id}, #{pw}, #{gender}, #{age})
+			id, pw, gender, age, postcode, roadAddress, jibunAddress, detailAddress, extraAddress
+		) VALUES (#{id}, #{pw}, #{gender}, #{age}, #{postcode}, #{roadAddress}, #{jibunAddress}, #{detailAddress}, #{extraAddress})
 	</insert>
 </mapper>
