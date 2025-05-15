@@ -18,7 +18,7 @@ public class BoardController {
 	@Autowired IBoardService boardService; // 인터페이스 형태로 의존성 주입 -> 디커플
 	
 	// 게시글 목록 조회
-	@GetMapping({"/", "/boardList"})
+	@GetMapping({"/boardList"})
 	public String boardList(Model model, @RequestParam(defaultValue = "1") int currentPage
 										, @RequestParam(defaultValue = "") String searchWord) {
 		int rowPerPage = 10;

@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.example.mbboard.dto.Board;
 import com.example.mbboard.dto.Page;
 
-@Mapper
+@Mapper // -> 구현 (component 구현 클래스를 자동으로 생성 -> ex) @Component BoardMapper_class -> 객체생성 been 등록
 public interface BoardMapper {
 	List<Board> selectBoardListByPage(Page page);
 	int countBoard(String searchWord);
