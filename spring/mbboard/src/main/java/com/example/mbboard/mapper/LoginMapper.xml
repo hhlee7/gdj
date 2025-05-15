@@ -17,10 +17,23 @@
 		WHERE member_id = #{memberId}
 	</select>
 	
+	<select id="selectMemberList" resultType="com.example.mbboard.dto.Member">
+		SELECT
+			member_id memberId
+			, member_role memberRole
+		FROM member
+	</select>
+	
 	<insert id="insertMember" parameterType="com.example.mbboard.dto.Member">
 		INSERT INTO member
 			(member_id, member_pw)
     	VALUES
     		(#{memberId}, #{memberPw})
 	</insert>
+	
+	<update id="updateMemberRole" parameterType="map">
+		UPDATE member
+		SET member_role = #{newRole}
+		WHERE member_id = #{memberId}
+	</update>
 </mapper>

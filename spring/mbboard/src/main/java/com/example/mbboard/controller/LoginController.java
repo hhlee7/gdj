@@ -1,22 +1,32 @@
 package com.example.mbboard.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.mbboard.dto.Member;
 import com.example.mbboard.service.IloginService;
-
+import com.example.mbboard.service.LoginService;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
 public class LoginController {
+
+    private final LoginService loginService_1;
 	@Autowired IloginService loginService;
+
+    LoginController(LoginService loginService_1) {
+        this.loginService_1 = loginService_1;
+    }
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
@@ -71,5 +81,20 @@ public class LoginController {
 	@GetMapping("/admin/adminHome") 
 	public String adminHome() {
 		return "/admin/adminHome";
+	}
+	
+	@GetMapping("/admin/memberList")
+	public String memberList(Model model) {	
+		List<Member> memberList = loginService.selectMemberList();
+		model.addAttribute("memberList", memberList);
+		return "/admin/memberList";
+	}
+	
+	@PostMapping("/admin/changeRole")
+	@ResponseBody
+	public String changeRole(@RequestParam String memberId
+							,@RequestParam String newRole) {
+		loginService.updateMemberRole(memberId, newRole);
+		return "success";
 	}
 }

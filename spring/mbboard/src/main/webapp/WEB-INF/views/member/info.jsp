@@ -12,7 +12,7 @@
 		MEMBER_ROLE : ${loginMember.memberRole}
 	</div>
 	<div>
-		<a href="">비밀번호 수정</a>
+		<a href="/updatePw">비밀번호 수정</a>
 	</div>
 </body>
 </html>

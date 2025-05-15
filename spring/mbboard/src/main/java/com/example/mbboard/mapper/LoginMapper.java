@@ -1,6 +1,9 @@
 package com.example.mbboard.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.mbboard.dto.Member;
 
@@ -13,4 +16,8 @@ public interface LoginMapper {
 	
 	// 회원 가입
 	int insertMember(Member member);
+
+	List<Member> selectMemberList();
+
+	void updateMemberRole(@Param("memberId") String memberId,@Param("newRole") String newRole);
 }

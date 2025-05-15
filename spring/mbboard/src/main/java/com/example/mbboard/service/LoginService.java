@@ -1,5 +1,7 @@
 package com.example.mbboard.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +18,9 @@ public class LoginService implements IloginService {
 	@Autowired LoginMapper loginMapper;
 	
 	@Override
-		public Member login(Member paramMember) {
-			return loginMapper.login(paramMember);
-		}
+	public Member login(Member paramMember) {
+		return loginMapper.login(paramMember);
+	}
 
 	@Override
 	public boolean isIdExist(String memberId) {
@@ -30,4 +32,13 @@ public class LoginService implements IloginService {
 		return loginMapper.insertMember(member);
 	}
 	
+	@Override
+	public List<Member> selectMemberList() {
+		return loginMapper.selectMemberList();
+	}
+	
+	@Override
+	public void updateMemberRole(String memberId, String newRole) {
+		loginMapper.updateMemberRole(memberId, newRole);
+	}
 }
