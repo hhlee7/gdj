@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.mbboard.dto.Member;
 import com.example.mbboard.service.IloginService;
@@ -42,6 +43,12 @@ public class LoginController {
 	@GetMapping("/joinMember")
 	public String joinMember() {
 		return "joinMember";
+	}
+	
+	@GetMapping("/isId/{memberId}")
+	@ResponseBody
+	public boolean isId(@PathVariable String memberId) {
+		return loginService.isIdExist(memberId);
 	}
 	
 	@PostMapping("/joinMember")

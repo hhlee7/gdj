@@ -11,8 +11,8 @@
 		AND member_pw = #{memberPw}
 	</select>
 	
-	<select id="selectMemberId" parameterType="string" resultType="string">
-		SELECT member_id memberId
+	<select id="countMemberId" parameterType="string" resultType="int">
+		SELECT count(*)
 		FROM member
 		WHERE member_id = #{memberId}
 	</select>

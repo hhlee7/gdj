@@ -5,7 +5,7 @@ import com.example.mbboard.dto.Member;
 public interface IloginService {
 	Member login(Member paramMember);
 	
-	boolean isDuplicateId(String memberId);
+	boolean isIdExist(String memberId);
 	
 	int insertMember(Member member);
 }

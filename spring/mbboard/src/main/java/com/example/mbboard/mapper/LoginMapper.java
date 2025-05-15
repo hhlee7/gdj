@@ -9,7 +9,7 @@ public interface LoginMapper {
 	Member login(Member paramMember);
 	
 	// ID 중복 검사
-	String selectMemberId(String memberId);
+	int countMemberId(String memberId);
 	
 	// 회원 가입
 	int insertMember(Member member);

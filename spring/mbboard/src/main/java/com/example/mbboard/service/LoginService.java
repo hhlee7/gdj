@@ -21,12 +21,13 @@ public class LoginService implements IloginService {
 		}
 
 	@Override
-	public boolean isDuplicateId(String memberId) {
-		return loginMapper.selectMemberId(memberId) != null;
+	public boolean isIdExist(String memberId) {
+		return loginMapper.countMemberId(memberId) > 0;
 	}
 	
 	@Override
 	public int insertMember(Member member) {
 		return loginMapper.insertMember(member);
 	}
+	
 }
