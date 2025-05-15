@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Transactional
 @Service
-public class LoginSerivce implements IloginService {
+public class LoginService implements IloginService {
 	@Autowired LoginMapper loginMapper;
 	
 	@Override
