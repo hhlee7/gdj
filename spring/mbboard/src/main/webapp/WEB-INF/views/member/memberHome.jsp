@@ -3,11 +3,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>memberHome</title>
 </head>
 <body>
 	<div>
-		${loginMember.loginId}님, 반갑습니다.
+		${loginMember.memberId}님, 반갑습니다.
 	</div>
 	<div><a href="/logout">로그아웃</a></div>
 	

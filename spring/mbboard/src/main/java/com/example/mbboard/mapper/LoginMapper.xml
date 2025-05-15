@@ -10,4 +10,17 @@
 		WHERE member_id = #{memberId}
 		AND member_pw = #{memberPw}
 	</select>
+	
+	<select id="selectMemberId" parameterType="string" resultType="string">
+		SELECT member_id memberId
+		FROM member
+		WHERE member_id = #{memberId}
+	</select>
+	
+	<insert id="insertMember" parameterType="com.example.mbboard.dto.Member">
+		INSERT INTO member
+			(member_id, member_pw)
+    	VALUES
+    		(#{memberId}, #{memberPw})
+	</insert>
 </mapper>

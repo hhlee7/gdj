@@ -3,10 +3,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>adminHome</title>
 </head>
 <body>
-	<h1>${loginMember.loginId}관리자</h1>
+	<h1>${loginMember.memberId}관리자</h1>
 	<div><a href="/logout">로그아웃</a></div>
 	<h2>멤버 리스트</h2>
 	<!--

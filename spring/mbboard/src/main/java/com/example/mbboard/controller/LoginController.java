@@ -3,6 +3,7 @@ package com.example.mbboard.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.mbboard.dto.Member;
@@ -31,8 +32,26 @@ public class LoginController {
 	public String login(HttpSession session, Member paramMember) {
 		Member loginMember = loginService.login(paramMember);
 		if(loginMember != null) {
+			// 로그인 성공 시 세션에 정보 저장
 			session.setAttribute("loginMember", loginMember);
 		}
+		// 로그인 실패 시 다시 로그인 페이지로
+		return "login";
+	}
+	
+	@GetMapping("/joinMember")
+	public String joinMember() {
+		return "joinMember";
+	}
+	
+	@PostMapping("/joinMember")
+	public String joinMember(Member member) {
+		loginService.insertMember(member);
+		return "redirect:/login";
+	}
+	
+	@GetMapping("/member/memberHome")
+	public String memberHome() {
 		return "/member/memberHome";
 	}
 	
