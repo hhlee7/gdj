@@ -35,13 +35,13 @@
 		</tr>
 	</table>
 	
-	<h2>현재 서버의 접속자</h2>
+	<h2>현재 서버의 접속자(톰켓 서버 안의 활성화 된 세션의 개수)</h2>
 	<table border="1">
 		<tr>
 			<th>TOTAL</th>
 		</tr>
 		<tr>
-			<td></td>
+			<td>${currentConnectCount}</td>
 		</tr>
 	</table>
 </body>
