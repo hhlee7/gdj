@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.mbboard.dto.ConnectCount;
 import com.example.mbboard.dto.Member;
+import com.example.mbboard.service.IRootService;
 import com.example.mbboard.service.IloginService;
 import com.example.mbboard.service.LoginService;
 import jakarta.servlet.http.HttpSession;
@@ -20,13 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class LoginController {
-
-    private final LoginService loginService_1;
 	@Autowired IloginService loginService;
+	@Autowired IRootService rootService;
 
-    LoginController(LoginService loginService_1) {
-        this.loginService_1 = loginService_1;
-    }
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
@@ -45,6 +43,14 @@ public class LoginController {
 		if(loginMember != null) {
 			// 로그인 성공 시 세션에 정보 저장
 			session.setAttribute("loginMember", loginMember);
+			// 멤버(ADMIN, MEMBER) count + 1
+			ConnectCount cc = new ConnectCount();
+			cc.setMemberRole(loginMember.getMemberRole());
+			if(rootService.getConnectDateByKey(cc) == null) {
+				rootService.addConnectCount(cc); // 오늘 날짜 loginMember.getMemberRole()로 1행을 추가, 카운트 = 1
+			} else {
+				rootService.modifyConnectCount(cc); // 오늘 날짜 loginMember.getMemberRole()을 수정, 카운트 + 1
+			}
 		}
 		// 로그인 실패 시 다시 로그인 페이지로
 		return "login";
