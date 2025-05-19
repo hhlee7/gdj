@@ -3,7 +3,7 @@
 <mapper namespace="com.example.mbboard.mapper.LoginMapper">
 	<update id="rechangeMemberPw" parameterType="com.example.mbboard.dto.Member">
 			UPDATE member
-			SET member_pw = #{reMemberPw}
+			SET member_pw = #{reMemberPw}, pwcktime = null
 			WHERE member_pw = #{memberPw}
 			AND pwcktime is not null
 			AND TIMESTAMPDIFF(MINUTE, pwcktime, NOW()) &lt; 11
