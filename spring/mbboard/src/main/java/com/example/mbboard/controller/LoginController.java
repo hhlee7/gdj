@@ -15,7 +15,9 @@ import com.example.mbboard.dto.ConnectCount;
 import com.example.mbboard.dto.Member;
 import com.example.mbboard.service.IRootService;
 import com.example.mbboard.service.IloginService;
-import com.example.mbboard.service.LoginService;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,6 +27,29 @@ public class LoginController {
 	@Autowired IloginService loginService;
 	@Autowired IRootService rootService;
 
+	@GetMapping("/findMemberPw")
+	public String findMemberPw() {
+		return "findMemberPw";
+	}
+	
+	@PostMapping("/findMemberPw")
+	public String findMemberPw(Member member) {
+		// 비밀번호를 변경
+		loginService.ChangeMemberPwByAdmin(member);
+		// 분실 비밀번호 변경 페이지로 redirect
+		return "rechangeMemberPw";
+	}
+	
+	@GetMapping("/rechangeMemberPw")
+	public String rechangeMemberPw() {
+		return "rechangeMemberPw";
+	}
+	
+	@PostMapping("/rechangeMemberPw")
+	public String rechangeMemberPw(Member member) {
+		loginService.rechangeMemberPw(member);
+		return "redirect:/login";
+	}
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
@@ -38,9 +63,22 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String login(HttpSession session, Member paramMember) {
+	public String login(HttpSession session, Member paramMember, HttpServletResponse response) {
 		Member loginMember = loginService.login(paramMember);
 		if(loginMember != null) {
+			
+			log.info(paramMember.toString());
+			
+			// 클라이언트 쿠키에도 로그인에 성공한 ID만 저장
+			
+			if(paramMember.getSaveIdCk() != null) {
+				Cookie c = new Cookie("saveId", paramMember.getMemberId());
+				response.addCookie(c);
+			} else {
+				Cookie c = new Cookie("saveId", "");
+				response.addCookie(c);
+			}
+			
 			// 로그인 성공 시 세션에 정보 저장
 			session.setAttribute("loginMember", loginMember);
 			// 멤버(ADMIN, MEMBER) count + 1

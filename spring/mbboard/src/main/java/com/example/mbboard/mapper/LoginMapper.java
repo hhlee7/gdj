@@ -20,4 +20,8 @@ public interface LoginMapper {
 	List<Member> selectMemberList();
 
 	void updateMemberRole(@Param("memberId") String memberId,@Param("newRole") String newRole);
+	
+	int updateMemberPwByAdmin(Member member);
+
+	int rechangeMemberPw(Member member);
 }
