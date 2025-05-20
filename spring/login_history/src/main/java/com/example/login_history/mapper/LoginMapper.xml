@@ -3,11 +3,10 @@
 <mapper namespace="com.example.login_history.mapper.LoginMapper">
 	<select id="selectMemberByIdAndPw" parameterType="com.example.login_history.dto.Member" resultType="com.example.login_history.dto.Member">
 		SELECT
-			id, pw
+			id, pw, active
 		FROM member
 		WHERE id = #{id}
 		AND pw = #{pw}
-		AND active = 'ON'
 	</select>
 	
 	<select id="selectDormantMembers" resultType="com.example.login_history.dto.Member">
