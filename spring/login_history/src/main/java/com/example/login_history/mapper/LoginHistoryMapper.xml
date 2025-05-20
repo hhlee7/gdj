@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.example.login_history.mapper.LoginHistoryMapper">
+	<insert id="insertLoginHistory" parameterType="com.example.login_history.dto.LoginHistory">
+		INSERT INTO login_history (
+			id
+		) VALUES (
+			#{id}
+		)
+	</insert>
+	
+	<select id="selectLoginHistoryById" resultType="com.example.login_history.dto.LoginHistory">
+		SELECT
+			no, id, logindate
+		FROM login_history
+		WHERE id = #{id}
+		ORDER BY logindate DESC
+	</select>
+</mapper>
