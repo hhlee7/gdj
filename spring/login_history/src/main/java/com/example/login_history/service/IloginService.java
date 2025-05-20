@@ -7,7 +7,7 @@ import com.example.login_history.dto.Member;
 
 public interface IloginService {
 	Member login(Member member);
-	List<LoginHistory> getLoginHistoryById(String id);
+	List<LoginHistory> getLoginHistory();
 	
 	List<Member> getDormantMembers();
 	void deactivateMember(String id);

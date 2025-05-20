@@ -30,8 +30,8 @@ public class LoginService implements IloginService {
 	}
 
 	@Override
-	public List<LoginHistory> getLoginHistoryById(String id) {
-		return loginHistoryMapper.selectLoginHistoryById(id);
+	public List<LoginHistory> getLoginHistory() {
+		return loginHistoryMapper.selectLoginHistory();
 	}
 
 	@Override

@@ -9,5 +9,5 @@ import com.example.login_history.dto.LoginHistory;
 @Mapper
 public interface LoginHistoryMapper {
 	void insertLoginHistory(LoginHistory loginHistory);
-	List<LoginHistory> selectLoginHistoryById(String id);
+	List<LoginHistory> selectLoginHistory();
 }

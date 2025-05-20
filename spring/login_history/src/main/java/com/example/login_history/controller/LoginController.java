@@ -12,6 +12,9 @@ import com.example.login_history.dto.LoginHistory;
 import com.example.login_history.dto.Member;
 import com.example.login_history.service.IloginService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class LoginController {
 	@Autowired IloginService loginService;
@@ -26,12 +29,13 @@ public class LoginController {
 		Member result = loginService.login(member);
 		if(result != null) {
 			// 휴면 계정 로그인 시
+			log.info("result.getActive() : " + result.getActive());
 			if("OFF".equals(result.getActive())) {
 				return "dormantPage";
 			}
 			
 			// 로그인 성공 시
-			List<LoginHistory> historyList = loginService.getLoginHistoryById(result.getId());
+			List<LoginHistory> historyList = loginService.getLoginHistory();
 			model.addAttribute("historyList", historyList);
 			return "loginPage";
 		} else {

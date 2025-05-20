@@ -9,11 +9,10 @@
 		)
 	</insert>
 	
-	<select id="selectLoginHistoryById" resultType="com.example.login_history.dto.LoginHistory">
+	<select id="selectLoginHistory" resultType="com.example.login_history.dto.LoginHistory">
 		SELECT
 			no, id, logindate
 		FROM login_history
-		WHERE id = #{id}
 		ORDER BY logindate DESC
 	</select>
 </mapper>
