@@ -67,4 +67,9 @@ public class LoginService implements IloginService {
 		loginMapper.updatePw(id, pw1);
 		loginMapper.insertPwHistory(id, pw1);
 	}
+
+	@Override
+	public void deletePwHistory() {
+		loginMapper.deletePwHistory();
+	}
 }

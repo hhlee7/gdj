@@ -13,4 +13,5 @@ public interface IloginService {
 	void deactivateMember(String id);
 	void sendDormantEmail(Member member);
 	void changePw(String id, String nowPw, String pw1);
+	void deletePwHistory();
 }
