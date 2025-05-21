@@ -12,4 +12,5 @@ public interface IloginService {
 	List<Member> getDormantMembers();
 	void deactivateMember(String id);
 	void sendDormantEmail(Member member);
+	void changePw(String id, String nowPw, String pw1);
 }

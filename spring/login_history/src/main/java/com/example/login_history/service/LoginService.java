@@ -12,6 +12,9 @@ import com.example.login_history.dto.Member;
 import com.example.login_history.mapper.LoginHistoryMapper;
 import com.example.login_history.mapper.LoginMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class LoginService implements IloginService {
 	@Autowired LoginMapper loginMapper;
@@ -51,5 +54,17 @@ public class LoginService implements IloginService {
 		msg.setSubject("휴면 계정 전환 안내");
 		msg.setText(member.getId() + "님, 1년 이상 로그인 기록이 없어 계정이 휴면 처리되었습니다.");
 		mailSender.send(msg);
+	}
+
+	@Override
+	public void changePw(String id, String nowPw, String pw1) {
+		String currentPw = loginMapper.getPwById(id);
+		
+		if(!nowPw.equals(currentPw)) {
+			log.info("비밀번호 불일치");
+			return;
+		}
+		loginMapper.updatePw(id, pw1);
+		loginMapper.insertPwHistory(id, pw1);
 	}
 }

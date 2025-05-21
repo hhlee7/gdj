@@ -26,4 +26,21 @@
 		SET active = #{active}
 		WHERE id = #{id}
 	</update>
+	
+	<select id="getPwById" resultType="string">
+		SELECT pw
+		FROM member
+		WHERE id = #{id}
+	</select>
+	
+	<update id="updatePw">
+		UPDATE member
+		SET pw = #{pw1}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="insertPwHistory">
+		INSERT INTO pw_history (id, pw)
+		VALUES (#{id}, #{pw})
+	</update>
 </mapper>

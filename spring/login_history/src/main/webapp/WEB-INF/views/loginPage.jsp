@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>loginPage</h1>
-	
+	<a href="/changePw">비밀번호 변경</a>
 	<h3>loginList</h3>
 	<table border="1">
 		<tr>
