@@ -63,10 +63,9 @@ public class LoginController {
 		member.setPw(nowPw);
 		Member result = loginService.login(member);
 		if(result == null) {
-			return "fail";
+			return "incorrectNowPw";
 		}
 		
-		loginService.changePw(id, nowPw, pw1);
-		return "success";
+		return loginService.changePw(id, nowPw, pw1);
 	}
 }

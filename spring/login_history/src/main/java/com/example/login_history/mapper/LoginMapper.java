@@ -22,4 +22,6 @@ public interface LoginMapper {
 	void insertPwHistory(@Param("id") String id, @Param("pw") String pw);
 
 	void deletePwHistory();
+
+	List<String> getPwHistory(String id);
 }

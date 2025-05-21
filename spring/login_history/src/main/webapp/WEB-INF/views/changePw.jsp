@@ -27,8 +27,12 @@
 				success: function(data) {
 					if(data == 'success') {
 						window.location.href = '/login';
-					} else {
+					} else if(data == 'incorrectNowPw') {
 						alert('비밀번호가 일치하지 않습니다.');
+					} else if(data == 'reusedPw') {
+						alert('기존에 사용된 비밀번호입니다.');
+					} else {
+						alert('비밀번호 변경에 실패했습니다.');
 					}
 				}
 			})

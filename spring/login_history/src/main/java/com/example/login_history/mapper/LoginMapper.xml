@@ -55,4 +55,10 @@
 			WHERE rn > 5
 		)
 	</delete>
+	
+	<select id="getPwHistory" resultType="string" parameterType="string">
+	    SELECT pw
+	    FROM pw_history
+	    WHERE id = #{id}
+	</select>
 </mapper>

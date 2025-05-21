@@ -57,15 +57,24 @@ public class LoginService implements IloginService {
 	}
 
 	@Override
-	public void changePw(String id, String nowPw, String pw1) {
+	public String changePw(String id, String nowPw, String pw1) {
 		String currentPw = loginMapper.getPwById(id);
 		
 		if(!nowPw.equals(currentPw)) {
 			log.info("비밀번호 불일치");
-			return;
+			return "incorrectNowPw";
 		}
+		
+		// 기존 비밀번호 이력 확인
+		List<String> pwHistoryList = loginMapper.getPwHistory(id);
+		if(pwHistoryList.contains(pw1)) {
+			log.info("기존에 사용된 비밀번호");
+			return "reusedPw";
+		}
+		
 		loginMapper.updatePw(id, pw1);
 		loginMapper.insertPwHistory(id, pw1);
+		return "success";
 	}
 
 	@Override
