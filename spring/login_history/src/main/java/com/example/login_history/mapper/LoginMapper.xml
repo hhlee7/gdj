@@ -43,4 +43,22 @@
 		INSERT INTO pw_history (id, pw)
 		VALUES (#{id}, #{pw})
 	</update>
+	
+	<delete id="deletePwHistory">
+		DELETE FROM pw_history
+		WHERE NO IN(
+			SELECT NO FROM(
+				SELECT NO
+						, change_date
+						, ROW_NUMBER() OVER (PARTITION BY id ORDER BY change_date DESC) rn
+				FROM pw_history) AS rn2
+			WHERE rn > 5
+		)
+	</delete>
+	
+	<select id="getPwHistory" resultType="string" parameterType="string">
+	    SELECT pw
+	    FROM pw_history
+	    WHERE id = #{id}
+	</select>
 </mapper>

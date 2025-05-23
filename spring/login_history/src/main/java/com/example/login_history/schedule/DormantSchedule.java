@@ -21,4 +21,9 @@ public class DormantSchedule {
 			loginService.sendDormantEmail(m);
 		}
 	}
+	
+	@Scheduled(cron = "0 0 0 1 * *")
+	public void deletePwHistory() {
+		loginService.deletePwHistory();
+	}
 }
