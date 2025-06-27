@@ -22,22 +22,9 @@ public class CountryService {
 		this.cityRepository = cityRepository;
 	}
 	
-	// country 삭제
-	public boolean delete(int countryId) {
-		// issue : 자식 테이블에 외래키로 참조하는 행이 있다면?
-		// 자식 테이블에 참조하는 행이 없다면 (select count(*) from city where country_id = ?)
-		
-		if(0 == cityRepository.countByCountryEntity(countryRepository.findById(countryId).orElse(null))) {
-			countryRepository.deleteById(countryId);
-			return true;
-		}
-		return false;
-	}
-	
-	// country 수정
-	public void update(CountryDto countryDto) {
-		CountryEntity updateCountryEntity =  countryRepository.findById(countryDto.getCountryId()).orElse(null);
-		updateCountryEntity.setCountry(countryDto.getCountry());
+	// country 전체 조회
+	public List<CountryEntity> findAll() {
+		return countryRepository.findAll();
 	}
 	
 	// CountryEntity 입력
@@ -48,8 +35,20 @@ public class CountryService {
 		countryRepository.save(saveCountryEntity);
 	}
 	
-	// 전체 조회
-	public List<CountryEntity> findAll() {
-		return countryRepository.findAll();
+	// country 수정
+	public void update(CountryDto countryDto) {
+		CountryEntity updateCountryEntity =  countryRepository.findById(countryDto.getCountryId()).orElse(null);
+		updateCountryEntity.setCountry(countryDto.getCountry());
+	}
+	
+	// country 삭제
+	public boolean delete(int countryId) {
+		// issue : 자식 테이블에 외래키로 참조하는 행이 있다면?
+		// 자식 테이블에 참조하는 행이 없다면 (select count(*) from city where country_id = ?)
+		if(0 == cityRepository.countByCountryEntity(countryRepository.findById(countryId).orElse(null))) {
+			countryRepository.deleteById(countryId);
+			return true;
+		}
+		return false;
 	}
 }
