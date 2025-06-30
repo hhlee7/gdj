@@ -31,6 +31,12 @@ public class CountryController {
 		return new ResponseEntity<List<CountryEntity>>(countryService.findAll(), HttpStatus.OK);
 	}
 	
+	// 한 행 조회
+	@GetMapping("/country/{countryId}")
+	public ResponseEntity<CountryEntity> countryOne(@PathVariable int countryId) {
+		return new ResponseEntity<CountryEntity>(countryService.findById(countryId), HttpStatus.OK);
+	}
+	
 	// 입력
 	@PostMapping("/country")
 	public ResponseEntity<String> country(@RequestBody CountryDto countryDto) {

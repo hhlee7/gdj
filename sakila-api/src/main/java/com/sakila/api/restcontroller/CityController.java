@@ -31,6 +31,12 @@ public class CityController {
 		return new ResponseEntity<List<CityEntity>>(cityService.findAll(), HttpStatus.OK);
 	}
 	
+	// 한 행 조회
+	@GetMapping("/city/{cityId}")
+	public ResponseEntity<CityEntity> cityOne(@PathVariable int cityId) {
+		return new ResponseEntity<CityEntity>(cityService.findById(cityId), HttpStatus.OK);
+	}
+	
 	// 입력
 	@PostMapping("/city")
 	public ResponseEntity<String> city(@RequestBody CityDto cityDto) {

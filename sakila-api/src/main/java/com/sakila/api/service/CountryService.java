@@ -27,6 +27,11 @@ public class CountryService {
 		return countryRepository.findAll();
 	}
 	
+	// country 한 행 조회
+	public CountryEntity findById(int countryId) {
+		return countryRepository.findById(countryId).orElse(null);
+	}
+	
 	// CountryEntity 입력
 	public void save(CountryDto countryDto) {
 		// DTO -> Entity

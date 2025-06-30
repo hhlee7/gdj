@@ -30,6 +30,11 @@ public class CityService {
 	public List<CityEntity> findAll() {
 		return cityRepository.findAll();
 	}
+	
+	// city 한 행 조회
+	public CityEntity findById(int cityId) {
+		return cityRepository.findById(cityId).orElse(null);
+	}
 
 	// CityEntity 입력
 	public void save(CityDto cityDto) {

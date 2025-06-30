@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +31,12 @@ public class AddressController {
 		return new ResponseEntity<List<AddressEntity>>(addressService.findAll(), HttpStatus.OK);
 	}
 	
+	// 한 행 조회
+	@GetMapping("/address/{addressId}")
+	public ResponseEntity<AddressEntity> addressOne(@PathVariable int addressId) {
+		return new ResponseEntity<AddressEntity>(addressService.findById(addressId), HttpStatus.OK);
+	}
+	
 	// 입력
 	@PostMapping("/address")
 	public ResponseEntity<String> address(@RequestBody AddressDto addressDto) {
@@ -41,5 +49,15 @@ public class AddressController {
 	public ResponseEntity<String> updateAddress(@RequestBody AddressDto addressDto) {
 		addressService.update(addressDto);
 		return new ResponseEntity<String>("수정 성공", HttpStatus.OK);
+	}
+	
+	// 삭제
+	@DeleteMapping("/address/{addressId}")
+	public ResponseEntity<String> deleteAddress(@PathVariable int addressId) {
+		boolean result = addressService.delete(addressId);
+		if(result) {
+			return new ResponseEntity<String>("삭제 성공", HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("삭제 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }
