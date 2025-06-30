@@ -53,6 +53,9 @@ public class CityService {
 	public void update(CityDto cityDto) {
 		CityEntity updateCityEntity = cityRepository.findById(cityDto.getCityId()).orElse(null);
 		updateCityEntity.setCity(cityDto.getCity());
+		
+		CountryEntity countryEntity = countryRepository.findById(cityDto.getCountryId()).orElse(null);
+		updateCityEntity.setCountryEntity(countryEntity);
 	}
 
 	// city 삭제

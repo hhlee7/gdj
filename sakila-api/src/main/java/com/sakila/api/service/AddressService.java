@@ -45,7 +45,9 @@ public class AddressService {
 		// DTO -> Entity
 		AddressEntity saveAddressEntity = new AddressEntity();
 		saveAddressEntity.setAddress(addressDto.getAddress());
+		saveAddressEntity.setAddress2(addressDto.getAddress2());
 		saveAddressEntity.setDistrict(addressDto.getDistrict());
+		saveAddressEntity.setPostalCode(addressDto.getPostalCode());
 		saveAddressEntity.setPhone(addressDto.getPhone());
 		
 		// CityEntity
@@ -63,6 +65,9 @@ public class AddressService {
 		updateAddressEntity.setDistrict(addressDto.getDistrict());
 		updateAddressEntity.setPostalCode(addressDto.getPostalCode());
 		updateAddressEntity.setPhone(addressDto.getPhone());
+		
+		CityEntity cityEntity = cityRepository.findById(addressDto.getCityId()).orElse(null);
+		updateAddressEntity.setCityEntity(cityEntity);
 	}
 	
 	// 삭제

@@ -64,6 +64,12 @@ public class CustomerService {
 		updateCustomerEntity.setLastName(customerDto.getLastName());
 		updateCustomerEntity.setEmail(customerDto.getEmail());
 		updateCustomerEntity.setActive(customerDto.getActive());
+		
+		StoreEntity storeEntity = storeRepository.findById(customerDto.getStoreId()).orElse(null);
+		updateCustomerEntity.setStoreEntity(storeEntity);
+		
+		AddressEntity addressEntity = addressRepository.findById(customerDto.getAddressId()).orElse(null);
+		updateCustomerEntity.setAddressEntity(addressEntity);
 	}
 	
 	// 삭제
