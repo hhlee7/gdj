@@ -9,35 +9,34 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            <div>
+            <div className="p-6 max-w-screen-md mx-auto">
                 {/* header */}
-                <h1>Sakila Project</h1>
-                <ul>
-                    <li><Link to="/">home</Link></li>
-                    <li><Link to="/Country">country</Link></li>
-                    <li><Link to="/City">city</Link></li>
-                    <li><Link to="/Address">address</Link></li>
-                    <li><Link to="/Customer">customer</Link></li>
-                </ul>
+                <h1 className="text-2xl font-bold text-blue-700 mb-4">Sakila Project</h1>
                 
-                <hr />
+                <ul className="flex gap-4 mb-4 text-sm">
+                <li><Link to="/" className="text-blue-500 hover:underline">home</Link></li>
+                <li><Link to="/Country" className="text-blue-500 hover:underline">country</Link></li>
+                <li><Link to="/City" className="text-blue-500 hover:underline">city</Link></li>
+                <li><Link to="/Address" className="text-blue-500 hover:underline">address</Link></li>
+                <li><Link to="/Customer" className="text-blue-500 hover:underline">customer</Link></li>
+                </ul>
 
-                {/* content ---------------------------------------------------------------- */}
+                <hr className="mb-4" />
 
+                {/* content */}
                 <Routes>
-                    <Route path='/' element={<Home />} /> {/* 라우터 -> 컴포넌트 */}
-                    <Route path='/Country' element={<Country />} />
-                    <Route path='/City' element={<City />} />
-                    <Route path='/Address' element={<Address />} />
-                    <Route path='/Customer' element={<Customer />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/Country" element={<Country />} />
+                {/* <Route path="/CountryOne/:countryId" element={<CountryOne />} /> */}
+                <Route path="/City" element={<City />} />
+                <Route path="/Address" element={<Address />} />
+                <Route path="/Customer" element={<Customer />} />
                 </Routes>
 
-                {/* ------------------------------------------------------------------------ */}
-
                 {/* footer */}
-                <hr />
-                <div>
-                    Copyright@ GDJ91.
+                <hr className="mt-8" />
+                <div className="text-xs text-gray-500 text-center mt-2">
+                Copyright@ GDJ91.
                 </div>
             </div>
         </BrowserRouter>
