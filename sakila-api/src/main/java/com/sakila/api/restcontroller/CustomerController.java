@@ -1,7 +1,6 @@
 package com.sakila.api.restcontroller;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sakila.api.dto.CustomerDto;
 import com.sakila.api.entity.CustomerEntity;
+import com.sakila.api.entity.CustomerMapping;
 import com.sakila.api.service.CustomerService;
 
 @RestController
@@ -27,9 +27,9 @@ public class CustomerController {
 	}
 
 	// 전체 조회
-	@GetMapping("/customer")
-	public ResponseEntity<List<CustomerEntity>> customer() {
-		return new ResponseEntity<List<CustomerEntity>>(customerService.findAll(), HttpStatus.OK);
+	@GetMapping("/customerList/{currentPage}")
+	public ResponseEntity<Page<CustomerMapping>> customer(@PathVariable int currentPage) {
+		return new ResponseEntity<Page<CustomerMapping>>(customerService.findAll(currentPage), HttpStatus.OK);
 	}
 	
 	// 한 행 조회

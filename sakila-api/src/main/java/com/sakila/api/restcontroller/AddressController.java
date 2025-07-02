@@ -1,7 +1,6 @@
 package com.sakila.api.restcontroller;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sakila.api.dto.AddressDto;
 import com.sakila.api.entity.AddressEntity;
+import com.sakila.api.entity.AddressMapping;
 import com.sakila.api.service.AddressService;
 
 @RestController
@@ -28,9 +28,9 @@ public class AddressController {
 	}
 	
 	// 전체 조회
-	@GetMapping("/address")
-	public ResponseEntity<List<AddressEntity>> address() {
-		return new ResponseEntity<List<AddressEntity>>(addressService.findAll(), HttpStatus.OK);
+	@GetMapping("/addressList/{currentPage}")
+	public ResponseEntity<Page<AddressMapping>> address(@PathVariable int currentPage) {
+		return new ResponseEntity<Page<AddressMapping>>(addressService.findAll(currentPage), HttpStatus.OK);
 	}
 	
 	// 한 행 조회

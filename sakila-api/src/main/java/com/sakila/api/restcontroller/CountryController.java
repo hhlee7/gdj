@@ -1,7 +1,6 @@
 package com.sakila.api.restcontroller;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sakila.api.dto.CountryDto;
 import com.sakila.api.entity.CountryEntity;
+import com.sakila.api.entity.CountryMapping;
 import com.sakila.api.service.CountryService;
 
 @RestController
@@ -28,9 +28,9 @@ public class CountryController {
 	}
 	
 	// 전체 조회
-	@GetMapping("/country")
-	public ResponseEntity<List<CountryEntity>> country() {
-		return new ResponseEntity<List<CountryEntity>>(countryService.findAll(), HttpStatus.OK);
+	@GetMapping("/countryList/{currentPage}")
+	public ResponseEntity<Page<CountryMapping>> country(@PathVariable int currentPage) {
+		return new ResponseEntity<Page<CountryMapping>>(countryService.findAll(currentPage), HttpStatus.OK);
 	}
 	
 	// 한 행 조회
