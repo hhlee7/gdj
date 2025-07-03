@@ -34,7 +34,7 @@ public class CityController {
 	}
 	
 	// 한 행 조회
-	@GetMapping("/city/{cityId}")
+	@GetMapping("/cityOne/{cityId}")
 	public ResponseEntity<CityEntity> cityOne(@PathVariable int cityId) {
 		return new ResponseEntity<CityEntity>(cityService.findById(cityId), HttpStatus.OK);
 	}

@@ -33,7 +33,7 @@ public class CustomerService {
 	public Page<CustomerMapping> findAll(int currentPage) {
 		int pageSize = 10;
 		int pageNumber = currentPage - 1;
-		Sort sort = Sort.by("customerId").ascending();
+		Sort sort = Sort.by("customerId").descending();
 		PageRequest pageable = PageRequest.of(pageNumber, pageSize, sort);
 		return customerRepository.findAllBy(pageable);
 	}

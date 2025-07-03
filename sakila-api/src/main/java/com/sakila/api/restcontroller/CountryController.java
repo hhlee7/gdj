@@ -34,7 +34,7 @@ public class CountryController {
 	}
 	
 	// 한 행 조회
-	@GetMapping("/country/{countryId}")
+	@GetMapping("/countryOne/{countryId}")
 	public ResponseEntity<CountryEntity> countryOne(@PathVariable int countryId) {
 		return new ResponseEntity<CountryEntity>(countryService.findById(countryId), HttpStatus.OK);
 	}

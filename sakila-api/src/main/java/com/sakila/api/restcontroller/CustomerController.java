@@ -33,7 +33,7 @@ public class CustomerController {
 	}
 	
 	// 한 행 조회
-	@GetMapping("/customer/{customerId}")
+	@GetMapping("/customerOne/{customerId}")
 	public ResponseEntity<CustomerEntity> customerOne(@PathVariable int customerId) {
 		return new ResponseEntity<CustomerEntity>(customerService.findById(customerId), HttpStatus.OK);
 	}

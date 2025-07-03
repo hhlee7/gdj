@@ -34,7 +34,7 @@ public class AddressController {
 	}
 	
 	// 한 행 조회
-	@GetMapping("/address/{addressId}")
+	@GetMapping("/addressOne/{addressId}")
 	public ResponseEntity<AddressEntity> addressOne(@PathVariable int addressId) {
 		return new ResponseEntity<AddressEntity>(addressService.findById(addressId), HttpStatus.OK);
 	}
