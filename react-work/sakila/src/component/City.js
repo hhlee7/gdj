@@ -47,7 +47,9 @@ export default function City() {
                     {cityList.map((c) => (
                         <tr key={c.cityId} className="hover:bg-gray-50">
                             <td className="border px-4 py-2 text-center">{c.cityId}</td>
-                            <td className="border px-4 py-2 text-center"> <Link to={"/CityOne/{c.cityId}"} className="text-blue-600 hover:underline">{c.city}</Link></td>
+                            <td className="border px-4 py-2 text-center">
+                                <Link to={`/CityOne/${c.cityId}`} className="text-blue-600 hover:underline">{c.city}</Link>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

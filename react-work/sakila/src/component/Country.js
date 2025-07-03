@@ -39,6 +39,9 @@ export default function Country() {
                 Country (totalElements: {totalElements})
             </h1>
 
+            {/* country 입력 폼 컴포넌트로 이동 */}
+            <Link className="text-blue-600 hover:underline" to="/AddCountry">add country</Link>
+
             <table className="table-auto border-collapse border border-gray-300 mb-4">
                 <thead className="bg-gray-100">
                     <tr>
@@ -50,7 +53,9 @@ export default function Country() {
                     {countryList.map((c) => (
                         <tr key={c.countryId} className="hover:bg-gray-50">
                             <td className="border px-4 py-2 text-center">{c.countryId}</td>
-                            <td className="border px-4 py-2 text-center"> <Link to={"/CountryOne/{c.countryId}"} className="text-blue-600 hover:underline">{c.country}</Link></td>
+                            <td className="border px-4 py-2 text-center">
+                                <Link to={`/CountryOne/${c.countryId}`} className="text-blue-600 hover:underline">{c.country}</Link>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

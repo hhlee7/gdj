@@ -48,7 +48,9 @@ export default function Customer() {
                     {customerList.map((c) => (
                         <tr key={c.customerId} className="hover:bg-gray-50">
                             <td className="border px-4 py-2 text-center">{c.customerId}</td>
-                            <td className="border px-4 py-2 text-center"> <Link to={"/CustomerOne/{c.fisrtName}"} className="text-blue-600 hover:underline">{c.firstName}</Link></td>
+                            <td className="border px-4 py-2 text-center">
+                                <Link to={`/CustomerOne/${c.customerId}`} className="text-blue-600 hover:underline">{c.firstName}</Link>
+                            </td>
                             <td className="border px-4 py-2 text-center">{c.lastName}</td>
                         </tr>
                     ))}

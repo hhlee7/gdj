@@ -4,6 +4,14 @@ import Country from './component/Country';
 import City from './component/City';
 import Address from './component/Address';
 import Customer from './component/Customer';
+import CountryOne from './component/CountryOne';
+import AddCountry from './component/AddCountry';
+import CityOne from './component/CityOne';
+import AddressOne from './component/AddressOne';
+import CustomerOne from './component/CustomerOne';
+import AddCity from './component/AddCity';
+import AddAddress from './component/AddAddress';
+import AddCustomer from './component/AddCustomer';
 
 export default function App() {
 
@@ -25,12 +33,29 @@ export default function App() {
 
                 {/* content */}
                 <Routes>
-                <Route path="/" element={<Home />} />
+
+                <Route path="/" element={<Home />} /> {/* 라우터 -> 컴포넌트 */}
+
+                {/* country CRUD */}
                 <Route path="/Country" element={<Country />} />
-                {/* <Route path="/CountryOne/:countryId" element={<CountryOne />} /> */}
+                <Route path="/CountryOne/:countryId" element={<CountryOne />} />
+                <Route path="/AddCountry" element={<AddCountry />} />
+
+                {/* city CRUD */}
                 <Route path="/City" element={<City />} />
+                <Route path="/CityOne/:cityId" element={<CityOne />} />
+                <Route path="/AddCity/:countryId" element={<AddCity />} />
+
+                {/* address CRUD */}
                 <Route path="/Address" element={<Address />} />
+                <Route path="/AddressOne/:addressId" element={<AddressOne />} />
+                <Route path="/AddAddress/:cityId" element={<AddAddress />} />
+
+                {/* customer CRUD */}
                 <Route path="/Customer" element={<Customer />} />
+                <Route path="/CustomerOne/:customerId" element={<CustomerOne />} />
+                <Route path="/AddCustomer/:addressId" element={<AddCustomer />} />
+
                 </Routes>
 
                 {/* footer */}
