@@ -34,15 +34,15 @@ export default function Country() {
     };
 
     return (
-        <div className="p-6">
+        <div className="flex flex-col items-center mt-6">
             <h1 className="text-2xl font-bold mb-4">
                 Country (totalElements: {totalElements})
             </h1>
 
             {/* country 입력 폼 컴포넌트로 이동 */}
-            <Link className="text-blue-600 hover:underline" to="/AddCountry">add country</Link>
+            <Link className="text-blue-600 hover:underline mb-4" to="/AddCountry">add country</Link>
 
-            <table className="table-auto border-collapse border border-gray-300 mb-4">
+            <table className="table-auto border-collapse border border-gray-300 mb-6">
                 <thead className="bg-gray-100">
                     <tr>
                         <th className="border px-4 py-2">ID</th>

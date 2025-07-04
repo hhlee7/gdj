@@ -28,7 +28,7 @@ export default function AddCity() {
     }
 
     return (
-        <div className="p-6">
+        <div className="flex flex-col items-center mt-6">
             <h1 className="text-2xl font-bold mb-4">
                 AddCity
             </h1>
@@ -40,9 +40,8 @@ export default function AddCity() {
                     onChange={(e) => {
                     setCity(e.target.value);
                 }}/>
-                <br />
-                <button onClick={addFetch} className="mt-2 px-3 py-1 bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition">입력</button>
             </div>
+            <button onClick={addFetch} className="mt-4 px-4 py-1 bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition">입력</button>
         </div>
     )
 }

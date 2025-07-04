@@ -31,12 +31,12 @@ export default function Customer() {
     };
 
     return (
-        <div className="p-6">
+        <div className="flex flex-col items-center mt-6">
             <h1 className="text-2xl font-bold mb-4">
                 Customer (totalElements: {totalElements})
             </h1>
 
-            <table className="table-auto border-collapse border border-gray-300 mb-4">
+            <table className="table-auto border-collapse border border-gray-300 mb-6">
                 <thead className="bg-gray-100">
                     <tr>
                         <th className="border px-4 py-2">ID</th>

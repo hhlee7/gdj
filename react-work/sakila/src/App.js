@@ -12,6 +12,10 @@ import CustomerOne from './component/CustomerOne';
 import AddCity from './component/AddCity';
 import AddAddress from './component/AddAddress';
 import AddCustomer from './component/AddCustomer';
+import EditCountry from './component/EditCountry';
+import EditCity from './component/EditCity';
+import EditAddress from './component/EditAddress';
+import EditCustomer from './component/EditCustomer';
 
 export default function App() {
 
@@ -40,21 +44,25 @@ export default function App() {
                 <Route path="/Country" element={<Country />} />
                 <Route path="/CountryOne/:countryId" element={<CountryOne />} />
                 <Route path="/AddCountry" element={<AddCountry />} />
+                <Route path="/EditCountry/:countryId" element={<EditCountry />} />
 
                 {/* city CRUD */}
                 <Route path="/City" element={<City />} />
                 <Route path="/CityOne/:cityId" element={<CityOne />} />
                 <Route path="/AddCity/:countryId" element={<AddCity />} />
+                <Route path="/EditCity/:cityId" element={<EditCity />} />
 
                 {/* address CRUD */}
                 <Route path="/Address" element={<Address />} />
                 <Route path="/AddressOne/:addressId" element={<AddressOne />} />
                 <Route path="/AddAddress/:cityId" element={<AddAddress />} />
+                <Route path="/EditAddress/:addressId" element={<EditAddress />} />
 
                 {/* customer CRUD */}
                 <Route path="/Customer" element={<Customer />} />
                 <Route path="/CustomerOne/:customerId" element={<CustomerOne />} />
                 <Route path="/AddCustomer/:addressId" element={<AddCustomer />} />
+                <Route path="/EditCustomer/:customerId" element={<EditCustomer />} />
 
                 </Routes>
 
