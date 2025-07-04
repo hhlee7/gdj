@@ -1,5 +1,7 @@
 package com.sakila.api.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -24,13 +26,18 @@ public class CountryService {
 		this.cityRepository = cityRepository;
 	}
 	
-	// country 전체 조회
+	// country 전체 조회 (페이징)
 	public Page<CountryMapping> findAll(int currentPage) {
 		int pageSize = 10;
 		int pageNumber = currentPage - 1;
 		Sort sort = Sort.by("countryId").descending();
 		PageRequest pageable = PageRequest.of(pageNumber, pageSize, sort);
 		return countryRepository.findAllBy(pageable);
+	}
+	
+	// 페이징 없이 전체 조회
+	public List<CountryMapping> findAll() {
+		return countryRepository.findAllBy();
 	}
 	
 	// country 한 행 조회

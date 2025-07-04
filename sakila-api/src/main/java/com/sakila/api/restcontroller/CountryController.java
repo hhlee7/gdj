@@ -1,5 +1,7 @@
 package com.sakila.api.restcontroller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,12 @@ public class CountryController {
 	@GetMapping("/countryList/{currentPage}")
 	public ResponseEntity<Page<CountryMapping>> country(@PathVariable int currentPage) {
 		return new ResponseEntity<Page<CountryMapping>>(countryService.findAll(currentPage), HttpStatus.OK);
+	}
+	
+	// 페이징 없이 전체 조회
+	@GetMapping("/countryListAll")
+	public ResponseEntity<List<CountryMapping>> countryListAll() {
+		return new ResponseEntity<List<CountryMapping>>(countryService.findAll(), HttpStatus.OK);
 	}
 	
 	// 한 행 조회

@@ -1,5 +1,7 @@
 package com.sakila.api.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +15,5 @@ public interface CityRepository extends JpaRepository<CityEntity, Integer>{
 	// select count(*) from city where country_id = countryEntity.getCountryId()
 	
 	Page<CityMapping> findAllBy(Pageable pageable);
+	List<CityMapping> findAllBy();
 }

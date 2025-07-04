@@ -1,8 +1,11 @@
 package com.sakila.api.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,13 +35,18 @@ public class AddressService {
 		this.customerRepository = customerRepository;
 	}
 	
-	// address 전체 조회
+	// address 전체 조회 (페이징)
 	public Page<AddressMapping> findAll(int currentPage) {
 		int pageSize = 10;
 		int pageNumber = currentPage - 1;
 		Sort sort = Sort.by("addressId").descending();
 		PageRequest pageable = PageRequest.of(pageNumber, pageSize, sort);
 		return addressRepository.findAllBy(pageable);
+	}
+	
+	// 페이징 없이 전체 조회
+	public List<AddressMapping> findAll() {
+		return addressRepository.findAllBy();
 	}
 	
 	// address 한 행 조회

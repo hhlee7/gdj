@@ -1,5 +1,7 @@
 package com.sakila.api.restcontroller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +29,16 @@ public class AddressController {
 		this.addressService = addressService;
 	}
 	
-	// 전체 조회
+	// 전체 조회 (페이징)
 	@GetMapping("/addressList/{currentPage}")
 	public ResponseEntity<Page<AddressMapping>> address(@PathVariable int currentPage) {
 		return new ResponseEntity<Page<AddressMapping>>(addressService.findAll(currentPage), HttpStatus.OK);
+	}
+	
+	// 페이징 없이 전체 조회
+	@GetMapping("/addressListAll")
+	public ResponseEntity<List<AddressMapping>> addressListAll() {
+		return new ResponseEntity<List<AddressMapping>>(addressService.findAll(), HttpStatus.OK);
 	}
 	
 	// 한 행 조회

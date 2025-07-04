@@ -1,5 +1,7 @@
 package com.sakila.api.restcontroller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +29,16 @@ public class CityController {
 		this.cityService = cityService;
 	}
 	
-	// 전체 조회
+	// 전체 조회 (페이징)
 	@GetMapping("/cityList/{currentPage}")
 	public ResponseEntity<Page<CityMapping>> city(@PathVariable int currentPage) {
 		return new ResponseEntity<Page<CityMapping>>(cityService.findAll(currentPage), HttpStatus.OK);
+	}
+	
+	// 페이징 없이 전체 조회
+	@GetMapping("/cityListAll")
+	public ResponseEntity<List<CityMapping>> cityListAll() {
+		return new ResponseEntity<List<CityMapping>>(cityService.findAll(), HttpStatus.OK);
 	}
 	
 	// 한 행 조회
