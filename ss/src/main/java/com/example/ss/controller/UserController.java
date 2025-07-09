@@ -39,16 +39,13 @@ public class UserController {
 		if(row != 1) {
 			return "editUser";
 		}
-		return "redirect:/";
+		return "redirect:/logout";
 	}
 	
 	@PostMapping("user/delete")
-	public String deleteUser(HttpServletRequest request) {
+	public String deleteUser() {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		userService.deleteUser(username);
-		
-		// 세션 제거
-		request.getSession().invalidate();
-		return "redirect:/login";
+		return "redirect:/logout";
 	}
 }
