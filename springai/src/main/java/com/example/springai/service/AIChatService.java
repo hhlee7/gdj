@@ -13,19 +13,35 @@ import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.stereotype.Service;
 
+import com.example.springai.dto.ChatHistoryDto;
+import com.example.springai.mapper.ChatHistoryMapper;
+
 import jakarta.servlet.http.HttpSession;
 
 @Service
 public class AIChatService {
 	private OpenAiChatModel openAiChatModel;
-	public AIChatService (OpenAiChatModel openAiChatModel) {
+	private ChatHistoryMapper chatHistoryMapper;
+	public AIChatService (OpenAiChatModel openAiChatModel, ChatHistoryMapper chatHistoryMapper) {
 		this.openAiChatModel = openAiChatModel;
+		this.chatHistoryMapper = chatHistoryMapper;
 	}
 	
 	// OpenAI 서버와 통신할 메서드 선언
 	// param String userMsg : 사용자의 문자열 메세지
 	// return String : 오픈 챗 서버의 응답 문자열
 	public String generate(String userMsg, HttpSession session) {
+		/*
+		 * DB 저장될 내용
+		 * 
+		 * key auto_increment
+		 * session.getId()
+		 * userMsg
+		 * aiReply
+		 * 
+		 * ex)
+		 * 1(int), session id(text), 안녕(text), 그래 뭘 도와줄까(text)
+		 * */
 
 		List<Message> messageList = (List<Message>)session.getAttribute("chatHistory");
 		if(messageList == null) {
@@ -33,7 +49,7 @@ public class AIChatService {
 		}
 		
 		// SystemMessage, UserMessage
-		SystemMessage systemMessage = new SystemMessage("너는 한국어 반말만 답변하는 테토남 스타일의 AI 챗봇이다.");
+		SystemMessage systemMessage = new SystemMessage("너는 한국어 반말만 답변하는 테토녀 스타일의 AI 챗봇이다.");
 		UserMessage userMessage = new UserMessage(userMsg);
 		
 		messageList.add(systemMessage);
@@ -41,7 +57,7 @@ public class AIChatService {
 		
 		// 옵션
 		OpenAiChatOptions options = OpenAiChatOptions.builder()
-				.model("gpt-4.1-mini") // 사용하고자 하는 OpenAI 모델(버전)의 이름을 지정
+				.model("gpt-3.5-turbo") // 사용하고자 하는 OpenAI 모델(버전)의 이름을 지정
 				.temperature(0.7) // 창의성(무작위성) 정도를 설정(0.0 ~ 2.0)값으로 보통 0~1 사이 사용
 				.build();
 		
@@ -58,6 +74,13 @@ public class AIChatService {
 		
 		// messageList 변경된 내용 session의 messageList 속성에도 반영
 		session.setAttribute("chatHistory", messageList); // 이전 session chatHistory 속성값을 덮어쓰기
+		
+		// DB에 채팅 내역 저장
+		ChatHistoryDto chat = new ChatHistoryDto();
+		chat.setUserId(session.getId());
+		chat.setUserChat(userMsg);
+		chat.setAiChat(aiReply);
+		chatHistoryMapper.insertChat(chat);
 		
 		return aiReply;
 	}
